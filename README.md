@@ -16,7 +16,24 @@ Kratko opisati cilj Vašeg projekta. Vaša motivacija?  (Napomena: odgovor nije 
 > Dobro izrađen opis omogućuje vam da pokažete svoj rad drugim programerima, kao i potencijalnim poslodavcima. Ne samo da prvi dojam na stranici opisa često razlikuje dobar projekt od lošeg projekta već i predstavlja dobru praksu koju morate savladati.
 
 # Funkcijski zahtjevi
-> Navedite ključne zahtjeve Vašeg projekta.
+> Korisničke uloge: Korisnici će moći odabrati između tri uloge (User, Organizator,
+Admin) prilikom registracije. Ove uloge dozvoljavaju pristup različitim funkcijama
+aplikacije; organizatorima omogućuju da kreiraju događaje, userima da se na njih
+prijavljuju i traže nove rute za vožnju, dok administratori imaju pristup alatima za
+upravljanje korisnicima i sadržajem.
+> Newsfeed: Aplikacija će imati dinamički newsfeed koji prikazuje nadolazeće
+biciklističke događaje, te će tako korisnicima dati jednostavan pristup informacijama i
+opcijama za prijavu.
+> Alat za izradu ruta: Korisnik će moći kreirati svoju rutu koristeći početnu i finalnu
+točku ili „punktove“ kroz koje želi proći.
+> Komunikacija među korisnicima: Chat funkcionalnost omogućit će korisnicima da
+međusobno komuniciraju, razmjenjuju savjete i organiziraju zajedničke vožnje.
+> Ocjenjivanje ruta: Korisnici će moći ocjenjivati rute koristeći lajkove i dislajkove te
+ih "pinnati" za buduću upotrebu, čime će se poticati dijeljenje kvalitetnih informacija.
+> Leaderboard: Sustav rangiranja korisnika na temelju vremena ostvarenih na
+događanjima, uz mogućnost arhiviranja rezultata ostvarit će, nadamo se, natjecateljski
+duh među korisnicima. Sam unos vremena biti će proizvoljan, User može unijeti
+vrijeme koje je ostvario bez provjere točnosti.
 
 
 # Tehnologije
