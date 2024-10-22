@@ -1,19 +1,10 @@
 # BiciKlik
-
-> Ime projekta u naslovu ima cilj opisati namjenu projekta te pomoći u podizanju početnog interesa za projekt prezentirajući osnovnu svrhu projekta.
-> Isključivo ovisi o Vama!
-> 
-> Naravno, nijedan predložak nije idealan za sve projekte jer su potrebe i ciljevi različiti. Ne bojte se naglasiti Vaš cilj u ovoj početnoj stranici projekta, podržat ćemo ga bez obzira usredotočili se Vi više na tenologiju ili marketing.
-> 
-> Zašto ovaj dokument? Samo manji dio timova je do sada propoznao potrebu (a i meni je lakše pratiti Vaš rad).  
-
-# Opis projekta
-Ovaj projekt je reultat timskog rada u sklopu projeknog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu. 
-
-Kratko opisati cilj Vašeg projekta. Vaša motivacija?  (Napomena: odgovor nije »Zato što je to bio zadatak i nismo imali ideje za drugo.«). Koji problem rješavate?
-> Obzirom da je ovo zadani projekt navedite i što želite/jeste novo  naučili.
-
-> Dobro izrađen opis omogućuje vam da pokažete svoj rad drugim programerima, kao i potencijalnim poslodavcima. Ne samo da prvi dojam na stranici opisa često razlikuje dobar projekt od lošeg projekta već i predstavlja dobru praksu koju morate savladati.
+> U suvremenom okruženju biciklisti često traže načine za povezivanje s drugima, sudjelovanje
+u događanjima i pronalaženje dobrih ruta za vožnju. Mnoge već popularne aplikacije ne nude
+platformu za interakciju i dijeljenje iskustava. Biciklisti tako mogu propustiti prilike za
+sudjelovanje u zajednici, što može utjecati na njihovo zadovoljstvo sportom i motivaciju za
+daljnju vožnju.
+>* Naša aplikacija ima potencijal i želju ispuniti tu prazninu te unaprijediti biciklističko iskustvo.
 
 # Funkcijski zahtjevi
 >### Korisničke uloge
@@ -48,16 +39,24 @@ vrijeme koje je ostvario bez provjere točnosti.
 
 
 # Tehnologije
+>* Sustav će imati vlastitu domenu koristeći Azure Cloud sustav
+>* Sustav će biti implementiran koristeći NodeJS, ExpressJS, React u jeziku TypeScript
+>* Sustav će koristiti bazu podataka MongoDB
+>* Za implementaciju kreiranja ruta, sustav će koristiti Google Maps API
+>* Korisničke rute će se spremati na serveru u .gpx formatu, te će njihove putanje biti
+spremljene u bazi podataka zajedno sa unikatnim identifikatorom i imenom rute koje
+zadaje korisnik
+>* Aplikacija će biti isključivo web-aplikacija te će biti kompatibilna sa Google Chrome,
+Chromium, Microsoft Edge i Firefox web browserima
 
-#Instalcija
 # Članovi tima 
-> Popis članova tima/linkovi/ glavni doprinos
->
-
-# Kontribucije
->Pravila ovise o organizaciji tima i su često izdvojena u CONTRIBUTING.md
-
-
+>* Matija Fauković
+>* Andrej Filipčić
+>* Egon Hajpek
+>* Ante Ivančić
+>* Oliver Kreitmeyer
+>* Marin Prusac
+>* Petra Turković
 
 # 📝 Kodeks ponašanja [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 Kao studenti sigurno ste upoznati s minimumom prihvatljivog ponašanja definiran u [KODEKS PONAŠANJA STUDENATA FAKULTETA ELEKTROTEHNIKE I RAČUNARSTVA SVEUČILIŠTA U ZAGREBU](https://www.fer.hr/_download/repository/Kodeks_ponasanja_studenata_FER-a_procisceni_tekst_2016%5B1%5D.pdf), te dodatnim naputcima za timski rad na predmetu [Programsko inženjerstvo](https://wwww.fer.hr).
