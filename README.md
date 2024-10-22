@@ -103,5 +103,3 @@ Orginal [![cc0-1.0][cc0-1.0-shield]][cc0-1.0]
 [cc0-1.0]: https://creativecommons.org/licenses/by/1.0/deed.en
 [cc0-1.0-image]: https://licensebuttons.net/l/by/1.0/88x31.png
 [cc0-1.0-shield]: https://img.shields.io/badge/License-CC0--1.0-lightgrey.svg
-
-### Reference na licenciranje repozitorija
