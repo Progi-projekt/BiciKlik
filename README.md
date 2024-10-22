@@ -22,19 +22,24 @@ Admin) prilikom registracije. Ove uloge dozvoljavaju pristup različitim funkcij
 aplikacije; organizatorima omogućuju da kreiraju događaje, userima da se na njih
 prijavljuju i traže nove rute za vožnju, dok administratori imaju pristup alatima za
 upravljanje korisnicima i sadržajem.
+
 >### Newsfeed
 > Aplikacija će imati dinamički newsfeed koji prikazuje nadolazeće
 biciklističke događaje, te će tako korisnicima dati jednostavan pristup informacijama i
 opcijama za prijavu.
+
 >### Alat za izradu ruta
 > Korisnik će moći kreirati svoju rutu koristeći početnu i finalnu
 točku ili „punktove“ kroz koje želi proći.
+
 >### Komunikacija među korisnicima
 > Chat funkcionalnost omogućit će korisnicima da
 međusobno komuniciraju, razmjenjuju savjete i organiziraju zajedničke vožnje.
+
 >### Ocjenjivanje ruta
 > Korisnici će moći ocjenjivati rute koristeći lajkove i dislajkove te
 ih "pinnati" za buduću upotrebu, čime će se poticati dijeljenje kvalitetnih informacija.
+
 >### Leaderboard
 > Sustav rangiranja korisnika na temelju vremena ostvarenih na
 događanjima, uz mogućnost arhiviranja rezultata ostvarit će, nadamo se, natjecateljski
