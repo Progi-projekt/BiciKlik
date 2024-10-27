@@ -1,16 +1,27 @@
-import express from 'express';
+// src/app.ts
+import express, { Application } from 'express';
 import path from 'path';
+import dotenv from 'dotenv';
 
-const app = express();
+// Load environment variables from .env file
+dotenv.config();
 
-// Middleware to parse JSON bodies
+const app: Application = express();
+
+// Middleware to parse JSON
 app.use(express.json());
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../../frontend/build')));
+// Serve static files (e.g., for a React frontend build)
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
+// API route example
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'OK' });
+});
+
+// Serve React frontend (if integrated)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
 });
 
 export default app;
