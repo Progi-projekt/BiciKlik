@@ -1,5 +1,5 @@
 // src/app.ts
-import express, { Application } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -22,6 +22,11 @@ app.get('/api/health', (req, res) => {
 // Serve React frontend (if integrated)
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+});
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error(err.stack); // Log the error stack to console (optional)
+    res.status(500).send('Something broke!'); // Respond with a generic error message
 });
 
 export default app;
