@@ -2,7 +2,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
-
+import mockRouter from './routes/mockRoutes';
 // Load environment variables from .env file
 dotenv.config();
 
@@ -18,6 +18,9 @@ app.use(express.static(path.join(__dirname, '../../frontend/build')));
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK' });
 });
+
+//mock routes
+app.use('/mock',mockRouter);
 
 // Serve React frontend (if integrated)
 app.get('*', (req, res) => {
