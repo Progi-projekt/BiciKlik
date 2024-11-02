@@ -1,0 +1,52 @@
+.Heading{
+    width: 100%;
+    display: flex;
+    background-color: #322F2E;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-bottom: 2px solid #8A7B7B;
+    color: white;
+}
+.logo{
+    width: 4%;
+}
+ul{
+    list-style: none;
+    text-align: center;
+    padding-right: 50%;
+}
+li {
+    display: inline-block;
+    margin: 1rem 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9px;
+    cursor: pointer;
+}
+.LogIn {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    border-radius: 9px;
+    color: white;
+    background-color: #718E2A;
+    border: 1px solid #252321;
+}
+li:hover {
+    background-color: #5E5A5A;
+    border: none;
+}
+
+.LogIn:hover {
+    background-color: #637C24;
+}
+
+@media (max-width: 1100px){
+    .logo{
+        width: 10%;
+    }
+    ul {
+        padding: 0;
+    }
+}
