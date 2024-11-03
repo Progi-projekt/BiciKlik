@@ -13,12 +13,12 @@
 .logo{
     width: 4%;
 }
-ul{
+.Heading ul{
     list-style: none;
     text-align: center;
     padding-right: 50%;
 }
-li {
+.Heading li {
     display: inline-block;
     margin: 1rem 1rem;
     padding: 0.5rem 1rem;
@@ -33,7 +33,7 @@ li {
     background-color: #718E2A;
     border: 1px solid #252321;
 }
-li:hover {
+.Heading li:hover {
     background-color: #5E5A5A;
     border: none;
 }
@@ -46,7 +46,7 @@ li:hover {
     .logo{
         width: 10%;
     }
-    ul {
+    .Heading ul {
         padding: 0;
     }
 }

@@ -1,0 +1,19 @@
+.footer{
+    background-color: #5D5A5A;
+    color: #D8D8D8;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.footer ul {
+    text-align: center;
+    list-style: none;
+}
+.footer li {
+    display: inline-block;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.footer p {
+    padding: 0.5rem;
+}
