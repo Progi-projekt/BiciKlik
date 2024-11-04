@@ -1,4 +1,4 @@
-import logo from 'Bicklik.png'
+import logo from '../Bicklik.png'
 import React from 'react';
 import "./heading.css"
 

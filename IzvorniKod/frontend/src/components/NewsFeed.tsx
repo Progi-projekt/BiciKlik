@@ -1,7 +1,7 @@
 import React from 'react';
 import "./neewsfeed.css";
-import headerNewsFeed from 'HeaderNewsFeed.png';
-import routeImg from 'R.png';
+import headerNewsFeed from '../HeaderNewsFeed.png';
+import routeImg from '../R.png';
 
 const newsfeed =() => {
     return (
