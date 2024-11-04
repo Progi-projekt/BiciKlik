@@ -2,10 +2,12 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import path from 'path';
 import sequelize from './config/database';
+import dotenv from 'dotenv';
 
 const app: Application = express();
 var db_connected: boolean = false;
 
+dotenv.config();
 
 sequelize.authenticate()
 .then(() => {

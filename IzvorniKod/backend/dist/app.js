@@ -7,8 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const database_1 = __importDefault(require("./config/database"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const app = (0, express_1.default)();
 var db_connected = false;
+dotenv_1.default.config();
 database_1.default.authenticate()
     .then(() => {
     console.log('Connected to the database');
@@ -17,6 +19,7 @@ database_1.default.authenticate()
     .catch((err) => {
     console.error('Unable to connect to the database:', err);
 });
+console.log(process.env.DB_HOST);
 // Middleware to parse JSON
 app.use(express_1.default.json());
 // Serve static files (e.g., for a React frontend build)
