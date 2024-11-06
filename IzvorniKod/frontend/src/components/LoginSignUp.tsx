@@ -38,11 +38,12 @@ const Loginsignup = () => {
         <form onSubmit={handleSubmit}>
 
             <div className="container">
+              <p className='LogInNaslov'>User Login</p>
                 <label htmlFor="mail"><b>Mail</b></label>
-                <input type="text" placeholder="Enter Mail" name="mail" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                <input type="text" placeholder="Email" name="mail" value={username} onChange={(e) => setUsername(e.target.value)} required />
 
                 <label htmlFor="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <input type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
                 <button type="submit">Login</button>
                 <p>{message}</p> {/* Display login success/error message */}
