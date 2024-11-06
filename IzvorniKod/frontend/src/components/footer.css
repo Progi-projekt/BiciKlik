@@ -1,9 +1,10 @@
-.footer{
+.footer {
     background-color: #5D5A5A;
     color: #D8D8D8;
-    position: relative;
-    bottom: 0;
     width: 100%;
+    text-align: center;
+    padding: 1rem;
+    border-top: 2px solid #8A7B7B;
 }
 .footer ul {
     text-align: center;

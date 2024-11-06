@@ -6,10 +6,12 @@ import LoginSignUp from './components/LoginSignUp';
 
 function App() {
   return (
-    <div className="AppTest">
-      <Heading/>
-      <LoginSignUp/>
-      <Footer/>
+    <div className="App">
+      <Heading />
+      <div className="content">
+        <LoginSignUp />
+      </div>
+      <Footer />
     </div>
   );
 }
