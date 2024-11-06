@@ -1,3 +1,4 @@
+/* Main styles */
 .loginsignup .container {
     width: 30vw;
     height: 65vh;
@@ -9,6 +10,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    /* Restrict aspect ratio */
+    max-width: 70vh; 
 }
 
 .loginsignup label {
@@ -20,7 +24,6 @@
 
 .loginsignup input[type="text"],
 .loginsignup input[type="password"] {
-
     width: 60%;
     padding: 0.5rem;
     margin-bottom: 1rem;
@@ -59,7 +62,7 @@
     color: white;
 }
 
-
+/* Styles for smaller screens */
 @media (max-width: 800px) {
     .loginsignup .LogInNaslov { 
         font-size: 1.5rem;
@@ -73,6 +76,38 @@
 
     .loginsignup button {
         font-size: 1rem;
+    }
+}
 
+/* Styles for larger screens */
+@media (min-width: 1440px) {
+    .loginsignup .container {
+        width: 40vw; 
+        height: 75vh;
+        padding: 2rem 3rem 3rem 3rem;
+    }
+
+    .loginsignup label {
+        font-size: 1.5rem;
+    }
+
+    .loginsignup input[type="text"],
+    .loginsignup input[type="password"] {
+        font-size: 1.5rem;
+        padding: 0.8rem;
+    }
+
+    .loginsignup button {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+
+    .loginsignup p {
+        font-size: 1.4rem;
+    }
+
+    .loginsignup .LogInNaslov { 
+        font-size: 3.5rem;
+        padding-bottom: 3.5rem;
     }
 }
