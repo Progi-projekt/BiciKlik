@@ -24,7 +24,7 @@ app.use('/mock',mockRouter);
 
 // Serve React frontend (if integrated)
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../frontend/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../../frontend/dist', 'index.html'));
 });
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
