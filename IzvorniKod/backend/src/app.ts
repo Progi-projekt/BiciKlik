@@ -12,7 +12,7 @@ const app: Application = express();
 app.use(express.json());
 
 // Serve static files (e.g., for a React frontend build)
-app.use(express.static(path.join(__dirname, '../../frontend/build')));
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 // API route example
 app.get('/api/health', (req, res) => {
