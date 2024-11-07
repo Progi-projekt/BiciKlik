@@ -4,7 +4,10 @@ const webpack = require('webpack');
 
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: {
+    index: './src/index.tsx',
+    login: './src/login.tsx'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -38,7 +41,13 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
+      chunks: ['index']
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/login.html',
+      filename: 'login.html',
+      chunks: ['login']
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env),
