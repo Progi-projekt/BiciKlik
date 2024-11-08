@@ -1,0 +1,70 @@
+ok znaci evo kratak sazetak "google api" istrazivanja:
+
+da bi ovo radilo trebao korititi (najmanje) 2 google api-a;
+
+maps api - https://developers.google.com/maps/documentation/javascript?hl=en
+
+i
+
+routes api- https://developers.google.com/maps/documentation/routes?hl=en 
+ili
+sastaviti svoj routes koristeci
+
+places api - https://developers.google.com/maps/documentation/places/web-service
++
+directions api - https://developers.google.com/maps/documentation/directions
+
+
+razlog sto uopce navodim pravljenje svog routsa je to sto je (ako sam dobro shvatio) routes relativno novi api (2 god star) te nisam mogao pronaci niti jedan tutorial koji ga implementira, a za pravljenje vlastiotog sam pronasao detaljan tutorial:
+
+How to use Google Maps API with React including Directions and Places autocomplete - https://www.youtube.com/watch?v=iP3DnhCUIsE (doduse trebat ce nadobradnju za waypointe)
+
+
+Nadalje, kao sto vec znate limitirani smo na 200$/mjesecno + 300$ od kreiranja accounta sto nas dovodi do dvije opcije.
+
+
+1. opcija poceti od jeftinijh i limitirajucih usluga pa ih postupno mijenjati skupljima opcijama ako vidimo da ima prostora za to.
+
+2. opija je da svi kreiramo vlastiti account i tijekom projekta mijenjmo api kljuceve kada potrosimo novce s njih. To bi nam trebalo dati dovoljno resursa da eksperimentiramo i testiramo koliko god zelimo sa svim uslugama koje nam zatrebaju.
+
+Osobno sam za drugu opciju ukoliko je ona uopce izvediva (prvi put radim s ovak necim).  
+
+
+Sto se tice implementacije "maps api" mislim da ne bi trebalo biti vecih problema. Cini se relativno jednostavnim, a guidovi na yt su mnogobrojni. Takodjer sam primjietio da maps api ima mogucnost uredjivanja mape koju namjeravmo koristiti tako da ako ostane vremena i volje @petra se moze pozabaviti i sa uredjivanjem toga.
+
+Use the Google Maps API to build a custom map with markers - https://www.youtube.com/watch?v=CdDXbvBFXLY
+
+
+----------------------------------------------------------------------------------------------------
+
+
+
+koristeci clanak vecernjeg lista (https://www.vecernji.hr/zagreb/deset-ruta-na-kojima-cete-100-uzivati-u-pedaliranju-1409663) na google mapsu sam kreirao opisanih 10 najboljih zagrebackih ruta (bar koliko sam iz opisa mogao iscitati i koliko su mi "gorske" rute na mapsima dozvoljavale).
+Screenshot-i ruta kao i linkovi na mape koje sam kreirao nalaze pod linkom sispod:
+
+google drive link - https://drive.google.com/drive/folders/1JJEYFhodiACjS-B6DJiZWnSljO7aRzqY?usp=drive_link
+
+
+Klik na link otvara dinamicku mapu gdje mozete ponovo uzeti screenshot ako niste zadovoljni (brze nego da si 500 puta objasnjavamo sto specificno ne valja) ili pogledati opis pojedine rute.
+
+Svaka ruta ima kratak opis (uzet iz clanka) kojeg bi uz manje modifikacije mogli dodati u news feed zajedno sa slikom.
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Bit cu s vama u 9, al ne mugu reci da sam otkrio nesto specijalno. Budici da na kraju moramo napraviti login samo za google, ono sto je Andrej prije poslao je doslovno step by step guide kako napraviti upravo to.
+
+- https://permify.co/post/oauth-20-implementation-nodejs-expressjs/
+
+Ne doima se zahtjevnim, ima mnogo detaljnih videa o tome, a chat GPT (our lord and saviour) prakticki pise code sam.
+
+
+Primjeri:
+
+-https://www.youtube.com/watch?v=17xwTuidqZw
+
+-https://www.youtube.com/watch?v=Q0a0594tOrc
+
+
+
+
