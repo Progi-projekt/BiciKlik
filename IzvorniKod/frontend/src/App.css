@@ -8,8 +8,8 @@
   min-height: 100vh;
 }
 .content {
-  flex: 1; /* Allow the content to grow and push the footer down */
-  width: 100%; /* Ensure content takes full width */
+  flex: 1; 
+  width: 100%; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,4 +19,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.no-link-style {
+  text-decoration: none; 
+  color: inherit;       
 }

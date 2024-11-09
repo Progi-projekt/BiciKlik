@@ -1,9 +1,12 @@
 /* Main styles */
+
 .loginsignup .container {
     width: 30vw;
     height: 65vh;
     background-color: #5D5A5A;
     padding: 1.5rem 2rem 2rem 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: white;
