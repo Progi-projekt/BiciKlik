@@ -1,6 +1,7 @@
 import logo from '../assets/Bicklik.png'
 import React from 'react';
 import "./heading.css"
+import { Link } from 'react-router-dom';
 
 const Heading =() => {
     return (
@@ -8,12 +9,12 @@ const Heading =() => {
         <img src={logo} alt='logo' className='logo'></img>
 
         <ul>
-          <li>News Feed</li>
+          <li><Link to={"/"} style={{textDecoration: 'none', color: 'inherit'}}>News Feed</Link></li>
           <li>Feature1</li>
           <li>Feature2</li>
         </ul>
         
-        <button className='LogIn'>Log In</button>
+        <Link to={"/login"}><button className='LogIn'>Log In</button></Link>
       </div>
     );
   }
