@@ -14,6 +14,9 @@ app.use(express.json());
 // Serve static files (e.g., for a React frontend build)
 app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
+app.use('/images', express.static(path.join(__dirname, '../../static/images')));
+
+
 // API route example
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK' });
