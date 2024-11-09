@@ -4,34 +4,31 @@ const webpack = require('webpack');
 
 
 module.exports = {
-  entry: {
-    index: './src/index.tsx',
-    login: './src/login.tsx'
-  },
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.js', 
     publicPath: '/'
   },
   module: {
     rules: [
       {
-        test: /\.[jt]sx?$/,
+        test: /\.[jt]sx?$/,  // Support for both TS and JS 
         exclude: /node_modules/,
         use: 'babel-loader'
       },
       {
-        test: /\.css$/,    // CSSファイルを読み込むための設定
+        test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,  // Add rule for images and SVGs
+        test: /\.(png|jpe?g|gif|svg)$/i,  // Loading images and SVGs
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[hash].[ext]',  // Optional: Configure output naming
-              outputPath: 'assets',          // Optional: Configure output folder
+              name: '[name].[hash].[ext]',  
+              outputPath: 'assets',          
             }
           }
         ]
@@ -41,18 +38,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      filename: 'index.html',
-      chunks: ['index']
-    }),
-    new HtmlWebpackPlugin({
-      template: './public/login.html',
-      filename: 'login.html',
-      chunks: ['login']
+      filename: 'index.html'
     }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env),
     }),
-  ],
+  ], // TODO add devServer config for react-router
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
