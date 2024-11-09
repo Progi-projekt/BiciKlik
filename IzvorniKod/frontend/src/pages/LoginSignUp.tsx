@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import "./loginsignup.css";
+import "../components/loginsignup.css";
 
 const Loginsignup = () => {
     // Defining state types
