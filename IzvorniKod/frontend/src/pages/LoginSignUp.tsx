@@ -50,7 +50,7 @@ const Loginsignup = () => {
               setMessage(data.message); // Show success message
               navigate('/'); // Redirect to newsfeed
             } else {
-              setMessage(data.message); // Show error message from backend
+              setMessage(data.message); // Show error message from backend 
             }
         } catch (error) {
             setMessage('An error occurred.');
