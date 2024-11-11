@@ -43,7 +43,7 @@ const Newsfeed =() => {
               <p className='nazivRute'>{event.event_name}</p>
               <p className='vrijemeDatum'>{event.event_time}</p>
               <p>{event.description}</p>
-              <img src={'https://localhost:3000/images/${event.route_id}.png'} alt='RouteImg' className='slikarute' />
+              <img src={`https://biciklik.duckdns.org/images/${event.route_id}.png}`} alt='RouteImg' className='slikarute' />
             </div>
           </div>
         ))}
