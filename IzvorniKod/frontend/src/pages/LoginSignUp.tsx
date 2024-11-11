@@ -34,7 +34,7 @@ const Loginsignup = () => {
 
     const handleOAuthSuccess = async (credentialResponse: any) => {
         try {
-            const response = await fetch('http://localhost:3000/auth/google/callback', {
+            const response = await fetch('https://biciklik.duckdns.org/auth/google/callback', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { findOrCreateUser } from '../services/oauth.service';
 import { OAuth2Client } from 'google-auth-library';
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID,process.env.GOOGLE_CLIENT_SECRET);
 
 export const googleCallback = async (req: Request, res: Response): Promise<void> => {
   const { token } = req.body;
