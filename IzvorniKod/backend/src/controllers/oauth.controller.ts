@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { findOrCreateUser } from '../services/oauth.service';
 import { OAuth2Client } from 'google-auth-library';
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID,process.env.GOOGLE_CLIENT_SECRET);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET);
 
 export const googleCallback = async (req: Request, res: Response): Promise<void> => {
   const { token } = req.body;
@@ -34,6 +34,6 @@ export const googleCallback = async (req: Request, res: Response): Promise<void>
     res.json({ message: 'Login successful', user });
   } catch (error) {
     console.error('Error during Google OAuth callback:', error); // Log the error for debugging
-    res.status(500).json({ message: 'Login failed', error });
+    res.status(500).json({ message: 'Login failed', error: error.message });
   }
 };
