@@ -19,13 +19,21 @@ export const googleCallback = async (req: Request, res: Response): Promise<void>
       return;
     }
 
+    console.log('Payload:', payload); // Log the payload for debugging
+
     const { email, name, sub: oauthId } = payload;
 
-    const user = await findOrCreateUser(email, name, 'google', oauthId);
+    if (!email) {
+      res.status(400).json({ message: 'Email not found in token payload' });
+      return;
+    }
+
+    const user = await findOrCreateUser(email, name || '', 'google', oauthId);
     req.session.loggedInAs = user.email;
     res.cookie('loggedInAs', user.email, { httpOnly: true });
     res.json({ message: 'Login successful', user });
   } catch (error) {
+    console.error('Error during Google OAuth callback:', error); // Log the error for debugging
     res.status(500).json({ message: 'Login failed', error });
   }
 };
