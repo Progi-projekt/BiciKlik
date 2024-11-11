@@ -22,7 +22,7 @@ const Newsfeed =() => {
 
     const fetchEvents = async () => {
       try {
-        const response = await fetch('https://localhost:3000/mock/get-ten'); //fetcha responce od backenda
+        const response = await fetch('https://biciklik.duckdns.org/mock/get-ten'); //fetcha responce od backenda
         const data = await response.json();       
         setEvents(data);         //sprema data za State          
       } catch (error) {
