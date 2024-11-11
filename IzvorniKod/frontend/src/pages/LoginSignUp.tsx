@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import "../components/loginsignup.css";
+import GoogleAuth from '../components/GoogleAuth';
 
 const Loginsignup = () => {
     // Defining state types
@@ -30,20 +31,36 @@ const Loginsignup = () => {
             setMessage('An error occurred.');
         }
     };
-    
-    const handleOAuthLogin = () => {
-      const clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your Google Client ID
-      const redirectUri = 'http://localhost:3000/auth/google/callback'; // Replace with your redirect URI
-      const scope = 'profile email';
-      const responseType = 'token';
-      const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
-      window.location.href = googleAuthUrl;
-  };
-    
+
+    const handleOAuthSuccess = async (credentialResponse: any) => {
+        try {
+            const response = await fetch('http://localhost:3000/auth/google/callback', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ token: credentialResponse.credential }),
+            });
+      
+            const data = await response.json();
+      
+            if (response.ok) {
+              setMessage(data.message); // Show success message
+            } else {
+              setMessage(data.message); // Show error message from backend
+            }
+        } catch (error) {
+            setMessage('An error occurred.');
+        }
+    };
+
+    const handleOAuthError = () => {
+        setMessage('Google login failed.');
+    };
+
     return (
     <div className="loginsignup">
         <form onSubmit={handleSubmit}>
-
             <div className="container">
               <p className='LogInNaslov'>User Login</p>
                 <label htmlFor="mail"><b>Mail</b></label>
@@ -54,12 +71,11 @@ const Loginsignup = () => {
 
                 <button type="submit">Login</button>
                 <p>{message}</p> {/* Display login success/error message */}
-                <button type="button" onClick={handleOAuthLogin}>Login with Google</button>
+                <GoogleAuth onSuccess={handleOAuthSuccess} onError={handleOAuthError} />
             </div>
         </form>
-
     </div>
     );
-  };
+};
 
 export default Loginsignup;
