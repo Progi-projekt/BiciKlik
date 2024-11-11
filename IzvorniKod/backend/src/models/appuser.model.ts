@@ -1,7 +1,7 @@
 import { Table, Column, Model, PrimaryKey, DataType, CreatedAt, UpdatedAt, Index } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'AppUser',
+  tableName: 'appuser',
   timestamps: true // Automatically adds createdAt and updatedAt fields
 })
 export class AppUser extends Model {
