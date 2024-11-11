@@ -1,56 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import "./neewsfeed.css";
-import headerNewsFeed from '../HeaderNewsFeed.png';
-import routeImg from '../R.png';
-import { response } from 'express';
+import React from 'react';
+import "../components/newsfeed.css";
+import headerNewsFeed from '../assets/HeaderNewsFeed.png';
+import routeImg from '../assets/R.png';
 
-type EventData = {
-  created_time: string;
-  event_time: string;
-  description: string;
-  event_id: number;
-  event_name: string;
-  route_id: number;
-  organizer_email: string;
-};
-
-const Newsfeed =() => {
-
-  const [events, setEvents] = useState<EventData[]>([]);   //za storeanje data
-
-  useEffect(() => {
-
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/mock/get-ten'); //fetcha responce od backenda
-        const data = await response.json();       
-        setEvents(data);         //sprema data za State          
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-  
-    fetchEvents();
-  }, []);
-
+const newsfeed =() => {
     return (
       <div className="newsfeed">
          <img src={headerNewsFeed} alt='NewsFeed' className='slikanews'/>
          <p className='filter'>Filter</p>
          <div className='containerRuta'>
-          {events.map(event => (
-            <div className='ruta' key={event.event_id}>
-            <div className='tekst'>
-              <p className='nazivRute'>{event.event_name}</p>
-              <p className='vrijemeDatum'>{event.event_time}</p>
-              <p>{event.description}</p>
-              <img src={routeImg} alt='RouteImg' className='slikarute' />
-            </div>
+         <div className='ruta'>
+          <div className='tekst'>
+          <p className='nazivRute'>Naziv rute</p>
+          <p className='vrijemeDatum'>Datum, vrijeme</p>
+          <p>podnaslov rute što nešto objašnjuje</p>
+          <img src={routeImg} alt='RouteImg' className='slikarute'></img>
           </div>
-        ))}
+         </div>
+         <div className='ruta'>
+          <div className='tekst'>
+          <p className='nazivRute'>Naziv rute</p>
+          <p className='vrijemeDatum'>Datum, vrijeme</p>
+          <p>podnaslov rute što nešto objašnjuje</p>
+          <img src={routeImg} alt='RouteImg' className='slikarute'></img>
+          </div>
+         </div><div className='ruta'>
+          <div className='tekst'>
+          <p className='nazivRute'>Naziv rute</p>
+          <p className='vrijemeDatum'>Datum, vrijeme</p>
+          <p>podnaslov rute što nešto objašnjuje</p>
+          <img src={routeImg} alt='RouteImg' className='slikarute'></img>
+          </div>
+         </div><div className='ruta'>
+          <div className='tekst'>
+          <p className='nazivRute'>Naziv rute</p>
+          <p className='vrijemeDatum'>Datum, vrijeme</p>
+          <p>podnaslov rute što nešto objašnjuje</p>
+          <img src={routeImg} alt='RouteImg' className='slikarute'></img>
+          </div>
+         </div><div className='ruta'>
+          <div className='tekst'>
+          <p className='nazivRute'>Naziv rute</p>
+          <p className='vrijemeDatum'>Datum, vrijeme</p>
+          <p>podnaslov rute što nešto objašnjuje</p>
+          <img src={routeImg} alt='RouteImg' className='slikarute'></img>
+          </div>
+         </div><div className='ruta'>
+          <div className='tekst'>
+          <p className='nazivRute'>Naziv rute</p>
+          <p className='vrijemeDatum'>Datum, vrijeme</p>
+          <p>podnaslov rute što nešto objašnjuje</p>
+          <img src={routeImg} alt='RouteImg' className='slikarute'></img>
+          </div>
+         </div>
          
          </div>
       </div>
     );
   }
-  export default Newsfeed;
+  export default newsfeed;
