@@ -17,7 +17,7 @@ dotenv.config();
 
 sequelize.authenticate()
 .then(() => {
-    sequlize.sync();
+    sequelize.sync();
     console.log('Connected to the database');
     db_connected = true;
 })
