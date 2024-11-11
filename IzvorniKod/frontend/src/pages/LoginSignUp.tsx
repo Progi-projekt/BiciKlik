@@ -31,7 +31,14 @@ const Loginsignup = () => {
         }
     };
     
-    
+    const handleOAuthLogin = () => {
+      const clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your Google Client ID
+      const redirectUri = 'http://localhost:3000/auth/google/callback'; // Replace with your redirect URI
+      const scope = 'profile email';
+      const responseType = 'token';
+      const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+      window.location.href = googleAuthUrl;
+  };
     
     return (
     <div className="loginsignup">
@@ -47,6 +54,7 @@ const Loginsignup = () => {
 
                 <button type="submit">Login</button>
                 <p>{message}</p> {/* Display login success/error message */}
+                <button type="button" onClick={handleOAuthLogin}>Login with Google</button>
             </div>
         </form>
 
