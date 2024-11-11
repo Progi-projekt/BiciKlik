@@ -7,7 +7,7 @@ interface GoogleAuthProps {
 }
 
 const GoogleAuth: React.FC<GoogleAuthProps> = ({ onSuccess, onError }) => {
-  const clientId: string = "Your_Google_Client_ID";
+  const clientId: string = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'PLACEHOLDER_CLIENT_ID';
 
   return (
     <GoogleOAuthProvider clientId={clientId}>

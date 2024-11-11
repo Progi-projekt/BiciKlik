@@ -49,6 +49,8 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK' });
 });
 
+//auth route
+app.use('/auth',authRouter);
 //mock routes
 app.use('/mock',mockRouter);
 // DB health check
@@ -60,8 +62,6 @@ app.get('/db/health', (req, res) => {
     }
 });
 
-// Add auth routes
-app.use('/auth', authRouter);
 
 // Serve React frontend (if integrated)
 app.get('*', (req, res) => {

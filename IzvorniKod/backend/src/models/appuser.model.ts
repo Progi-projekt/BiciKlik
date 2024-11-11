@@ -1,18 +1,18 @@
-import { Table, Column, Model, PrimaryKey, DataType, NotNull } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, CreatedAt, UpdatedAt, Index } from 'sequelize-typescript';
 
 @Table({
   tableName: 'AppUser',
-  timestamps: false
+  timestamps: true // Automatically adds createdAt and updatedAt fields
 })
 export class AppUser extends Model {
-	@PrimaryKey
-	@Column(DataType.STRING)
-	email!: string;
+  @PrimaryKey
+  @Column(DataType.STRING)
+  email!: string;
 
-	@Column(DataType.STRING)
-	archived_reason!: string | null;
+  @Column(DataType.STRING)
+  archived_reason!: string | null;
 
-	@Column(DataType.STRING)
+  @Column(DataType.STRING)
   name!: string;
 
   @Column(DataType.STRING)
@@ -21,7 +21,11 @@ export class AppUser extends Model {
   @Column(DataType.STRING)
   oauthId!: string;
 
-	@NotNull
-	@Column(DataType.DATE)
-	created_time!: Date;
+  @CreatedAt
+  @Column(DataType.DATE)
+  createdAt!: Date;
+
+  @UpdatedAt
+  @Column(DataType.DATE)
+  updatedAt!: Date;
 }
