@@ -47,6 +47,7 @@ const Loginsignup = () => {
       
             if (response.ok) {
               setMessage(data.message); // Show success message
+              navigate('/')
             } else {
               setMessage(data.message); // Show error message from backend
             }
