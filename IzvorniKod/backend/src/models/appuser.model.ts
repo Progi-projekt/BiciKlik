@@ -12,13 +12,14 @@ export class AppUser extends Model {
 	@Column(DataType.STRING)
 	archived_reason!: string | null;
 
-	@NotNull
 	@Column(DataType.STRING)
-	first_name!: string;
+  name!: string;
 
-	@NotNull
-	@Column(DataType.STRING)
-	family_name!: string;
+  @Column(DataType.STRING)
+  oauthProvider!: string;
+
+  @Column(DataType.STRING)
+  oauthId!: string;
 
 	@NotNull
 	@Column(DataType.DATE)
