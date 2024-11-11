@@ -34,6 +34,11 @@ export const googleCallback = async (req: Request, res: Response): Promise<void>
     res.json({ message: 'Login successful', user });
   } catch (error) {
     console.error('Error during Google OAuth callback:', error); // Log the error for debugging
-    res.status(500).json({ message: 'Login failed', error: error.message });
+
+    if (error instanceof Error) {
+      res.status(500).json({ message: 'Login failed', error: error.message });
+    } else {
+      res.status(500).json({ message: 'Login failed', error: 'Unknown error' });
+    }
   }
 };
