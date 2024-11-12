@@ -46,8 +46,7 @@ const Newsfeed =() => {
               <img src={`https://biciklik.duckdns.org/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
             </div>
           </div>
-        ))}
-          run 
+        ))} 
          </div>
       </div>
     );

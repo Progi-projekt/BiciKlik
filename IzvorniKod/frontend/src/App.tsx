@@ -15,7 +15,9 @@ function App() {
       <Route path='/' element={<NewsFeed/>}/>
       <Route path='/login' element={<Loginsignup/>}/>
       </Routes>
-      <Footer/>
+      <div className="footer">
+      <Footer></Footer>
+      </div>
     </div>
     </BrowserRouter>
   );
