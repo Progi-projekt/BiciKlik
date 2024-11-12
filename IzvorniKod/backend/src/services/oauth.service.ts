@@ -1,4 +1,3 @@
-// src/services/authService.ts
 import { AppUser } from '../models/appuser.model';
 
 export const findOrCreateUser = async (email: string, name: string, oauthProvider: string, oauthId: string) => {

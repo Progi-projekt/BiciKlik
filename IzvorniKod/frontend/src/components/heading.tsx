@@ -10,6 +10,7 @@ const Heading =() => {
 
         <ul>
           <li><Link to={"/"} style={{textDecoration: 'none', color: 'inherit'}}>News Feed</Link></li>
+
           <li><Link to={"/chat"} style={{textDecoration: 'none', color: 'inherit'}}>Chat</Link></li>
           <li>Feature2</li>
         </ul>

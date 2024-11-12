@@ -1,7 +1,12 @@
 /* Main styles */
-
+.loginsignup {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .loginsignup .container {
-    width: 30vw;
+    width: 40vw;
     height: 65vh;
     background-color: #5D5A5A;
     padding: 1.5rem 2rem 2rem 2rem;
@@ -18,42 +23,10 @@
     max-width: 70vh; 
 }
 
-.loginsignup label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #D4D4D4;
-    font-size: 1rem;
-}
-
-.loginsignup input[type="text"],
-.loginsignup input[type="password"] {
-    width: 60%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1.2rem;
-}
-
-.loginsignup button {
-    width: 30%;
-    padding: 0.75rem;
-    margin: 1rem;
-    font-size: 1.3rem;
-    border-radius: 5px;
-    color: white;
-    background-color: #718E2A;
-    border: 1px solid #252321;
-    cursor: pointer;
-}
-
-.loginsignup button:hover {
-    background-color: #637C24;
-}
-
 .loginsignup p {
     color: #D4D4D4;
     font-size: 1.2rem;
+    padding: 0.5rem;
 }
 
 .loginsignup .LogInNaslov { 
@@ -66,43 +39,27 @@
 }
 
 /* Styles for smaller screens */
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .loginsignup .LogInNaslov { 
         font-size: 1.5rem;
     }
-
+    .loginsignup .container {
+        width: 80vw;
+    }
     .loginsignup .container {
         padding: 1rem;
         width: 70vw;
         height: 60vh;
     }
-
-    .loginsignup button {
-        font-size: 1rem;
-    }
 }
 
+
 /* Styles for larger screens */
-@media (min-width: 1440px) {
+@media (min-width: 2200px) {
     .loginsignup .container {
         width: 40vw; 
         height: 75vh;
         padding: 2rem 3rem 3rem 3rem;
-    }
-
-    .loginsignup label {
-        font-size: 1.5rem;
-    }
-
-    .loginsignup input[type="text"],
-    .loginsignup input[type="password"] {
-        font-size: 1.5rem;
-        padding: 0.8rem;
-    }
-
-    .loginsignup button {
-        font-size: 1.5rem;
-        padding: 1rem;
     }
 
     .loginsignup p {
@@ -113,4 +70,23 @@
         font-size: 3.5rem;
         padding-bottom: 3.5rem;
     }
+}
+
+@media (max-height: 800px) {
+    .loginsignup {
+        padding: 0rem;
+
+    }
+    .loginsignup .LogInNaslov { 
+        margin-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+    .loginsignup .container {
+        width: 70vw;
+        height: 60vh;
+    }
+
 }
