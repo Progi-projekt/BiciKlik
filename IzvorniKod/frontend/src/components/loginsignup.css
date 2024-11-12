@@ -6,7 +6,7 @@
     align-items: center;
 }
 .loginsignup .container {
-    width: 30vw;
+    width: 40vw;
     height: 65vh;
     background-color: #5D5A5A;
     padding: 1.5rem 2rem 2rem 2rem;
@@ -39,17 +39,20 @@
 }
 
 /* Styles for smaller screens */
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .loginsignup .LogInNaslov { 
         font-size: 1.5rem;
     }
-
+    .loginsignup .container {
+        width: 80vw;
+    }
     .loginsignup .container {
         padding: 1rem;
         width: 70vw;
         height: 60vh;
     }
 }
+
 
 /* Styles for larger screens */
 @media (min-width: 2200px) {
@@ -82,7 +85,7 @@
         font-size: 1rem;
     }
     .loginsignup .container {
-        width: 50vw;
+        width: 70vw;
         height: 60vh;
     }
 
