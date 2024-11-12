@@ -1,0 +1,16 @@
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #e9ebee;
+  }
+  
+  .message-history {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds space between messages */
+    padding: 20px;
+    overflow-y: auto;
+  }

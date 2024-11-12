@@ -1,0 +1,29 @@
+.message {
+    max-width: 70%; /* Control message width */
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  
+  .message.contact {
+    background-color: #ffffff;
+    align-self: flex-start; /* Align to the left for contacts */
+  }
+  
+  .message.user {
+    background-color: #daf8cb;
+    align-self: flex-end; /* Align to the right for the user */
+  }
+  
+  .message-sender {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size:small;
+    justify-self: flex-start;
+  }
+  
+  .message-text {
+    margin: 0;
+  }
