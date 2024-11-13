@@ -1,0 +1,92 @@
+/* Main styles */
+.loginsignup {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loginsignup .container {
+    width: 40vw;
+    height: 65vh;
+    background-color: #5D5A5A;
+    padding: 1.5rem 2rem 2rem 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Restrict aspect ratio */
+    max-width: 70vh; 
+}
+
+.loginsignup p {
+    color: #D4D4D4;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.loginsignup .LogInNaslov { 
+    margin-top: 2rem;
+    font-size: 2.4rem;
+    padding-bottom: 3rem;
+    font-weight: 500;
+    letter-spacing:1.5px;
+    color: white;
+}
+
+/* Styles for smaller screens */
+@media (max-width: 1000px) {
+    .loginsignup .LogInNaslov { 
+        font-size: 1.5rem;
+    }
+    .loginsignup .container {
+        width: 80vw;
+    }
+    .loginsignup .container {
+        padding: 1rem;
+        width: 70vw;
+        height: 60vh;
+    }
+}
+
+
+/* Styles for larger screens */
+@media (min-width: 2200px) {
+    .loginsignup .container {
+        width: 40vw; 
+        height: 75vh;
+        padding: 2rem 3rem 3rem 3rem;
+    }
+
+    .loginsignup p {
+        font-size: 1.4rem;
+    }
+
+    .loginsignup .LogInNaslov { 
+        font-size: 3.5rem;
+        padding-bottom: 3.5rem;
+    }
+}
+
+@media (max-height: 800px) {
+    .loginsignup {
+        padding: 0rem;
+
+    }
+    .loginsignup .LogInNaslov { 
+        margin-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+    .loginsignup .container {
+        width: 70vw;
+        height: 60vh;
+    }
+
+}

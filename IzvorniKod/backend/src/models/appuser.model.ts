@@ -1,26 +1,31 @@
-import { Table, Column, Model, PrimaryKey, DataType, NotNull } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, CreatedAt, UpdatedAt, Index } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'AppUser',
-  timestamps: false
+  tableName: 'appuser',
+  timestamps: true // Automatically adds createdAt and updatedAt fields
 })
 export class AppUser extends Model {
-	@PrimaryKey
-	@Column(DataType.STRING)
-	email!: string;
+  @PrimaryKey
+  @Column(DataType.STRING)
+  email!: string;
 
-	@Column(DataType.STRING)
-	archived_reason!: string | null;
+  @Column(DataType.STRING)
+  archived_reason!: string | null;
 
-	@NotNull
-	@Column(DataType.STRING)
-	first_name!: string;
+  @Column(DataType.STRING)
+  name!: string;
 
-	@NotNull
-	@Column(DataType.STRING)
-	family_name!: string;
+  @Column(DataType.STRING)
+  oauthProvider!: string;
 
-	@NotNull
-	@Column(DataType.DATE)
-	created_time!: Date;
+  @Column(DataType.STRING)
+  oauthId!: string;
+
+  @CreatedAt
+  @Column(DataType.DATE)
+  createdAt!: Date;
+
+  @UpdatedAt
+  @Column(DataType.DATE)
+  updatedAt!: Date;
 }

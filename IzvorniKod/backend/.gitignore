@@ -10,7 +10,6 @@
 
 # production - after running npm run build we get /dist on server
 /dist 
-
 # misc
 .DS_Store
 .env.local
