@@ -8,10 +8,9 @@ const Heading =() => {
         <img src={logo} alt='logo' className='logo'></img>
 
         <ul>
-          <li><Link to={"/"} style={{textDecoration: 'none', color: 'inherit'}}>News Feed</Link></li>
+          <li><Link to={"/"} className="clickable">News Feed</Link></li>
+          <li><Link to={"/chat"} className="clickable">Chat</Link></li>
           <li>Feature1</li>
-          <li><Link to={"/chat"} style={{textDecoration: 'none', color: 'inherit'}}>Chat</Link></li>
-          <li>Feature2</li>
         </ul>
 
         <Link to={"/login"}><button className='LogIn'>Log In</button></Link>

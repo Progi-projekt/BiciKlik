@@ -1,11 +1,13 @@
 .App {
   text-align: center;
   background-color: #252321;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center; 
-  min-height: 100vh;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 .content {
   flex: 1; 

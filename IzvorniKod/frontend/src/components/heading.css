@@ -24,7 +24,6 @@
 .Heading li {
     display: inline-block;
     margin: 1rem 1rem;
-    padding: 0.5rem 1rem;
     border-radius: 9px;
     cursor: pointer;
 }
@@ -39,6 +38,14 @@
 .Heading li:hover {
     background-color: #5E5A5A;
     border: none;
+}
+
+.Heading .clickable {
+    text-decoration: none;
+    color: inherit;
+    display: block; 
+    padding: 0.5rem 1rem;
+    border-radius: 9px;
 }
 
 .LogIn:hover {

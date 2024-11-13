@@ -1,13 +1,13 @@
 /* Main styles */
 .loginsignup {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .loginsignup .container {
-    width: 40vw;
-    height: 65vh;
+    width: 40%;
+    height: 65vh; /*bolje bi bilo da je s %*/
     background-color: #5D5A5A;
     padding: 1.5rem 2rem 2rem 2rem;
     margin-top: 2rem;
