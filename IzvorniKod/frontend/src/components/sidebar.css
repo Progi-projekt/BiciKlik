@@ -8,7 +8,9 @@
   
   .sidebar h2 {
     margin-top: 0;
+    padding-bottom: 1rem;
     font-size: 1.5em;
+    color: #252321;
   }
   
   .contact {
@@ -19,4 +21,8 @@
   
   .contact:hover {
     background-color: #f7f7f7;
+  }
+
+  .sidebar li {
+    list-style-type: none;
   }

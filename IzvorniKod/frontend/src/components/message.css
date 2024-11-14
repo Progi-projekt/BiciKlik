@@ -1,5 +1,5 @@
 .message {
-    max-width: 70%; /* Control message width */
+    max-width: 70%; 
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -8,16 +8,16 @@
   
   .message.contact {
     background-color: #ffffff;
-    align-self: flex-start; /* Align to the left for contacts */
+    align-self: flex-start; 
   }
   
   .message.user {
-    background-color: #daf8cb;
-    align-self: flex-end; /* Align to the right for the user */
+    background-color: #bfce98;
+    align-self: flex-end; 
   }
   
   .message-sender {
-    color: green;
+    color: #718E2A;
     font-weight: bold;
     margin-bottom: 5px;
     font-size:small;

@@ -1,8 +1,25 @@
 import logo from '../assets/Bicklik.png'
-import React from 'react';
 import "./heading.css"
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import icon from '../assets/icon.png';
+
 const Heading =() => {
+    const [LoggedIn, setLoggedIn] = useState(false);
+
+    useEffect(() => {
+      const connectSid = Cookies.get('connect.sid');
+      const gState = Cookies.get('g:state');
+      const loggedInAs = Cookies.get('loggedInAs');
+  
+      if (connectSid && gState && loggedInAs) {
+        setLoggedIn(true);  
+      } else {
+        setLoggedIn(false); 
+      }
+    }, []);
+
     return (
       <div className="Heading">
         <img src={logo} alt='logo' className='logo'></img>
@@ -13,7 +30,12 @@ const Heading =() => {
           <li>Feature1</li>
         </ul>
 
-        <Link to={"/login"}><button className='LogIn'>Log In</button></Link>
+        {LoggedIn ? (
+            <img src={icon} alt='ikona' className='ikona'/>
+        ) : (
+          <Link to={"/login"}> <button className='LogIn'>Log In</button> </Link>
+        )}
+
       </div>
     );
   }
