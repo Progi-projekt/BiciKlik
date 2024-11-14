@@ -3,7 +3,7 @@ import { Route } from './route.model';
 import { Organizer } from './organizer.model';
 
 @Table({
-  tableName: 'Event',
+  tableName: 'event',
   timestamps: true 
 })
 export class Event extends Model {

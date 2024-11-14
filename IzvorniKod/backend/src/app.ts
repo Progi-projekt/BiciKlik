@@ -7,6 +7,8 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/oauth.router';
 import eventRouter from './routes/event.router';
+import { getLastTenEvents } from './services/event.service';
+import { json } from 'sequelize';
 
 dotenv.config();
 
@@ -15,7 +17,7 @@ var db_connected: boolean = false;
 
 sequelize.authenticate()
 .then(() => {
-    sequelize.sync({ force: false });
+    sequelize.sync({ force: true });
     console.log('Connected to the database');
     db_connected = true;
 })
@@ -50,6 +52,20 @@ app.get('/db/health', (req, res) => {
         res.json({ status: 'ERROR' });
     }
 });
+
+app.get('/db/createEvent', (req, res) => {
+    
+
+
+})
+
+app.get('/db/getEvents', (req, res) => {
+    let events = getLastTenEvents()
+    .then((data) => {
+        res.json(data);
+    })
+    .catch(() => {});
+})
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../frontend/dist', 'index.html'));

@@ -3,7 +3,7 @@ import { AppUser } from './appuser.model';
 import { Route } from './route.model';
 
 @Table({
-  tableName: 'Organizer',
+  tableName: 'organizer',
   timestamps: true // Automatically adds createdAt and updatedAt fields
 })
 export class Organizer extends Model {

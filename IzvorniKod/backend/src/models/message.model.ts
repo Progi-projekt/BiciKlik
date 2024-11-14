@@ -2,7 +2,7 @@ import { Table, Column, Model, PrimaryKey, ForeignKey } from 'sequelize-typescri
 import { AppUser } from './appuser.model';
 
 @Table({
-  tableName: 'Message',
+  tableName: 'message',
   timestamps: true
 })
 export class Message extends Model {

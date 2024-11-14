@@ -2,7 +2,7 @@ import { Table, ForeignKey, BelongsTo, Model, Column } from 'sequelize-typescrip
 import { AppUser } from './appuser.model';
 
 @Table({
-  tableName: 'Regular',
+  tableName: 'regular',
   timestamps: true // Automatically adds createdAt and updatedAt fields
 })
 export class Regular extends Model {
