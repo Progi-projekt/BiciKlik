@@ -6,7 +6,7 @@ import { AppUser } from '../models/appuser.model';
 export const getLastTenEvents = async () => {
   const events = await Event.findAll({
     limit: 10,
-    order: [['created_time', 'DESC']],
+    order: [['createdAt', 'DESC']],
     include: [
       {
         model: Route,

@@ -12,9 +12,6 @@ export class Event extends Model {
   event_id!: string;
 
   @Column
-  created_time!: Date;
-
-  @Column
   event_time!: Date;
 
   @Column

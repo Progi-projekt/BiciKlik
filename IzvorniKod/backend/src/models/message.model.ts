@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, ForeignKey, AutoIncrement } from 'sequelize-typescript';
 import { AppUser } from './appuser.model';
 
 @Table({
@@ -8,7 +8,7 @@ import { AppUser } from './appuser.model';
 export class Message extends Model {
   @PrimaryKey
   @Column
-  sent_time!: Date;
+  message_index!: number;
 
   @PrimaryKey
   @ForeignKey(() => AppUser)

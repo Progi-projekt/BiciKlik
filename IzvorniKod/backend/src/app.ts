@@ -17,7 +17,7 @@ var db_connected: boolean = false;
 
 sequelize.authenticate()
 .then(() => {
-    sequelize.sync({ force: true });
+    sequelize.sync({ force: false });
     console.log('Connected to the database');
     db_connected = true;
 })
@@ -64,7 +64,9 @@ app.get('/db/getEvents', (req, res) => {
     .then((data) => {
         res.json(data);
     })
-    .catch(() => {});
+    .catch((err) => {
+        res.json(err);
+    });
 })
 
 app.get('*', (req, res) => {

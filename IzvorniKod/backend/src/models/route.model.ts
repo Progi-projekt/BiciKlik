@@ -17,9 +17,6 @@ export class Route extends Model {
   @Column
   route_data_path_gpx!: string;  
 
-  @Column
-  created_time!: Date;
-
   @ForeignKey(() => Organizer)
   @Column
   creator_email!: string;
