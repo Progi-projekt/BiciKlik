@@ -24,6 +24,12 @@
 .slikarute {
     width: 100%;
     padding-top: 3%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.slikarute:hover {
+    object-fit: contain;
 }
 
 .containerRuta{
