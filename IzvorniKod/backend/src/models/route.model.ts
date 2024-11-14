@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo, NotNull, AllowNull } from 'sequelize-typescript';
 import { Organizer } from './organizer.model';
 
 @Table({
@@ -25,4 +25,5 @@ export class Route extends Model {
 
   @BelongsTo(() => Organizer)
   creator!: Organizer;
+
 }

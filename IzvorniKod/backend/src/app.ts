@@ -15,7 +15,7 @@ var db_connected: boolean = false;
 
 sequelize.authenticate()
 .then(() => {
-    sequelize.sync();
+    sequelize.sync({ force: false });
     console.log('Connected to the database');
     db_connected = true;
 })

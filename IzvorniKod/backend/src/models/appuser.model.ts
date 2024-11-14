@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, DataType, CreatedAt, UpdatedAt, Index } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, CreatedAt, UpdatedAt, Index, Unique } from 'sequelize-typescript';
 
 @Table({
   tableName: 'appuser',
