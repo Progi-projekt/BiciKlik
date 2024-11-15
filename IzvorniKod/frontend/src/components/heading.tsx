@@ -10,10 +10,9 @@ const Heading =() => {
 
     useEffect(() => {
       const connectSid = Cookies.get('connect.sid');
-      const gState = Cookies.get('g:state');
       const loggedInAs = Cookies.get('loggedInAs');
   
-      if (connectSid && gState && loggedInAs) {
+      if (connectSid && loggedInAs) {
         setLoggedIn(true);  
       } else {
         setLoggedIn(false); 
