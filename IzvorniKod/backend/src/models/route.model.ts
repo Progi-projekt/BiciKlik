@@ -1,29 +1,30 @@
-import { Table, Column, Model, PrimaryKey, DataType, NotNull, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { AppUser} from './appuser.model'
+import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo, NotNull, AllowNull, HasMany } from 'sequelize-typescript';
+import { Organizer } from './organizer.model';
+import { Event } from './event.model';
+
 @Table({
-  tableName: 'Route',
-  timestamps: false
+  tableName: 'route',
+  timestamps: true 
 })
 export class Route extends Model {
-	@PrimaryKey
-	@Column(DataType.STRING)
-	route_id!: string;
+  @PrimaryKey
+  @Column
+  route_id!: string;
 
-	@Column(DataType.STRING)
-	route_data_path!: string | null; //points to gpx file
+  @Column
+  route_name!: string;
 
-	@NotNull
-	@Column(DataType.STRING)
-	route_name!: string;
+  @Column
+  route_data_path_gpx!: string;  
 
-	@NotNull
-	@Column(DataType.STRING)
-	created_time!: Date;   //is this datetime? I think it should be 
-
-  @NotNull
-  @ForeignKey(()=>AppUser)
-  @Column(DataType.STRING)
+  @ForeignKey(() => Organizer)
+  @Column
   creator_email!: string;
-  @BelongsTo(()=>AppUser)
-  creator!: AppUser;
+
+  @BelongsTo(() => Organizer)
+  creator!: Organizer;
+
+  @HasMany(() => Event)
+  events_on!: Event[];
+
 }
