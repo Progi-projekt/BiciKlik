@@ -16,14 +16,32 @@ const app: Application = express();
 var db_connected: boolean = false;
 
 sequelize.authenticate()
-.then(() => {
-    sequelize.sync({ force: false });
-    console.log('Connected to the database');
-    db_connected = true;
-})
-.catch((err: any) => {
-    console.error('Unable to connect to the database:', err);
-});
+    .then(async () => {
+        await sequelize.sync({ force: false });
+        console.log('Connected to the database');
+        db_connected = true;
+
+        // Insert initial data into the database
+        try {
+            // Call your bulkInsert functions here
+            await insertInitialData();
+            console.log('Initial data inserted successfully');
+        } catch (error) {
+            console.error('Error inserting initial data:', error);
+        }
+    })
+    .catch((err: any) => {
+        console.error('Unable to connect to the database:', err);
+    });
+
+async function insertInitialData() {
+    // Example insert function call
+    const { up: insertRoutes } = require('./migrations/insertRoutes');
+    const { up: insertEvents } = require('./migrations/insertEvents');
+
+    await insertRoutes(sequelize.getQueryInterface());
+    await insertEvents(sequelize.getQueryInterface());
+}
 
 app.use(express.json());
 app.use(cookieParser());
