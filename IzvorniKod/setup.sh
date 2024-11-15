@@ -32,3 +32,4 @@ echo "Restarting application with PM2..."
 pm2 restart BiciKlik
 
 echo "Setup complete!"
+echo "Yippie!"
