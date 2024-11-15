@@ -1,0 +1,28 @@
+.sidebar {
+    width: 25%;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+    padding-bottom: 1rem;
+    font-size: 1.5em;
+    color: #252321;
+  }
+  
+  .contact {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  .contact:hover {
+    background-color: #f7f7f7;
+  }
+
+  .sidebar li {
+    list-style-type: none;
+  }
