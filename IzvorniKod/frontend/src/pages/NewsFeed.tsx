@@ -30,6 +30,11 @@ const Newsfeed =() => {
     fetchEvents();
   }, []);
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+  };
+
     return (
       <div className="newsfeed">
          <img src={headerNewsFeed} alt='NewsFeed' className='slikanews'/>
@@ -39,7 +44,7 @@ const Newsfeed =() => {
             <div className='ruta' key={event.route_id}>
             <div className='tekst'>
               <p className='nazivRute'>{event.event_name}</p>
-              <p className='vrijemeDatum'>{event.event_time}</p>
+              <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
               <p>{event.short_description}</p>
               <img src={`https://biciklik.duckdns.org/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
             </div>
