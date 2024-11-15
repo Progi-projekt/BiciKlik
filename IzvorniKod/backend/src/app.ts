@@ -34,14 +34,12 @@ sequelize.authenticate()
         console.error('Unable to connect to the database:', err);
     });
 
-async function insertInitialData() {
-    // Example insert function call
-    const { up: insertRoutes } = require('./migrations/insertRoutes');
-    const { up: insertEvents } = require('./migrations/insertEvents');
-
-    await insertRoutes(sequelize.getQueryInterface());
-    await insertEvents(sequelize.getQueryInterface());
-}
+    async function insertInitialData() {
+        const { insertRoutes, insertEvents, insertOrganizers } = require('./config/database.insert');
+        await insertOrganizers(sequelize.getQueryInterface());
+        await insertRoutes(sequelize.getQueryInterface());
+        await insertEvents(sequelize.getQueryInterface());
+    }
 
 app.use(express.json());
 app.use(cookieParser());
