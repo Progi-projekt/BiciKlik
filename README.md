@@ -39,9 +39,9 @@ vrijeme koje je ostvario bez provjere točnosti.
 
 
 # Tehnologije
->* Sustav će imati vlastitu domenu koristeći Azure Cloud sustav
->* Sustav će biti implementiran koristeći NodeJS, ExpressJS, React u jeziku TypeScript
->* Sustav će koristiti bazu podataka MongoDB
+>* Sustav će imati vlastitu domenu, hostan na aws hostingu
+>* Sustav će biti implementiran koristeći NodeJS, Express, React u jeziku TypeScript
+>* Sustav će koristiti bazu podataka postgreSQL
 >* Za implementaciju kreiranja ruta, sustav će koristiti Google Maps API
 >* Korisničke rute će se spremati na serveru u .gpx formatu, te će njihove putanje biti
 spremljene u bazi podataka zajedno sa unikatnim identifikatorom i imenom rute koje
