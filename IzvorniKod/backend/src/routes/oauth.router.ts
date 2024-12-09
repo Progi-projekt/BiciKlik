@@ -1,7 +1,17 @@
 import { Router } from 'express';
-import { googleCallback } from '../controllers/oauth.controller';
-const router = Router();
+import { OAuthController } from '../controllers/oauth.controller';
 
-router.post('/google/callback', googleCallback);
+export class AuthRouter {
+  public router: Router;
+  private oauthController: OAuthController;
 
-export default router;
+  constructor() {
+    this.router = Router();
+    this.oauthController = new OAuthController();
+    this.initializeRoutes();
+  }
+
+  private initializeRoutes() {
+    this.router.post('/google/callback', this.oauthController.googleCallback);
+  }
+}

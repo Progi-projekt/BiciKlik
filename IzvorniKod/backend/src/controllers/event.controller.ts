@@ -1,12 +1,27 @@
 import { Request, Response } from 'express';
-import { getLastTenEvents } from '../services/event.service';
+import { EventService } from '../services/event.service';
 
-export const getRecentEvents = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const events = await getLastTenEvents();
-    res.json(events);
-  } catch (error) {
-    console.error('Error fetching recent events:', error);
-    res.status(500).json({ message: 'Failed to fetch recent events' });
+export class EventController {
+  private eventService: EventService;
+
+  constructor() {
+    this.eventService = new EventService();
   }
-};
+
+  public createEvent = async (req: Request, res: Response) => {
+    // TODO
+  };
+
+  public getEvents = async (req: Request, res: Response) => {
+    try {
+      const events = await this.eventService.getLastTenEvents();
+      res.json(events);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'An unknown error occurred' });
+      }
+    }
+  };
+}

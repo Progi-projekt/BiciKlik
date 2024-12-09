@@ -1,8 +1,18 @@
 import { Router } from 'express';
-import { getRecentEvents } from '../controllers/event.controller';
+import { EventController } from '../controllers/event.controller';
 
-const router = Router();
+export class EventRouter {
+  public router: Router;
+  private eventController: EventController;
 
-router.get('/get-recent', getRecentEvents);
+  constructor() {
+    this.router = Router();
+    this.eventController = new EventController();
+    this.initializeRoutes();
+  }
 
-export default router;
+  private initializeRoutes() {
+    this.router.get('/createEvent', this.eventController.createEvent);
+    this.router.get('/getEvents', this.eventController.getEvents);
+  }
+}

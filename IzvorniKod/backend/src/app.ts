@@ -1,97 +1,68 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
-import path from 'path';
-import sequelize from './config/database';
-import dotenv from 'dotenv';
-import mockRouter from './routes/mockRoutes';
-import session from 'express-session';
-import cookieParser from 'cookie-parser';
-import authRouter from './routes/oauth.router';
-import eventRouter from './routes/event.router';
-import { getLastTenEvents } from './services/event.service';
-import { json } from 'sequelize';
+import express, { Application } from "express";
+import path from "path";
+import dotenv from "dotenv";
+import sequelize from "./config/database";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import { AuthRouter } from "./routes/oauth.router";
+import { EventRouter } from "./routes/event.router";
+import { insertAppUsers } from "./config/database.insert";
 
 dotenv.config();
 
-const app: Application = express();
-var db_connected: boolean = false;
+class App {
+	public app: Application;
+	private dbConnected: boolean = false;
 
-sequelize.authenticate()
-    .then(async () => {
-        await sequelize.sync({ force: false });
-        console.log('Connected to the database');
-        db_connected = true;
+	constructor() {
+		this.app = express();
+		this.initializeMiddlewares();
+		this.initializeRoutes();
+		this.initializeDatabase();
+	}
 
-        // Insert initial data into the database
-        try {
-            // Call your bulkInsert functions here
-            await insertInitialData();
-            console.log('Initial data inserted successfully');
-        } catch (error) {
-            console.error('Error inserting initial data:', error);
-        }
-    })
-    .catch((err: any) => {
-        console.error('Unable to connect to the database:', err);
-    });
+	private initializeMiddlewares() {
+		this.app.use(express.json());
+		this.app.use(cookieParser());
+		this.app.use(
+			session({
+				secret: process.env.SESSION_SECRET || "your_secret_key",
+				resave: false,
+				saveUninitialized: true,
+				cookie: { secure: false },
+			})
+		);
+		this.app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+		this.app.use("/images", express.static(path.join(__dirname, "../../static/images")));
+	}
 
-    async function insertInitialData() {
-        const { insertRoutes, insertEvents, insertOrganizers } = require('./config/database.insert');
-        await insertOrganizers(sequelize.getQueryInterface());
-        await insertRoutes(sequelize.getQueryInterface());
-        await insertEvents(sequelize.getQueryInterface());
-    }
+	private initializeRoutes() {
+		this.app.use("/auth", new AuthRouter().router);
+		this.app.use("/event", new EventRouter().router);
+		this.app.get("/api/health", (req, res) => res.json({ status: "OK" }));
+		this.app.get("/db/health", (req, res) => res.json({ status: this.dbConnected ? "OK" : "ERROR" }));
+	}
 
-app.use(express.json());
-app.use(cookieParser());
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'your_secret_key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
-}));
+	private async initializeDatabase() {
+		try {
+			await sequelize.authenticate();
+			await sequelize.sync({ force: false });
+			console.log("Connected to the database");
+			this.dbConnected = true;
+			await this.insertInitialData();
+			console.log("Initial data inserted successfully");
+		} catch (error) {
+			console.error("Unable to connect to the database:", error);
+		}
+	}
 
-app.use(express.static(path.join(__dirname, '../../frontend/dist')));
-app.use('/images', express.static(path.join(__dirname, '../../static/images')));
+	private async insertInitialData() {
+		const { insertRoutes, insertEvents, insertOrganizers, insertAppUsers } = require("./config/database.insert");
+		await insertAppUsers(sequelize.getQueryInterface());
+		//await insertOrganizers(sequelize.getQueryInterface());
+		//await insertRoutes(sequelize.getQueryInterface());
+		//await insertEvents(sequelize.getQueryInterface());
+	}
+}
 
-app.get('/api/health', (req, res) => {
-    res.json({ status: 'OK' });
-});
-
-app.use('/auth', authRouter);
-app.use('/mock', mockRouter);
-app.use('/event', eventRouter);
-
-app.get('/db/health', (req, res) => {
-    if (db_connected) {
-        res.json({ status: 'OK' });
-    } else {
-        res.json({ status: 'ERROR' });
-    }
-});
-
-app.get('/db/createEvent', (req, res) => {
-    
-
-
-})
-
-app.get('/db/getEvents', (req, res) => {
-    let events = getLastTenEvents()
-    .then((data) => {
-        res.json(data);
-    })
-    .catch((err) => {
-        res.json(err);
-    });
-})
-
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../frontend/dist', 'index.html'));
-});
-
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-
-export default app;
+export default new App().app;
