@@ -1,4 +1,6 @@
 # BiciKlik
+> Ovaj je projekt rezultat timskog rada u sklopu projektnog zadatka kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu.
+
 > U suvremenom okruženju biciklisti često traže načine za povezivanje s drugima, sudjelovanje
 u događanjima i pronalaženje dobrih ruta za vožnju. Mnoge već popularne aplikacije ne nude
 platformu za interakciju i dijeljenje iskustava. Biciklisti tako mogu propustiti prilike za
