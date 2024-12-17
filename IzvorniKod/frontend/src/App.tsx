@@ -5,10 +5,12 @@ import Footer from './components/footer';
 import NewsFeed from './pages/NewsFeed';
 import Loginsignup from './pages/LoginSignUp';
 import Chat from './pages/Chat';
+import ClickedEvent from './pages/ClickedEvent';
+import CreateRoute from './pages/CreateRoute';
 
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 
-function App() {
+function App() { 
   return (
     <BrowserRouter>
     <div className="App">
@@ -17,6 +19,8 @@ function App() {
       <Route path='/' element={<NewsFeed/>}/>
       <Route path='/login' element={<Loginsignup/>}/>
       <Route path='/chat' element={<Chat/>}/>
+      <Route path='/event/:id' element={<ClickedEvent/>}/>  
+      <Route path='/createRoute' element={<CreateRoute/>}/>
       </Routes>
       <div className="footer">
       <Footer></Footer>

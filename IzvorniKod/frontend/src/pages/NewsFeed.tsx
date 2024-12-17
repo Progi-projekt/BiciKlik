@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../components/newsfeed.css'
 import headerNewsFeed from '../assets/HeaderNewsFeed.png';
 import { response } from 'express';
+import { Link } from 'react-router-dom';
 
 type EventData = {
   route_id: string;
@@ -41,7 +42,8 @@ const Newsfeed =() => {
          <p className='filter'>Filter</p>
          <div className='containerRuta'>
           {events.map(event => (
-            <div className='ruta' key={event.route_id}>
+            <Link to={`/event/${event.route_id}`} className="clickEvent" key={event.route_id}>
+            <div className='ruta'>
             <div className='tekst'>
               <p className='nazivRute'>{event.event_name}</p>
               <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
@@ -49,6 +51,7 @@ const Newsfeed =() => {
               <img src={`https://biciklik.duckdns.org/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
             </div>
           </div>
+          </Link>
         ))} 
          </div>
       </div>

@@ -12,7 +12,7 @@ const Heading =() => {
       const connectSid = Cookies.get('connect.sid');
       const loggedInAs = Cookies.get('loggedInAs');
   
-      if (connectSid && loggedInAs) {
+      if (true) { //connectSid && loggedInAs
         setLoggedIn(true);  
       } else {
         setLoggedIn(false); 
@@ -26,7 +26,7 @@ const Heading =() => {
         <ul>
           <li><Link to={"/"} className="clickable">News Feed</Link></li>
           <li><Link to={"/chat"} className="clickable">Chat</Link></li>
-          <li>Feature1</li>
+          {LoggedIn && <li><Link to={"/createRoute"} className="createButton">Create Route</Link></li>} 
         </ul>
 
         {LoggedIn ? (
