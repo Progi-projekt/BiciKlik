@@ -7,6 +7,7 @@ import icon from '../assets/icon.png';
 
 const Heading =() => {
     const [LoggedIn, setLoggedIn] = useState(false);
+    const [openProfile, setOpenProfile] = useState(false);
 
     useEffect(() => {
       const connectSid = Cookies.get('connect.sid');
@@ -30,7 +31,16 @@ const Heading =() => {
         </ul>
 
         {LoggedIn ? (
-            <img src={icon} alt='ikona' className='ikona'/>
+          <>
+            <img src={icon} alt='ikona' className='ikona' onClick={() => setOpenProfile((prev) => !prev)}/>
+            {openProfile &&
+            <div className='dropDown-container'>
+            <ul className='dropDown'>
+            <li className='logoutItem'>LogOut</li>
+            </ul>
+            </div>
+            }
+          </>
         ) : (
           <Link to={"/login"}> <button className='LogIn'>Log In</button> </Link>
         )}
