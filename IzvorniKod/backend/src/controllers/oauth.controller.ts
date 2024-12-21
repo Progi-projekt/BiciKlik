@@ -30,7 +30,7 @@ export class OAuthController {
 		}
 	};
 
-	public geteAuthorization = async (req: Request, res: Response): Promise<void> => {
+	public getAuthorization = async (req: Request, res: Response): Promise<void> => {
 		const email = req.cookies.loggedInAs;
 
 		if (!email) {
