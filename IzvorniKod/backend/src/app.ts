@@ -59,9 +59,9 @@ class App {
 	private async insertInitialData() {
 		const { insertRoutes, insertEvents, insertOrganizers, insertAppUsers } = require("./config/database.insert");
 		await insertAppUsers(sequelize.getQueryInterface());
-		//await insertOrganizers(sequelize.getQueryInterface());
-		//await insertRoutes(sequelize.getQueryInterface());
-		//await insertEvents(sequelize.getQueryInterface());
+		await insertOrganizers(sequelize.getQueryInterface());
+		await insertRoutes(sequelize.getQueryInterface());
+		await insertEvents(sequelize.getQueryInterface());
 	}
 }
 

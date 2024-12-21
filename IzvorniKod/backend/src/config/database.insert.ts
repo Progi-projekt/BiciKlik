@@ -1,7 +1,7 @@
 import { QueryInterface } from "sequelize";
 
 export async function insertRoutes(queryInterface: QueryInterface) {
-	await queryInterface.bulkInsert("Route", [
+	await queryInterface.bulkInsert("route", [
 		{
 			route_id: 1,
 			route_name: "Route 1",
@@ -46,7 +46,7 @@ export async function insertRoutes(queryInterface: QueryInterface) {
 }
 
 export async function insertEvents(queryInterface: QueryInterface) {
-	await queryInterface.bulkInsert("Event", [
+	await queryInterface.bulkInsert("event", [
 		{
 			event_id: 1,
 			event_time: new Date("2025-01-01 10:00:00"),
@@ -219,7 +219,7 @@ export async function insertEvents(queryInterface: QueryInterface) {
 }
 
 export async function insertOrganizers(queryInterface: QueryInterface) {
-	await queryInterface.bulkInsert("Organizer", [
+	await queryInterface.bulkInsert("organizer", [
 		{
 			email: "andrej.filipciczagreb@gmail.com",
 			createdAt: new Date("2023-01-01 10:00:00"),
@@ -249,7 +249,7 @@ export async function insertOrganizers(queryInterface: QueryInterface) {
 }
 
 export async function insertAppUsers(queryInterface: QueryInterface) {
-	await queryInterface.bulkInsert("AppUsers", [
+	await queryInterface.bulkInsert("appuser", [
 		{
 			email: "andrej.filipciczagreb@gmail.com",
 			name: "Andrej Filipcic",
