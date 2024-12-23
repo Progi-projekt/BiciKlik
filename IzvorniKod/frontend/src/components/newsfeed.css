@@ -20,6 +20,7 @@
     align-self: flex-start;
     padding: 1rem ;
     cursor: pointer;
+    position: relative;
 }
 
 .slikarute {
@@ -57,6 +58,22 @@
     text-decoration: none;
     color: inherit;
 }
+.filter-drop-down{
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 10%; 
+}
+.filter-drop-ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-drop-li {
+    padding: 10px;
+    cursor: pointer;
+  }
 
 @media (max-width: 845px){
     .containerRuta{
