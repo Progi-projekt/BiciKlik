@@ -8,6 +8,7 @@
     "dev": "ts-node-dev src/server.ts"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
     "@types/express-session": "^1.18.0",
     "backend": "file:",
     "bcrypt": "^5.1.1",
