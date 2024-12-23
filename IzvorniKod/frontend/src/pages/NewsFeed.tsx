@@ -15,6 +15,8 @@ type EventData = {
 const Newsfeed =() => {
 
   const [events, setEvents] = useState<EventData[]>([]);   //za storeanje data
+  const [openFilter, setopenFilter] = useState(false); //za pop up za filter
+  
 
   useEffect(() => {
 
@@ -39,7 +41,14 @@ const Newsfeed =() => {
     return (
       <div className="newsfeed">
          <img src={headerNewsFeed} alt='NewsFeed' className='slikanews'/>
-         <p className='filter'>Filter</p>
+         <p className='filter' onClick={() => setopenFilter((prev) => !prev)} >Filter</p>
+         {openFilter &&
+         <div className='filter-drop-down'>
+          <ul className='filter-drop-ul'>
+            <li className='filter-drop-li'>Sort by: ...</li>
+          </ul>
+         </div>
+         }
          <div className='containerRuta'>
           {events.map(event => (
             <Link to={`/event/${event.route_id}`} className="clickEvent" key={event.route_id}>

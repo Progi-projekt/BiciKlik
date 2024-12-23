@@ -1,17 +1,18 @@
-import { Router } from 'express';
-import { OAuthController } from '../controllers/oauth.controller';
+import { Router } from "express";
+import { OAuthController } from "../controllers/oauth.controller";
 
 export class AuthRouter {
-  public router: Router;
-  private oauthController: OAuthController;
+	public router: Router;
+	private oauthController: OAuthController;
 
-  constructor() {
-    this.router = Router();
-    this.oauthController = new OAuthController();
-    this.initializeRoutes();
-  }
+	constructor() {
+		this.router = Router();
+		this.oauthController = new OAuthController();
+		this.initializeRoutes();
+	}
 
-  private initializeRoutes() {
-    this.router.post('/google/callback', this.oauthController.googleCallback);
-  }
+	private initializeRoutes() {
+		this.router.post("/google/callback", this.oauthController.googleCallback);
+		this.router.get("/google/getAuthorization", this.oauthController.getAuthorization);
+	}
 }
