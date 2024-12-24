@@ -56,4 +56,8 @@ export class OAuthController {
 			res.status(500).json({ message: "Failed to fetch user role", error: errorMessage });
 		}
 	};
+	public logOut = async (req: Request, res: Response): Promise<void> => {
+		req.cookies.loggedInAs = "";
+		res.json({ message: "Succesfully logged out" });
+	};
 }

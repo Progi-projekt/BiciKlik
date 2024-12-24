@@ -13,6 +13,7 @@ export class AuthRouter {
 
 	private initializeRoutes() {
 		this.router.post("/google/callback", this.oauthController.googleCallback);
-		this.router.get("/google/getAuthorization", this.oauthController.getAuthorization);
+		this.router.get("/getAuthorization", this.oauthController.getAuthorization);
+		this.router.post("/logout", this.oauthController.logOut);
 	}
 }
