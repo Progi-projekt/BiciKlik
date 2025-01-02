@@ -20,7 +20,7 @@ const Newsfeed =() => {
 
     const fetchEvents = async () => {
       try {
-        const response = await fetch('https://biciklik.duckdns.org/event/get-recent'); //fetcha responce od backenda
+        const response = await fetch('https://biciklik.duckdns.org/event/getEvents'); //fetcha responce od backenda
         const data = await response.json();       
         setEvents(data);         //sprema data za State          
       } catch (error) {
