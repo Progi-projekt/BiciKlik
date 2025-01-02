@@ -2,23 +2,34 @@ import logo from '../assets/Bicklik.png'
 import "./heading.css"
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 import icon from '../assets/icon.png';
 
-const Heading =() => {
-    const [LoggedIn, setLoggedIn] = useState(false);
-    const [openProfile, setOpenProfile] = useState(false);
 
-    useEffect(() => {
-      const connectSid = Cookies.get('connect.sid');
-      const loggedInAs = Cookies.get('loggedInAs');
-  
-      if (true) { //connectSid && loggedInAs
-        setLoggedIn(true);  
+const Heading = () => {
+  const [LoggedIn, setLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState(null); //spremi user role
+  const [openProfile, setOpenProfile] = useState(false); //za pop up za logOut
+
+  useEffect(() => {
+    fetch("/google/getAuthorization", { method: "GET", credentials: "include"})
+    .then((response) => {
+      if (!response.ok){
+        throw new Error("Failed fetch");}
+        return response.json();
+      })
+    .then((data) => {
+      if (data.loggedInAs) {
+        setLoggedIn(true);
+        setUserRole(data.role); 
       } else {
-        setLoggedIn(false); 
+        setLoggedIn(false); //true/false za hardkodiranje
       }
-    }, []);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      setLoggedIn(false);
+    });
+  }, []);
 
     return (
       <div className="Heading">
