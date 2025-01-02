@@ -11,7 +11,7 @@ const Heading = () => {
   const [openProfile, setOpenProfile] = useState(false); //za pop up za logOut
 
   useEffect(() => {
-    fetch("/google/getAuthorization", { method: "GET", credentials: "include"})
+    fetch("/auth/getAuthorization", { method: "GET", credentials: "include"})
     .then((response) => {
       if (!response.ok){
         throw new Error("Failed fetch");}
