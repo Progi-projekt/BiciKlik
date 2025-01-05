@@ -50,8 +50,8 @@ class App {
 			await sequelize.sync({ force: false });
 			console.log("Connected to the database");
 			this.dbConnected = true;
-			//await this.insertInitialData();
-			//console.log("Initial data inserted successfully");
+			/* await this.insertInitialData();
+			console.log("Initial data inserted successfully"); */
 		} catch (error) {
 			console.error("Unable to connect to the database:", error);
 		}
