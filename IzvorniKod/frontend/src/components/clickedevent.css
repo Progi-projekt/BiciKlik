@@ -3,9 +3,13 @@
     padding: 1%;
     padding-top: 2%;
     display: flex;
-   flex-direction: column;   
+    justify-content: flex-start;
+    flex-direction: column;   
 }
 .container-event {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #D8D8D8;
     border-radius: 5px;
     padding: 3% 8% 8% 8%;
@@ -21,36 +25,4 @@
     color: #5D5A5A;
     font-size: 0.9rem;
     padding-bottom: 1.5rem;
-}
-.leaderboard {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-  
-.leaderboard h2 {
-    margin-bottom: 10px;
-}
-  
-.leaderboard ul {
-    list-style-type: none;
-    padding: 0;
-}
-  
-.leaderboard li {
-    margin-bottom: 5px;
-}
-  
-.leaderboard form {
-    margin-top: 20px;
-}
-  
-.leaderboard input {
-    margin-right: 10px;
-    padding: 5px;
-}
-  
-.leaderboard button {
-    padding: 5px 10px;
 }

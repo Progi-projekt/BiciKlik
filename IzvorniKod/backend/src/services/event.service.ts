@@ -34,4 +34,42 @@ export class EventService {
       event_time: event.event_time,
     }));
   }
+
+  public async getEventByRouteId(route_id: string) {
+    try {
+      const event = await Event.findOne({
+        where: { route_id },
+        include: [
+          {
+            model: Route,
+            attributes: ['route_id', 'route_name'],
+          },
+          {
+            model: Organizer,
+            include: [
+              {
+                model: AppUser,
+                attributes: ['name'],
+              },
+            ],
+            attributes: ['email'],
+          },
+        ],
+      });
+
+      if (!event) {
+        throw new Error('Event not found');
+      }
+
+      return {
+        route_id: event.route_id,
+        short_description: event.description,
+        organizer: event.organizer.appUser.name,
+        event_name: event.event_name,
+        event_time: event.event_time,
+      };
+    } catch (error) {
+      throw new Error('Failed to fetch event data');
+    }
+  }
 }
