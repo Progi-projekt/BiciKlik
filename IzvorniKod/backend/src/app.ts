@@ -46,11 +46,16 @@ class App {
 	private async initializeDatabase() {
 		try {
 			await sequelize.authenticate();
-			await sequelize.sync({ force: false });
 			console.log("Connected to the database");
-			this.dbConnected = true;
-			/* await this.insertInitialData();
-			console.log("Initial data inserted successfully"); */
+
+			if(!this.dbConnected){ //sync only once
+				await sequelize.sync({ force: false });
+				console.log("All models were synchronized successfully.");
+				this.dbConnected = true;
+				/* await this.insertInitialData();
+				console.log("Initial data inserted successfully"); */
+			}
+			
 		} catch (error) {
 			console.error("Unable to connect to the database:", error);
 		}
