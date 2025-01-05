@@ -3,6 +3,7 @@ import '../components/newsfeed.css'
 import headerNewsFeed from '../assets/HeaderNewsFeed.png';
 import { response } from 'express';
 import { Link } from 'react-router-dom';
+import CreateRoute from './CreateRoute';
 
 type EventData = {
   route_id: string;
@@ -49,7 +50,9 @@ const Newsfeed =() => {
           </ul>
          </div>
          }
+         <CreateRoute />
          <div className='containerRuta'>
+          
           {events.map(event => (
             <Link to={`/event/${event.route_id}`} className="clickEvent" key={event.route_id}>
             <div className='ruta'>
