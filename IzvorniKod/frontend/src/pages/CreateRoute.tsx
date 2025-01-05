@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../components/createroute.css';
 
-const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-
 function CreateRoute() {
     const mapRef = useRef<HTMLDivElement>(null);
     const [routeMap, setRouteMap] = useState<google.maps.Map | null>(null);
@@ -11,11 +9,22 @@ function CreateRoute() {
     const [endLocation, setEndLocation] = useState<string>('Split, Croatia');
 
     useEffect(() => {
+        const fetchGoogleMapsKey = async () => { // trying to fetch the api key, not sure if it works securely
+            try {
+                const response = await fetch('https://biciklik.duckdns.org:3000/api/google-maps-key');
+                const data = await response.json();
+                return data.key;
+            } catch (error) {
+                console.error('Error fetching Google Maps API key:', error);
+                return null;
+            }
+        };
+
         const loadGoogleMapsScript = (callback: () => void) => {
             const existingScript = document.getElementById('googleMaps');
             if (!existingScript) {
                 const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`;
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
                 script.id = 'googleMaps';
                 document.body.appendChild(script);
                 script.onload = () => {
