@@ -66,15 +66,20 @@ export class EventService {
     };
   }
 
-  public async getParticipantsDebug(eventId: string) {
-    // Hardcoded data for testing purposes
-    const participants = [
-      { name: 'John Doe', time: '00:45:30' },
-      { name: 'Jane Smith', time: '00:50:15' },
-      { name: 'Alice Johnson', time: '00:55:20' }
-    ];
-    
-    return participants;
+  public async saveResult(eventId: string, email: string, result: number) {
+    const participation = await Participation.findOne({
+      where: {
+        event_id: eventId,
+        email: email,
+      },
+    });
+
+    if (!participation) {
+      throw new Error('Participation not found');
+    }
+
+    participation.achieved_result = result;
+    await participation.save();
   }
 
   public async getParticipants(eventId: string) {
@@ -107,4 +112,6 @@ export class EventService {
 
     return participations;
   }
+
+
 }
