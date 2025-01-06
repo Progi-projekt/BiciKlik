@@ -11,9 +11,9 @@ function CreateRoute() {
     useEffect(() => {
         const fetchGoogleMapsKey = async () => { // trying to fetch the api key, not sure if it works securely
             try {
-                const response = await fetch('https://biciklik.duckdns.org:3000/api/google-maps-key');
+                const response = await fetch('/api/env');
                 const data = await response.json();
-                return data.key;
+                return data.mapsApiKey;
             } catch (error) {
                 console.error('Error fetching Google Maps API key:', error);
                 return null;
