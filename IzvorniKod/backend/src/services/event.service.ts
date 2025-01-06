@@ -2,6 +2,8 @@ import { Event } from '../models/event.model';
 import { Route } from '../models/route.model';
 import { Organizer } from '../models/organizer.model';
 import { AppUser } from '../models/appuser.model';
+import { Regular } from '../models/regular.model';
+import { Participation } from '../models/participation.model';
 
 export class EventService {
   public async getLastTenEvents() {
@@ -64,7 +66,7 @@ export class EventService {
     };
   }
 
-  public async getParticipants(eventId: string) {
+  public async getParticipantsDebug(eventId: string) {
     // Hardcoded data for testing purposes
     const participants = [
       { name: 'John Doe', time: '00:45:30' },
@@ -73,5 +75,30 @@ export class EventService {
     ];
     
     return participants;
+  }
+
+  public async getParticipants(eventId: string) {
+
+
+    const participations = await Participation.findAll({
+      where: {
+        event_id: eventId,
+      },
+
+      attributes: ['achieved_result', 'email'],
+
+      include: [{
+        model: Regular,
+        attributes: ['email'],
+
+        include: [{
+          model: AppUser,
+          attributes: ['name'],
+        }]
+
+      }],
+    });
+
+    return participations;
   }
 }
