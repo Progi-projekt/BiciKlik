@@ -5,11 +5,12 @@ function CreateRoute() {
     const mapRef = useRef<HTMLDivElement>(null);
     const [routeMap, setRouteMap] = useState<google.maps.Map | null>(null);
     const [directionsRenderer, setDirectionsRenderer] = useState<google.maps.DirectionsRenderer | null>(null);
-    const [startLocation, setStartLocation] = useState<string>('Zagreb, Croatia');
-    const [endLocation, setEndLocation] = useState<string>('Split, Croatia');
+    const [startLocation, setStartLocation] = useState<string>('');
+    const [endLocation, setEndLocation] = useState<string>('');
+    const [route, setRoute] = useState<google.maps.DirectionsResult | null>(null);
 
     useEffect(() => {
-        const fetchGoogleMapsKey = async () => { // trying to fetch the api key, not sure if it works securely
+        const fetchGoogleMapsKey = async () => {
             try {
                 const response = await fetch('/api/env');
                 const data = await response.json();
@@ -20,11 +21,11 @@ function CreateRoute() {
             }
         };
 
-        const loadGoogleMapsScript = (callback: () => void) => {
+        const loadGoogleMapsScript = (mapsApiKey: string, callback: () => void) => {
             const existingScript = document.getElementById('googleMaps');
             if (!existingScript) {
                 const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places`;
                 script.id = 'googleMaps';
                 document.body.appendChild(script);
                 script.onload = () => {
@@ -35,19 +36,25 @@ function CreateRoute() {
             }
         };
 
-        loadGoogleMapsScript(() => {
-            if (mapRef.current) {
-                const map = new google.maps.Map(mapRef.current, {
-                    center: { lat: 45.8150, lng: 15.9780 },
-                    zoom: 8,
+        const initializeMap = async () => {
+            const mapsApiKey = await fetchGoogleMapsKey();
+            if (mapsApiKey) {
+                loadGoogleMapsScript(mapsApiKey, () => {
+                    if (mapRef.current) {
+                        const map = new google.maps.Map(mapRef.current, {
+                            center: { lat: 45.8150, lng: 15.9780 },
+                            zoom: 8,
+                        });
+                        setRouteMap(map);
+        
+                        const renderer = new google.maps.DirectionsRenderer();
+                        renderer.setMap(map);
+                        setDirectionsRenderer(renderer);
+                    }
                 });
-                setRouteMap(map);
-
-                const renderer = new google.maps.DirectionsRenderer();
-                renderer.setMap(map);
-                setDirectionsRenderer(renderer);
             }
-        });
+        };
+        initializeMap();
     }, []);
 
     const handleStartLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,11 +79,38 @@ function CreateRoute() {
                 (response, status) => {
                     if (status === 'OK') {
                         directionsRenderer.setDirections(response);
+                        setRoute(response);
+                    } else if (status === 'NOT_FOUND') {
+                        window.alert('One or both of the locations could not be found. Please check the addresses and try again.');
                     } else {
                         window.alert('Directions request failed due to ' + status);
                     }
                 }
             );
+        }
+    };
+
+    const handleExportRoute = async () => {
+        if (route) {
+            try {
+                const response = await fetch('/api/saveRoute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/xml',
+                    },
+                    body: route,
+                });
+                if (response.ok) {
+                    window.alert('Route saved successfully!');
+                } else {
+                    window.alert('Failed to save the route.');
+                }
+            } catch (error) {
+                console.error('Error saving the route:', error);
+                window.alert('Error saving the route.');
+            }
+        } else {
+            window.alert('No route to export.');
         }
     };
 
@@ -94,6 +128,7 @@ function CreateRoute() {
                         <input type="text" value={endLocation} onChange={handleEndLocationChange} />
                     </label>
                     <button onClick={handleCalculateRoute}>Calculate Route</button>
+                    <button onClick={handleExportRoute}>Export Route</button>
                 </div>
                 <div ref={mapRef} style={{ height: '500px', width: '100%' }}></div>
             </div>

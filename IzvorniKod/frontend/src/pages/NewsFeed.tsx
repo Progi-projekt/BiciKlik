@@ -50,7 +50,6 @@ const Newsfeed =() => {
           </ul>
          </div>
          }
-         <CreateRoute />
          <div className='containerRuta'>
           
           {events.map(event => (
