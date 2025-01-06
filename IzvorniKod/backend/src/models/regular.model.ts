@@ -1,6 +1,7 @@
 import { Table, ForeignKey, PrimaryKey, BelongsTo, Model, Column, HasMany } from 'sequelize-typescript';
 import { AppUser } from './appuser.model';
 import { Participation } from './participation.model';
+import { Route } from './route.model';
 
 @Table({
   tableName: 'regular',
@@ -17,4 +18,7 @@ export class Regular extends Model {
 
   @HasMany(() => Participation)
   participations!: Participation[];
+
+  @HasMany(() => Route)
+  owned_routes!: Route;
 }
