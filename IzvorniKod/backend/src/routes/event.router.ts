@@ -14,6 +14,7 @@ export class EventRouter {
   private initializeRoutes() {
     this.router.get('/createEvent', this.eventController.createEvent);
     this.router.get('/getEvents', this.eventController.getEvents);
+    this.router.get('/:eventId', this.eventController.getEventById);
     this.router.get('/leaderboard/:eventId', this.eventController.getParticipants);
   }
 }

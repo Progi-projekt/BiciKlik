@@ -25,6 +25,23 @@ export class EventController {
     }
   };
 
+  public getEventById = async (req: Request, res: Response) => {
+    const eventId = req.params.eventId;
+    try {
+      const event = await this.eventService.getEventById(eventId);
+      if (!event) {
+        return res.status(404).json({ error: 'Event not found' });
+      }
+      res.json(event);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'An unknown error occurred' });
+      }
+    }
+  };
+
   public getParticipants = async (req: Request, res: Response) => {
     const eventId = req.params.eventId;
     try {
