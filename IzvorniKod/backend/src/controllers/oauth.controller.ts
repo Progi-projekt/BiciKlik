@@ -57,7 +57,14 @@ export class OAuthController {
 		}
 	};
 	public logOut = async (req: Request, res: Response): Promise<void> => {
-		req.cookies.loggedInAs = "";
-		res.json({ message: "Succesfully logged out" });
+		res.clearCookie("loggedInAs", { httpOnly: true });
+		req.session.destroy((err) => {
+			if (err) {
+				console.error("Error destroying session:", err);
+				res.status(500).json({ message: "Failed to log out" });
+			} else {
+				res.json({ message: "Successfully logged out" });
+			}
+		});
 	};
 }

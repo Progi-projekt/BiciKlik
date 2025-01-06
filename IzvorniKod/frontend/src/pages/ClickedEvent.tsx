@@ -24,7 +24,7 @@ function ClickedEvent() {
             <p className='vrijemeDatumEvent'>{events.event_time}</p>
             <p className='shortDescriptionEvent'>{events.short_description}</p>
             <img 
-              src={`https://biciklik.duckdns.org/images/${events.route_id}.PNG`} 
+              src={`/images/${events.route_id}.PNG`} 
             />
           </div>
         </div>
