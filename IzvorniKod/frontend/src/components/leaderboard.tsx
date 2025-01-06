@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './leaderboard.css';
+
 type Participant = {
     name: string;
     time: string;
@@ -10,14 +11,15 @@ type LeaderboardProps = {
 };
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
-    const [participants, setParticipants] = useState<Participant[]>([]);
+    //const [participants, setParticipants] = useState<Participant[]>([{name: 'John Doe', time: '00:45:30'}]);
+    const [participants, setParticipants] = useState<Participant[]>([]); //actual code
     const [name, setName] = useState('');
     const [time, setTime] = useState('');
 
-    useEffect(() => {
+    useEffect(() => { // GET request za leaderboard (participants)
         const fetchParticipants = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/leaderboard/${eventId}`);
+                const response = await fetch(`/event/leaderboard/${eventId}`); //fetcha response od backenda
                 const data = await response.json();
                 setParticipants(data);
             } catch (error) {

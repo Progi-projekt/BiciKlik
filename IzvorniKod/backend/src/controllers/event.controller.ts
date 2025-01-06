@@ -25,15 +25,11 @@ export class EventController {
     }
   };
 
-  public getEventByRouteId = async (req: Request, res: Response) => {
-    const { route_id } = req.params;
+  public getParticipants = async (req: Request, res: Response) => {
+    const eventId = req.params.eventId;
     try {
-      const event = await this.eventService.getEventByRouteId(route_id);
-      if (event) {
-        res.json(event);
-      } else {
-        res.status(404).json({ error: 'Event not found' });
-      }
+      const participants = await this.eventService.getParticipants(eventId);
+      res.json(participants);
     } catch (error) {
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
@@ -41,5 +37,5 @@ export class EventController {
         res.status(500).json({ error: 'An unknown error occurred' });
       }
     }
-  };
+  }
 }
