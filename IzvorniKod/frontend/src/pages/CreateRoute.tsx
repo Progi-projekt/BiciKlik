@@ -25,7 +25,7 @@ function CreateRoute() {
             const existingScript = document.getElementById('googleMaps');
             if (!existingScript) {
                 const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places`;
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places,geometry`;
                 script.id = 'googleMaps';
                 document.body.appendChild(script);
                 script.onload = () => {
@@ -42,11 +42,11 @@ function CreateRoute() {
                 loadGoogleMapsScript(mapsApiKey, () => {
                     if (mapRef.current) {
                         const map = new google.maps.Map(mapRef.current, {
-                            center: { lat: 45.8150, lng: 15.9780 },
+                            center: { lat: 45.815, lng: 15.978 },
                             zoom: 8,
                         });
                         setRouteMap(map);
-        
+
                         const renderer = new google.maps.DirectionsRenderer();
                         renderer.setMap(map);
                         setDirectionsRenderer(renderer);
@@ -90,34 +90,73 @@ function CreateRoute() {
         }
     };
 
-    const handleExportRoute = async () => {
+    const handleExportGPX = () => {
         if (route) {
-            try {
-                const response = await fetch('/api/saveRoute', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/xml',
-                    },
-                    body: route,
-                });
-                if (response.ok) {
-                    window.alert('Route saved successfully!');
-                } else {
-                    window.alert('Failed to save the route.');
-                }
-            } catch (error) {
-                console.error('Error saving the route:', error);
-                window.alert('Error saving the route.');
-            }
+            const polyline = route.routes[0].overview_polyline; // Direktan pristup enkodiranom poliliniju
+            const decodedPath = google.maps.geometry.encoding.decodePath(polyline);
+    
+            const gpxData = `
+                <gpx version="1.1" creator="CreateRoute">
+                    <trk>
+                        <name>Generated Route</name>
+                        <trkseg>
+                            ${decodedPath
+                                .map(
+                                    (point) => `
+                                <trkpt lat="${point.lat()}" lon="${point.lng()}">
+                                </trkpt>`
+                                )
+                                .join('')}
+                        </trkseg>
+                    </trk>
+                </gpx>
+            `;
+    
+            const blob = new Blob([gpxData.trim()], { type: 'application/gpx+xml' });
+            const url = URL.createObjectURL(blob);
+    
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'route.gpx';
+            a.click();
+            URL.revokeObjectURL(url);
         } else {
             window.alert('No route to export.');
         }
     };
+    
+
+    const handleGenerateRouteImage = async () => {
+        if (route) {
+            const polyline = route.routes[0].overview_polyline; // Direktan pristup enkodiranom poliliniju
+            try {
+                const response = await fetch('/map/save-route-image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ polyline }),
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    window.alert(`Route image saved successfully! Image URL: ${data.filePath}`);
+                } else {
+                    window.alert('Failed to save the route image.');
+                }
+            } catch (error) {
+                console.error('Error saving the route image:', error);
+                window.alert('Error saving the route image.');
+            }
+        } else {
+            window.alert('No route to generate an image.');
+        }
+    };
+    
 
     return (
         <div className="createRoute">
-            <div className='createRoute-container'>
-                <p className='naslov'>Create Route</p>
+            <div className="createRoute-container">
+                <p className="naslov">Create Route</p>
                 <div>
                     <label>
                         Start Location:
@@ -128,12 +167,13 @@ function CreateRoute() {
                         <input type="text" value={endLocation} onChange={handleEndLocationChange} />
                     </label>
                     <button onClick={handleCalculateRoute}>Calculate Route</button>
-                    <button onClick={handleExportRoute}>Export Route</button>
+                    <button onClick={handleExportGPX}>Export GPX</button>
+                    <button onClick={handleGenerateRouteImage}>Generate Route Image</button>
                 </div>
                 <div ref={mapRef} style={{ height: '500px', width: '100%' }}></div>
             </div>
         </div>
-    ); 
+    );
 }
 
 export default CreateRoute;

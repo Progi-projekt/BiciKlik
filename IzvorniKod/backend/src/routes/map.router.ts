@@ -13,6 +13,6 @@ export class MapRouter {
   }
 
   private initializeRoutes() {
-    this.router.post("/createRoute", this.mapController.createRoute);
+    this.router.post("/save-route-image", this.mapController.saveRoute);
   }
 }
