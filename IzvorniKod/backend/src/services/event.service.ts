@@ -6,7 +6,7 @@ import { Regular } from '../models/regular.model';
 import { Participation } from '../models/participation.model';
 
 export class EventService {
-  public async getLastTenEvents() {
+  public async getLastTenEvents() { // for getting last 10 events
     const events = await Event.findAll({
       limit: 10,
       order: [['createdAt', 'DESC']],
@@ -37,7 +37,7 @@ export class EventService {
     }));
   }
 
-  public async getEventById(eventId: string): Promise<any> {
+  public async getEventById(eventId: string): Promise<any> { // for getting event by id
     const event = await Event.findByPk(eventId, {
       include: [
         {
@@ -66,7 +66,7 @@ export class EventService {
     };
   }
 
-  public async saveResult(eventId: string, email: string, result: number) {
+  public async saveResult(eventId: string, email: string, result: number) { //saving result
     const participation = await Participation.findOne({
       where: {
         event_id: eventId,
@@ -82,7 +82,7 @@ export class EventService {
     await participation.save();
   }
 
-  public async getParticipants(eventId: string) {
+  public async getParticipants(eventId: string) {   // for getting participants from the leaderboard
 
 
     const participations = await Participation.findAll({
@@ -111,6 +111,11 @@ export class EventService {
     });
 
     return participations;
+  }
+
+  public async addParticipant(eventId: string, time: number, email: string) { // for adding a participant to the leaderboard
+    console.log('Adding participant', eventId, time, email);
+    //TODO
   }
 
 

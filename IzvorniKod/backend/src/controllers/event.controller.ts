@@ -12,7 +12,7 @@ export class EventController {
     // TODO
   };
 
-  public getEvents = async (req: Request, res: Response) => {
+  public getEvents = async (req: Request, res: Response) => { //getting last 10 events
     try {
       const events = await this.eventService.getLastTenEvents();
       res.json(events);
@@ -25,7 +25,7 @@ export class EventController {
     }
   };
 
-  public getEventById = async (req: Request, res: Response) => {
+  public getEventById = async (req: Request, res: Response) => {    //getting event by id
     const eventId = req.params.eventId;
     try {
       const event = await this.eventService.getEventById(eventId);
@@ -42,11 +42,37 @@ export class EventController {
     }
   };
 
-  public getParticipants = async (req: Request, res: Response) => {
+  public getParticipants = async (req: Request, res: Response) => { // getting participants from the leaderboard
     const eventId = req.params.eventId;
     try {
       const participants = await this.eventService.getParticipants(eventId);
       res.json(participants);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'An unknown error occurred' });
+      }
+    }
+  }
+
+  public addParticipant = async (req: Request, res: Response) => { // adding a participant to the leaderboard
+
+    const email = req.cookies.loggedInAs;
+
+    console.log("email: " + email);
+		if (!email) {
+			res.status(400).json({ message: "No email found in cookies." });  // check if user is logged in, if there is no cookie, return an error
+			return;
+		} 
+
+    const eventId = req.params.eventId; //if ok, get the event id and time from the request 
+    const time = req.body;
+
+    try {
+      console.log("calling addParticipant");
+      const newParticipant = await this.eventService.addParticipant(eventId, time, email);
+      res.json(newParticipant);
     } catch (error) {
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });

@@ -30,7 +30,7 @@ function ClickedEvent() {
     }, [event_id]);
 
     
-    return (
+    return ( //rendera event
         <div className="event">
             <div className="container-event">
                 <p className='nazivEvent'>{event?.event_name}</p>

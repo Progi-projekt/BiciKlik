@@ -11,7 +11,6 @@ type LeaderboardProps = {
 };
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
-    //const [participants, setParticipants] = useState<Participant[]>([{name: 'John Doe', time: '00:45:30'}]);
     const [participants, setParticipants] = useState<Participant[]>([]); //actual code
     const [hours, setHours] = useState('');
     const [minutes, setMinutes] = useState('');
@@ -38,12 +37,12 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
         e.preventDefault();
         const time = `${hours}:${minutes}:${seconds}`;
         try {
-            const response = await fetch('/event/leaderboard', {    //salje podatke na backend
+            const response = await fetch(`/event/leaderboard/${eventId}`, {    //salje podatke na backend
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ eventId, time }),
+                body: JSON.stringify({ time }),
             });
             const newParticipant = await response.json();
             setParticipants([...participants, newParticipant]);
