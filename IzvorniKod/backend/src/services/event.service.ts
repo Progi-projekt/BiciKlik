@@ -113,10 +113,4 @@ export class EventService {
     return participations;
   }
 
-  public async addParticipant(eventId: string, time: number, email: string) { // for adding a participant to the leaderboard
-    console.log('Adding participant', eventId, time, email);
-    //TODO
-  }
-
-
 }

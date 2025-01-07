@@ -70,8 +70,8 @@ export class EventController {
     const time = req.body;
 
     try {
-      console.log("calling addParticipant");
-      const newParticipant = await this.eventService.addParticipant(eventId, time, email);
+      console.log("calling saveResult");
+      const newParticipant = await this.eventService.saveResult(eventId, email, time);
       res.json(newParticipant);
     } catch (error) {
       if (error instanceof Error) {
