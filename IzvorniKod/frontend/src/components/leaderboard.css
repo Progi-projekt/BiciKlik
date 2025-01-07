@@ -31,13 +31,38 @@
     border-bottom: none; /* Remove border from last item */
 }
 
-.leaderboard form {
+.add-participant-container {
     margin-top: 15px; /* Margin above the form */
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Add space between inputs */
 }
 
-.leaderboard form input[type="text"],
-.leaderboard form input[type="time"] {
-    width: calc(50% - 10px); /* Adjust width for inputs */
-    padding: 5px;
+.add-participant-container input[type="text"],
+.add-participant-container input[type="submit"] {
+    padding: 10px;
+    margin: 5px 0;
+    width: calc(23% - 10px); /* Adjust width for three inputs and one button in a row */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.add-participant-container input[type="text"] {
+    text-align: center; /* Center the text in the input fields */
+}
+
+.add-participant-container input[type="submit"] {
+    width: 100%; /* Full width for submit button */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for hover effect */
+}
+
+.add-participant-container input[type="submit"]:hover {
+    background-color: #45a049;
 }
