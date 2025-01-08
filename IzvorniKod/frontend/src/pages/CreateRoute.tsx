@@ -157,15 +157,17 @@ function CreateRoute() {
         <div className="createRoute">
             <div className="createRoute-container">
                 <p className="naslov">Create Route</p>
-                <div>
-                    <label>
-                        Start Location:
+                <div className="route-form-container">
+                    <div className='route-inputs'>
+                    <div> <label>
+                         Start Location: 
                         <input type="text" value={startLocation} onChange={handleStartLocationChange} />
-                    </label>
-                    <label>
-                        End Location:
+                    </label> </div>
+                    <div> <label>
+                        End Location:&nbsp;&nbsp;   
                         <input type="text" value={endLocation} onChange={handleEndLocationChange} />
-                    </label>
+                    </label> </div>
+                    </div>
                     <button onClick={handleCalculateRoute}>Calculate Route</button>
                     <button onClick={handleExportGPX}>Export GPX</button>
                     <button onClick={handleGenerateRouteImage}>Generate Route Image</button>
