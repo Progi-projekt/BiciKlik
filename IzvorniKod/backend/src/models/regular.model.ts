@@ -2,6 +2,7 @@ import { Table, ForeignKey, PrimaryKey, BelongsTo, Model, Column, HasMany } from
 import { AppUser } from './appuser.model';
 import { Participation } from './participation.model';
 import { Route } from './route.model';
+import { Save } from './save.model';
 
 @Table({
   tableName: 'regular',
@@ -21,4 +22,7 @@ export class Regular extends Model {
 
   @HasMany(() => Route)
   owned_routes!: Route;
+
+  @HasMany(() => Route)
+  saved_routes!: Save[];
 }
