@@ -79,7 +79,7 @@ export class EventService {
     }
 
     participation.achieved_result = result;
-    await participation.save();
+    return await participation.save();
   }
 
   public async getParticipants(eventId: string) {   // for getting participants from the leaderboard
