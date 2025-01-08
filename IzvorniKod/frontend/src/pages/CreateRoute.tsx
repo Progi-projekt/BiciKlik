@@ -65,93 +65,70 @@ function CreateRoute() {
         setEndLocation(event.target.value);
     };
 
-    const handleCalculateRoute = () => {
-        if (routeMap && directionsRenderer) {
-            const directionsService = new google.maps.DirectionsService();
-            directionsRenderer.set('directions', null); // Clear previous directions
-
-            directionsService.route(
-                {
-                    origin: startLocation,
-                    destination: endLocation,
-                    travelMode: google.maps.TravelMode.WALKING,
-                },
-                (response, status) => {
-                    if (status === 'OK') {
-                        directionsRenderer.setDirections(response);
-                        setRoute(response);
-                    } else if (status === 'NOT_FOUND') {
-                        window.alert('One or both of the locations could not be found. Please check the addresses and try again.');
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                }
-            );
+    const handleCreateRoute = async () => {
+        if (!routeMap || !directionsRenderer) {
+            window.alert('Map is not initialized.');
+            return;
         }
-    };
 
-    const handleExportGPX = () => {
-        if (route) {
-            const polyline = route.routes[0].overview_polyline; // Direktan pristup enkodiranom poliliniju
-            const decodedPath = google.maps.geometry.encoding.decodePath(polyline);
-    
-            const gpxData = `
-                <gpx version="1.1" creator="CreateRoute">
-                    <trk>
-                        <name>Generated Route</name>
-                        <trkseg>
-                            ${decodedPath
-                                .map(
-                                    (point) => `
-                                <trkpt lat="${point.lat()}" lon="${point.lng()}">
-                                </trkpt>`
-                                )
-                                .join('')}
-                        </trkseg>
-                    </trk>
-                </gpx>
-            `;
-    
-            const blob = new Blob([gpxData.trim()], { type: 'application/gpx+xml' });
-            const url = URL.createObjectURL(blob);
-    
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'route.gpx';
-            a.click();
-            URL.revokeObjectURL(url);
-        } else {
-            window.alert('No route to export.');
+        if (!startLocation || !endLocation) {
+            window.alert('Please provide start and end locations.');
+            return;
         }
-    };
-    
 
-    const handleGenerateRouteImage = async () => {
-        if (route) {
-            const polyline = route.routes[0].overview_polyline; // Direktan pristup enkodiranom poliliniju
-            try {
-                const response = await fetch('/map/save-route-image', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
+        const directionsService = new google.maps.DirectionsService();
+
+        try {
+            // Step 1: Generate Route
+            const response = await new Promise<google.maps.DirectionsResult>((resolve, reject) => {
+                directionsService.route(
+                    {
+                        origin: startLocation,
+                        destination: endLocation,
+                        travelMode: google.maps.TravelMode.WALKING, //todo: omogućit  da korisnik bira jel walking ili driving, msm da nebu uvijek ista ruta po tom pitanju, ali idk
                     },
-                    body: JSON.stringify({ polyline }),
-                });
-                if (response.ok) {
-                    const data = await response.json();
-                    window.alert(`Route image saved successfully! Image URL: ${data.filePath}`);
-                } else {
-                    window.alert('Failed to save the route image.');
-                }
-            } catch (error) {
-                console.error('Error saving the route image:', error);
-                window.alert('Error saving the route image.');
+                    (result, status) => {
+                        if (status === 'OK') {
+                            resolve(result);
+                        } else {
+                            reject('Directions request failed due to ' + status);
+                        }
+                    }
+                );
+            });
+
+            directionsRenderer.setDirections(response);
+            setRoute(response);
+
+            // Step 2: Generate and Save Image
+            const polyline = response.routes[0].overview_polyline;
+            const saveImageResponse = await fetch('/map/save-route-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ polyline }),
+            });
+            
+            const imageData = await saveImageResponse.json();
+            console.log('Image saved at:', imageData.filePath);
+            
+            const saveGpxResponse = await fetch('/map/save-gpx',{
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ polyline }),
+            });
+            if (!saveGpxResponse.ok) {
+                throw new Error('Failed to save the route image.');
             }
-        } else {
-            window.alert('No route to generate an image.');
+            const gpxData = await saveGpxResponse.json();
+            console.log('Gpx saved at: ', gpxData.filePath);
+
+            // Step 4: Success Message
+            window.alert('Ruta uspješno generirana!');
+        } catch (error) {
+            console.error('Error creating the route:', error);
+            window.alert('Failed to create the route. Please try again.');
         }
     };
-    
 
     return (
         <div className="createRoute">
@@ -168,9 +145,7 @@ function CreateRoute() {
                         <input type="text" value={endLocation} onChange={handleEndLocationChange} />
                     </label> </div>
                     </div>
-                    <button onClick={handleCalculateRoute}>Calculate Route</button>
-                    <button onClick={handleExportGPX}>Export GPX</button>
-                    <button onClick={handleGenerateRouteImage}>Generate Route Image</button>
+                    <button onClick={handleCreateRoute}>Calculate Route</button>
                 </div>
                 <div ref={mapRef} style={{ height: '500px', width: '100%' }}></div>
             </div>
