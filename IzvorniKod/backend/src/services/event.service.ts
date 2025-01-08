@@ -6,7 +6,9 @@ import { Regular } from '../models/regular.model';
 import { Participation } from '../models/participation.model';
 
 export class EventService {
-  public async getLastTenEvents() { // for getting last 10 events
+
+   // for getting last 10 events
+  public async getLastTenEvents() {
     const events = await Event.findAll({
       limit: 10,
       order: [['createdAt', 'DESC']],
@@ -37,7 +39,8 @@ export class EventService {
     }));
   }
 
-  public async getEventById(eventId: string): Promise<any> { // for getting event by id
+  // for getting event by id
+  public async getEventById(eventId: string): Promise<any> {
     const event = await Event.findByPk(eventId, {
       include: [
         {
@@ -66,7 +69,8 @@ export class EventService {
     };
   }
 
-  public async saveResult(eventId: string, email: string, result: number) { //saving result
+   //saving result
+  public async saveResult(eventId: string, email: string, result: number) {
     const participation = await Participation.findOne({
       where: {
         event_id: eventId,
@@ -82,7 +86,8 @@ export class EventService {
     return await participation.save();
   }
 
-  public async getParticipants(eventId: string) {   // for getting participants from the leaderboard
+  // for getting participants from the leaderboard
+  public async getParticipants(eventId: string) {
 
 
     const participations = await Participation.findAll({
@@ -111,6 +116,28 @@ export class EventService {
     });
 
     return participations;
+  }
+
+   // for getting events I'm participating in
+  public async getParticipatingEvents(email: string) {
+    const participations = await Participation.findAll({
+      where: {
+        email: email,
+      },
+      attributes: ['event_id'],
+      include: [
+        {
+          model: Event,
+          attributes: ['event_name', 'event_time'],
+        },
+      ],
+    });
+
+    return participations.map(participation => ({
+      event_id: participation.event.event_id,
+      event_name: participation.event.event_name,
+      event_time: participation.event.event_time,
+    }));
   }
 
 }

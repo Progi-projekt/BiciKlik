@@ -23,4 +23,7 @@ export class Participation extends Model {
   @BelongsTo(() => Regular)
   regular!: Regular;
 
+  @BelongsTo(() => Event)
+  event!: Event;
+
 }
