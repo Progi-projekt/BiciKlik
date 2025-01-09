@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Regular } from './regular.model';
 import { Route } from './route.model';
 
@@ -16,4 +16,12 @@ export class Save extends Model {
   @ForeignKey(() => Route)
   @Column
   route_id!: string;
+
+  @BelongsTo(() => Regular)
+  regular!: Regular;
+
+  @BelongsTo(() => Route)
+  route!: Route;
+
+
 }

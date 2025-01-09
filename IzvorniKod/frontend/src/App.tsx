@@ -19,7 +19,7 @@ function App() {
       <Route path='/' element={<NewsFeed/>}/>
       <Route path='/login' element={<Loginsignup/>}/>
       <Route path='/chat' element={<Chat/>}/>
-      <Route path='/event/:id' element={<ClickedEvent/>}/>  
+      <Route path='/event/:event_id' element={<ClickedEvent/>}/>  
       <Route path='/createRoute' element={<CreateRoute/>}/>
       </Routes>
       <div className="footer">

@@ -1,5 +1,5 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo, NotNull, AllowNull, HasMany } from 'sequelize-typescript';
-import { Organizer } from './organizer.model';
+import { Regular } from './regular.model';
 import { Event } from './event.model';
 
 @Table({
@@ -17,12 +17,12 @@ export class Route extends Model {
   @Column
   route_data_path_gpx!: string;  
 
-  @ForeignKey(() => Organizer)
+  @ForeignKey(() => Regular)
   @Column
   creator_email!: string;
 
-  @BelongsTo(() => Organizer)
-  creator!: Organizer;
+  @BelongsTo(() => Regular)
+  creator!: Regular;
 
   @HasMany(() => Event)
   events_on!: Event[];
