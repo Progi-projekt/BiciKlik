@@ -85,7 +85,7 @@ function CreateRoute() {
                     {
                         origin: startLocation,
                         destination: endLocation,
-                        travelMode: google.maps.TravelMode.WALKING, //todo: omogućit  da korisnik bira jel walking ili driving, msm da nebu uvijek ista ruta po tom pitanju, ali idk
+                        travelMode: google.maps.TravelMode.DRIVING, //todo: omogućit  da korisnik bira jel walking ili driving, msm da nebu uvijek ista ruta po tom pitanju, ali idk
                     },
                     (result, status) => {
                         if (status === 'OK') {
