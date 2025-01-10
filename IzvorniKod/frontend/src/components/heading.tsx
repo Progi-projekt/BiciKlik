@@ -22,12 +22,12 @@ const Heading = () => {
         setLoggedIn(true);
         setUserRole(data.role); 
       } else {
-        setLoggedIn(true); //true/false za hardkodiranje
+        setLoggedIn(false); //true/false za hardkodiranje
       }
     })
     .catch((error) => {
       console.error("Error:", error);
-      setLoggedIn(true); //true/false za hardkodiranje
+      setLoggedIn(false); //true/false za hardkodiranje
     });
   }, []);
 
