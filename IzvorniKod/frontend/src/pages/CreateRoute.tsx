@@ -184,16 +184,18 @@ function CreateRoute() {
                 <div className="route-form-container">
                     <div className='route-inputs'>
                     <div> <label>
-                         Start Location: 
+                         Start Location:&nbsp;&nbsp;
                         <input type="text" ref={startLocationRef} value={startLocation} onChange={handleStartLocationChange} />
                     </label> </div>
                     <div> <label>
                         End Location:&nbsp;&nbsp;   
-                        <input type="text" ref={endLocationRef} value={endLocation} onChange={handleEndLocationChange} />
+                        <input type="text" ref={endLocationRef} value={endLocation} onChange={handleEndLocationChange}/>
                     </label> </div>
-                    <button onClick={handleAddStop}>+</button>
+                    </div>
+                    <div>
+                    <button onClick={handleAddStop}>Add Stop</button>
                     {stops.map((stop, index) => ( //new stops
-                        <div key={index}>
+                        <div key={index} className='stops'>
                             <label>
                                 Stop {index + 1}:&nbsp;&nbsp;
                                 <input type="text" ref={(el) => (stopRefs.current[index] = el)} value={stop} onChange={event => handleStopChange(index, event.target.value)} />
