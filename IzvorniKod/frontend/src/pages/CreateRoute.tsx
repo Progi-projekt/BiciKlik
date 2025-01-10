@@ -6,8 +6,12 @@ function CreateRoute() {
     const [routeMap, setRouteMap] = useState<google.maps.Map | null>(null);
     const [directionsRenderer, setDirectionsRenderer] = useState<google.maps.DirectionsRenderer | null>(null);
     const [startLocation, setStartLocation] = useState<string>('');
+    const [stops, setStops] = useState<string[]>(['']); // support for stops in between Start and End
     const [endLocation, setEndLocation] = useState<string>('');
     const [route, setRoute] = useState<google.maps.DirectionsResult | null>(null);
+    const startLocationRef = useRef<HTMLInputElement>(null); // for autocomplete
+    const endLocationRef = useRef<HTMLInputElement>(null);
+    const stopRefs = useRef<(HTMLInputElement | null)[]>([]);
 
     useEffect(() => {
         const fetchGoogleMapsKey = async () => {
@@ -50,6 +54,20 @@ function CreateRoute() {
                         const renderer = new google.maps.DirectionsRenderer();
                         renderer.setMap(map);
                         setDirectionsRenderer(renderer);
+                        
+                        // Initialize autocomplete for start and end locations
+                        if (startLocationRef.current) {
+                            new google.maps.places.Autocomplete(startLocationRef.current);
+                        }
+                        if (endLocationRef.current) {
+                            new google.maps.places.Autocomplete(endLocationRef.current);
+                        }
+                        // Initialize autocomplete for stops
+                        stopRefs.current.forEach((ref) => {
+                            if (ref) {
+                                new google.maps.places.Autocomplete(ref);
+                            }
+                        });
                     }
                 });
             }
@@ -65,6 +83,16 @@ function CreateRoute() {
         setEndLocation(event.target.value);
     };
 
+    const handleAddStop = () => {
+        setStops([...stops, '']);
+    };
+
+    const handleStopChange = (index: number, value: string) => {
+        const newStops = [...stops];
+        newStops[index] = value;
+        setStops(newStops);
+    };
+
     const handleCreateRoute = async () => {
         if (!routeMap || !directionsRenderer) {
             window.alert('Map is not initialized.');
@@ -76,6 +104,11 @@ function CreateRoute() {
             return;
         }
 
+        const waypoints = stops.filter(stop => stop).map(stop => ({ // adding stops to the route
+            location: stop,
+            stopover: true,
+        }));
+
         const directionsService = new google.maps.DirectionsService();
 
         try {
@@ -85,6 +118,7 @@ function CreateRoute() {
                     {
                         origin: startLocation,
                         destination: endLocation,
+                        waypoints: waypoints,
                         travelMode: google.maps.TravelMode.DRIVING, //todo: omogućit  da korisnik bira jel walking ili driving, msm da nebu uvijek ista ruta po tom pitanju, ali idk
                     },
                     (result, status) => {
@@ -99,9 +133,21 @@ function CreateRoute() {
 
             directionsRenderer.setDirections(response);
             setRoute(response);
+        } catch (error) {
+            console.error('Error creating the route:', error);
+            window.alert('Failed to create the route. Please try again.');
+        }
+    };
 
+    const handleSaveRoute = async () => {
+        if (!route) {
+            window.alert('Please create a route first.');
+            return;
+        }
+
+        try {
             // Step 2: Generate and Save Image
-            const polyline = response.routes[0].overview_polyline;
+            const polyline = route.routes[0].overview_polyline;
             const saveImageResponse = await fetch('/map/save-route-image', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -125,10 +171,11 @@ function CreateRoute() {
             // Step 4: Success Message
             window.alert('Ruta uspješno generirana!');
         } catch (error) {
-            console.error('Error creating the route:', error);
-            window.alert('Failed to create the route. Please try again.');
+            console.error('Error saving the route:', error);
+            window.alert('Failed to save the route. Please try again.');
         }
     };
+    
 
     return (
         <div className="createRoute">
@@ -138,14 +185,24 @@ function CreateRoute() {
                     <div className='route-inputs'>
                     <div> <label>
                          Start Location: 
-                        <input type="text" value={startLocation} onChange={handleStartLocationChange} />
+                        <input type="text" ref={startLocationRef} value={startLocation} onChange={handleStartLocationChange} />
                     </label> </div>
                     <div> <label>
                         End Location:&nbsp;&nbsp;   
-                        <input type="text" value={endLocation} onChange={handleEndLocationChange} />
+                        <input type="text" ref={endLocationRef} value={endLocation} onChange={handleEndLocationChange} />
                     </label> </div>
+                    <button onClick={handleAddStop}>+</button>
+                    {stops.map((stop, index) => ( //new stops
+                        <div key={index}>
+                            <label>
+                                Stop {index + 1}:&nbsp;&nbsp;
+                                <input type="text" ref={(el) => (stopRefs.current[index] = el)} value={stop} onChange={event => handleStopChange(index, event.target.value)} />
+                            </label>
+                        </div>
+                    ))}
                     </div>
                     <button onClick={handleCreateRoute}>Calculate Route</button>
+                    <button onClick={handleSaveRoute}>Save Route</button>
                 </div>
                 <div ref={mapRef} style={{ height: '500px', width: '100%' }}></div>
             </div>
