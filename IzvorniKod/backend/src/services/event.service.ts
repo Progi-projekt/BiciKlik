@@ -122,15 +122,19 @@ export class EventService {
       }],
     });
 
-    console.log("Raw participants data:", JSON.stringify(participations, null, 2));
-
     // sort by achieved_result (lower is better, so the first one is the winner)
     // result, as of right now, reflects the time it took to complete the event in some time unit
+
+
     participations.sort((a, b) => {
       return a.achieved_result - b.achieved_result;
     });
 
-    return participations;
+    return participations.map(participation => ({
+      email: participation.regular.email,
+      name: participation.regular.appUser.name,
+      achieved_result: participation.achieved_result,
+      }));
   }
 
    // for getting events I'm participating in

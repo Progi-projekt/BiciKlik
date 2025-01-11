@@ -45,8 +45,7 @@ export class EventController {
   public getParticipants = async (req: Request, res: Response) => { // getting participants from the leaderboard
     const eventId = req.params.eventId;
     try {
-      const participants = await this.eventService.getParticipants(eventId);
-      const participantsData = participants.map(participant => participant.toJSON());
+      const participantsData = await this.eventService.getParticipants(eventId);
       res.json(participantsData);
       console.log("participants: " + JSON.stringify(participantsData, null, 2));
     } catch (error) {
