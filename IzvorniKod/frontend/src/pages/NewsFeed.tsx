@@ -5,7 +5,7 @@ import { response } from 'express';
 import { Link } from 'react-router-dom';
 
 type EventData = {
-  route_id: string;
+  event_id: string;
   short_description: string;
   organizer: string;
   event_name: string;
@@ -51,13 +51,13 @@ const Newsfeed =() => {
          }
          <div className='containerRuta'>
           {events.map(event => (
-            <Link to={`/event/${event.route_id}`} className="clickEvent" key={event.route_id}>
+            <Link to={`/event/${event.event_id}`} className="clickEvent" key={event.event_id}>
             <div className='ruta'>
             <div className='tekst'>
               <p className='nazivRute'>{event.event_name}</p>
               <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
               <p>{event.short_description}</p>
-              <img src={`/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
+              <img src={`/images/${event.event_id}.PNG`} alt='RouteImg' className='slikarute' />
             </div>
           </div>
           </Link>
