@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../components/reviewform.css';
 
 interface ReviewFormProps {
     eventId: string;
@@ -33,6 +34,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ eventId, routeId }) => {
     };
 
     return (
+        <div className='container-review'>
         <form onSubmit={handleReviewSubmit}>
             <h3>Submit a Review</h3>
             <textarea
@@ -40,6 +42,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ eventId, routeId }) => {
                 onChange={(e) => setReview(e.target.value)}
                 placeholder="Write your review here"
                 required
+
             />
             <div>
                 <label>Rating: </label>
@@ -53,6 +56,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ eventId, routeId }) => {
             </div>
             <button type="submit">Submit Review</button>
         </form>
+        </div>
     );
 };
 
