@@ -46,7 +46,9 @@ export class EventController {
     const eventId = req.params.eventId;
     try {
       const participants = await this.eventService.getParticipants(eventId);
-      res.json(participants);
+      const participantsData = participants.map(participant => participant.toJSON());
+      res.json(participantsData);
+      console.log("participants: " + JSON.stringify(participantsData, null, 2));
     } catch (error) {
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
@@ -67,7 +69,7 @@ export class EventController {
 		} 
 
     const eventId = req.params.eventId; //if ok, get the event id and time from the request 
-    const time = req.body;
+    const { time } = req.body;
 
     try {
       console.log("calling saveResult");
@@ -81,4 +83,29 @@ export class EventController {
       }
     }
   }
+
+  public addReview = async (req: Request, res: Response) => { // adding a review to the event
+    const email = req.cookies.loggedInAs;
+
+    console.log("email: " + email);
+		if (!email) {
+			res.status(400).json({ message: "No email found in cookies." });  // check if user is logged in, if there is no cookie, return an error
+			return;
+		}
+    
+    const routeId = req.params.routeId; //extract routeId from request parameters
+    const rating = req.body.rating; // -||- from req body
+    const review = req.body.review; // -||- from req body
+
+    try {
+      const newReview = await this.eventService.addReview(routeId, email, review, rating);
+      res.json(newReview);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'An unknown error occurred' });
+      }
+    }
+  } 
 }
