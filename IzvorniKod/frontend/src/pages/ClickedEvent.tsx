@@ -41,7 +41,7 @@ function ClickedEvent() { //funkcija za getanje eventa
                 <p className='nazivEvent'>{event?.event_name}</p>
                 <p className='vrijemeDatumEvent'>{event?.event_time}</p>
                 <p className='shortDescriptionEvent'>{event?.short_description}</p>
-                <img src={`/images/${event?.event_id}.PNG`} alt='Route Image' />
+                <img src={`/images/${event?.route_id}.PNG`} alt='Route Image' />
                 <Leaderboard eventId={event_id!} />
                 {event && <ReviewForm eventId={event_id!} routeId={event.route_id} />}
             </div>
