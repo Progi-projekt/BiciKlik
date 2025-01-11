@@ -5,6 +5,7 @@ import { AppUser } from '../models/appuser.model';
 import { Regular } from '../models/regular.model';
 import { Participation } from '../models/participation.model';
 import { Save } from '../models/save.model';
+import { Grade } from '../models/grade.model';
 
 export class RouteService {
 
@@ -63,6 +64,17 @@ export class RouteService {
 				route_id: routeId,
 			},
 		});
+	}
+
+	// user grades a route
+	public async addReview(routeId: string, email: string, review: string, rating: string){
+		const save = new Grade();
+		save.grader_email = email;
+		save.route_id = routeId;
+		save.comment = review;
+		const gradeNumber = parseInt(rating[0]);
+		save.grade = gradeNumber;
+		await save.save();
 	}
 
 
