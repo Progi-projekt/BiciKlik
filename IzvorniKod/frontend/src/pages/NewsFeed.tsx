@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 type EventData = {
   event_id: string;
+  route_id: string;
   short_description: string;
   organizer: string;
   event_name: string;
@@ -57,7 +58,7 @@ const Newsfeed =() => {
               <p className='nazivRute'>{event.event_name}</p>
               <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
               <p>{event.short_description}</p>
-              <img src={`/images/${event.event_id}.PNG`} alt='RouteImg' className='slikarute' />
+              <img src={`/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
             </div>
           </div>
           </Link>
