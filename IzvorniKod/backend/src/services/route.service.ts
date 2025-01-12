@@ -67,13 +67,14 @@ export class RouteService {
 	}
 
 	// user grades a route
-	public async addReview(routeId: string, email: string, review: string, rating: string){
+	public async addReview(routeId: string, email: string, review: string, rating: number){
 		const save = new Grade();
 		save.grader_email = email;
 		save.route_id = routeId;
 		save.comment = review;
-		const gradeNumber = parseInt(rating[0]);
-		save.grade = gradeNumber;
+		save.grade = rating;
+		console.log(save);
+
 		await save.save();
 	}
 

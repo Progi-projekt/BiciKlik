@@ -12,6 +12,7 @@ export class EventService {
     const events = await Event.findAll({
       limit: 10,
       order: [['createdAt', 'DESC']],
+      attributes: ['event_id', 'event_name', 'event_time', 'description', 'route_id'],
       include: [
         {
           model: Route,
@@ -31,6 +32,7 @@ export class EventService {
     });
 
     return events.map(event => ({
+      event_id: event.event_id,
       route_id: event.route_id,
       short_description: event.description,
       organizer: event.organizer.appUser.name,
@@ -101,7 +103,7 @@ export class EventService {
         throw error;
     }
 }
-    
+
   // for getting participants from the leaderboard
   public async getParticipants(eventId: string) {
 
@@ -131,10 +133,10 @@ export class EventService {
     });
 
     return participations.map(participation => ({
-      email: participation.regular.email,
-      name: participation.regular.appUser.name,
-      achieved_result: participation.achieved_result,
-      }));
+    email: participation.regular.email,
+    name: participation.regular.appUser.name,
+    achieved_result: participation.achieved_result,
+    }));
   }
 
    // for getting events I'm participating in
@@ -157,11 +159,6 @@ export class EventService {
       event_name: participation.event.event_name,
       event_time: participation.event.event_time,
     }));
-  }
-
-  public async addReview(routeId: string, email: string, review: string, rating: number) {
-   //TODO: implement adding a review
-   console.log("Adding review for route " + routeId + " by user " + email + " with rating " + rating + " and review " + review);//DEBGU
   }
 
 }

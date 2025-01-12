@@ -17,6 +17,8 @@ function ClickedEvent() { //funkcija za getanje eventa
     const { event_id } = useParams<{ event_id: string }>(); //iz URL vadi event_id
     const [event, setEvent] = useState<EventData>(); 
 
+    
+
     useEffect(() => {
         const fetchEvent = async () => {
             try {
@@ -35,6 +37,7 @@ function ClickedEvent() { //funkcija za getanje eventa
         const date = new Date(dateString)    
         return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
     };
+    console.log(event);
 
     return ( //rendera event
         <div className="event">
@@ -42,7 +45,7 @@ function ClickedEvent() { //funkcija za getanje eventa
                 <p className='nazivEvent'>{event?.event_name}</p>
                 <p className='vrijemeDatumEvent'>{event?.event_time ? formatDate(event.event_time) : 'Date not available'}</p>
                 <p className='shortDescriptionEvent'>{event?.short_description}</p>
-                <img src={`/images/${event?.event_id}.PNG`} alt='Route Image' className='image-event'/>
+                <img src={`/images/${event?.route_id}.PNG`} alt='Route Image' className='image-event'/>
                 <div className='leaderboard-reviews'>
                 <div><Leaderboard eventId={event_id!}/></div>
                 <div>{event && <ReviewForm eventId={event_id!} routeId={event.route_id} />}</div>
