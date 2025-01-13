@@ -26,7 +26,7 @@ export class ChatController {
 
     public getAllChatsWithAnotherUser = async (req: Request, res: Response) => {    //getting event by id
         const email = req.cookies.loggedInAs;
-        const email_another = req.params.email_another;
+        const email_another = req.params.emailAnother;
         try {
             const chats = await this.chatService.getAllChatsWithAnotherUser(email, email_another);
             if (chats !== null) {
@@ -46,7 +46,7 @@ export class ChatController {
 
     public sendMessage = async (req: Request, res: Response) => {    //getting event by id
         const email = req.cookies.loggedInAs;
-        const email_another = req.params.email_another;
+        const email_another = req.params.emailAnother;
         const content = req.body.content;
         try {
             const result = await this.chatService.sendMessage(email, email_another, content);
