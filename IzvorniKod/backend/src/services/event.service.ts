@@ -2,8 +2,8 @@ import { Event } from '../models/event.model';
 import { Route } from '../models/route.model';
 import { Organizer } from '../models/organizer.model';
 import { AppUser } from '../models/appuser.model';
-import { Regular } from '../models/regular.model';
 import { Participation } from '../models/participation.model';
+import App from "../app";
 
 export class EventService {
 
@@ -115,7 +115,7 @@ export class EventService {
 
       attributes: ['achieved_result', 'email'],
       include: [{
-        model: Regular,
+        model: AppUser,
         attributes: ['email'],
         include: [{
           model: AppUser,
@@ -133,8 +133,8 @@ export class EventService {
     });
 
     return participations.map(participation => ({
-    email: participation.regular.email,
-    name: participation.regular.appUser.name,
+    email: participation.user.email,
+    name: participation.user.name,
     achieved_result: this.secondsToHHMMSS(participation.achieved_result),
     }));
   }

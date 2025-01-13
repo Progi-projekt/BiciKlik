@@ -2,7 +2,6 @@ import { Event } from '../models/event.model';
 import { Route } from '../models/route.model';
 import { Organizer } from '../models/organizer.model';
 import { AppUser } from '../models/appuser.model';
-import { Regular } from '../models/regular.model';
 import { Participation } from '../models/participation.model';
 import { Save } from '../models/save.model';
 import { Grade } from '../models/grade.model';

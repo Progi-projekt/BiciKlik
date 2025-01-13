@@ -1,6 +1,6 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { Regular } from './regular.model';
 import { Event } from './event.model';
+import {AppUser} from "./appuser.model";
 
 @Table({
   tableName: 'participation',
@@ -8,7 +8,7 @@ import { Event } from './event.model';
 })
 export class Participation extends Model {
   @PrimaryKey
-  @ForeignKey(() => Regular)
+  @ForeignKey(() => AppUser)
   @Column
   email!: string;
 
@@ -20,8 +20,8 @@ export class Participation extends Model {
   @Column
   achieved_result!: number;
 
-  @BelongsTo(() => Regular)
-  regular!: Regular;
+  @BelongsTo(() => AppUser)
+  user!: AppUser;
 
   @BelongsTo(() => Event)
   event!: Event;

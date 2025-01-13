@@ -1,6 +1,6 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey } from 'sequelize-typescript';
-import { Regular } from './regular.model';
 import { Route } from './route.model';
+import {AppUser} from "./appuser.model";
 
 @Table({
   tableName: 'grade',
@@ -8,7 +8,7 @@ import { Route } from './route.model';
 })
 export class Grade extends Model {
   @PrimaryKey
-  @ForeignKey(() => Regular)
+  @ForeignKey(() => AppUser)
   @Column
   grader_email!: string;
 

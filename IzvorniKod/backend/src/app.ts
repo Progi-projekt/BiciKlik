@@ -76,11 +76,9 @@ class App {
 			insertRoutes,
 			insertEvents,
 			insertOrganizers,
-			insertRegulars,
 			insertAppUsers,
 		} = require("./config/database.insert");
 		await insertAppUsers(sequelize.getQueryInterface());
-		await insertRegulars(sequelize.getQueryInterface());
 		await insertOrganizers(sequelize.getQueryInterface());
 		await insertRoutes(sequelize.getQueryInterface());
 		await insertEvents(sequelize.getQueryInterface());
