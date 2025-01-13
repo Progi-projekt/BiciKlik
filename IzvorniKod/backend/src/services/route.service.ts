@@ -67,15 +67,26 @@ export class RouteService {
 	}
 
 	// user grades a route
-	public async addReview(routeId: string, email: string, review: string, rating: number){
-		const save = new Grade();
-		save.grader_email = email;
-		save.route_id = routeId;
-		save.comment = review;
-		save.grade = rating;
-		console.log(save);
+	public async addReview(routeId: string, email: string, comment: string, rating: number){
+		const oldReview = await Grade.findOne({
+			where: {
+				grader_email: email,
+				route_id: routeId
+			}
+		});
 
-		await save.save();
+		if (oldReview) {
+			await oldReview.destroy();
+		}
+
+		const review = new Grade();
+		review.grader_email = email;
+		review.route_id = routeId;
+		review.comment = comment;
+		review.grade = rating;
+		console.log(review);
+
+		await review.save();
 	}
 
 
