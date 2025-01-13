@@ -23,7 +23,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
     useEffect(() => { // GET request za leaderboard (participants)
         const fetchParticipants = async () => {
             try {
-                const response = await fetch(`/event/leaderboard/${eventId}`); //fetcha response od backenda
+                const response = await fetch(`/api/event/leaderboard/${eventId}`); //fetcha response od backenda
                 const data = await response.json();
                 const participants = JSON.stringify(data, null, 2)
                 console.log("participants: " + participants);
@@ -40,7 +40,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
         e.preventDefault();
         const time = `${hours}:${minutes}:${seconds}`;
         try {
-            const response = await fetch(`/event/leaderboard/${eventId}`, {    //salje podatke na backend
+            const response = await fetch(`/api/event/leaderboard/${eventId}`, {    //salje podatke na backend
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
