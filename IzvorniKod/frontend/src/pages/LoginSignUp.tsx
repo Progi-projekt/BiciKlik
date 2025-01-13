@@ -26,7 +26,6 @@ const Loginsignup = () => {
             if (response.ok) {
               setMessage(data.message); // Show success message
               navigate('/'); // Redirect to newsfeed
-              window.location.reload(); // ovo bi trebalo refreshat page (da se moze pojavit changed heading)
             } else {
               setMessage(data.message); // Show error message from backend
             }
@@ -50,6 +49,7 @@ const Loginsignup = () => {
             if (response.ok) {
               setMessage(data.message); // Show success message
               navigate('/'); // Redirect to newsfeed
+              window.location.reload();
             } else {
               setMessage(data.message); // Show error message from backend 
             }

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import '../components/newsfeed.css'
+import '../components/newsfeed.css';
 import headerNewsFeed from '../assets/HeaderNewsFeed.png';
-import { response } from 'express';
 import { Link } from 'react-router-dom';
+import CreateRoute from './CreateRoute';
+import { useAuth } from '../AuthContext';
+
 
 type EventData = {
   event_id: string;
@@ -13,14 +15,12 @@ type EventData = {
   event_time: string;
 };
 
-const Newsfeed =() => {
-
-  const [events, setEvents] = useState<EventData[]>([]);   //za storeanje data
-  const [openFilter, setopenFilter] = useState(false); //za pop up za filter
-  
+const Newsfeed = () => {
+  const [events, setEvents] = useState<EventData[]>([]);
+  const [openFilter, setopenFilter] = useState(false);
+  const { checkAuthStatus } = useAuth();
 
   useEffect(() => {
-
     const fetchEvents = async () => {
       try {
         const response = await fetch('/event/getEvents'); //fetcha responce od backenda
@@ -30,27 +30,29 @@ const Newsfeed =() => {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     fetchEvents();
-  }, []);
+    checkAuthStatus(); // Trigger auth check when Newsfeed loads
+  }, [checkAuthStatus]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
   };
 
-    return (
-      <div className="newsfeed">
-         <img src={headerNewsFeed} alt='NewsFeed' className='slikanews'/>
-         <p className='filter' onClick={() => setopenFilter((prev) => !prev)} >Filter</p>
-         {openFilter &&
-         <div className='filter-drop-down'>
+  return (
+    <div className="newsfeed">
+      <img src={headerNewsFeed} alt='NewsFeed' className='slikanews' />
+      <p className='filter' onClick={() => setopenFilter((prev) => !prev)}>Filter</p>
+      {openFilter &&
+        <div className='filter-drop-down'>
           <ul className='filter-drop-ul'>
             <li className='filter-drop-li'>Sort by: ...</li>
           </ul>
          </div>
          }
          <div className='containerRuta'>
+          
           {events.map(event => (
             <Link to={`/event/${event.event_id}`} className="clickEvent" key={event.event_id}>
             <div className='ruta'>
@@ -59,12 +61,13 @@ const Newsfeed =() => {
               <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
               <p>{event.short_description}</p>
               <img src={`/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
+
             </div>
-          </div>
           </Link>
-        ))} 
-         </div>
+        ))}
       </div>
-    );
-  }
-  export default Newsfeed;
+    </div>
+  );
+}
+
+export default Newsfeed;
