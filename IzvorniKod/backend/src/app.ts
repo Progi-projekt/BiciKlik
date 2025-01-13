@@ -42,6 +42,10 @@ class App {
 		this.app.get("/api/health", (req, res) => res.json({ status: "OK" }));
 		this.app.get("/db/health", (req, res) => res.json({ status: this.dbConnected ? "OK" : "ERROR" }));
 		this.app.get("/api/env", (req, res) => res.json({ mapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }));
+
+		this.app.get("*", (req, res) => {
+			res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+		});
 	}
 
 	private async initializeDatabase() {
