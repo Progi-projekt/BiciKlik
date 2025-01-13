@@ -30,10 +30,11 @@
 }
 .LogIn {
     padding: 0.5rem 1rem;
-    font-size: 1.2rem;
     border-radius: 9px;
     color: white;
     background-color: #718E2A;
+    border: none;
+    font-size: 1.2rem;
 }
 .Heading li:hover {
     background-color: #5E5A5A;
@@ -99,6 +100,9 @@
     .dropDown-container {
         top: 2.5rem;
         right: 1rem;
+    }
+    .LogIn {
+        font-size: 1rem;
     }
 
   }

@@ -188,7 +188,7 @@ function CreateRoute() {
                         <input type="text" ref={startLocationRef} value={startLocation} onChange={handleStartLocationChange} />
                     </label> </div>
                     <div> <label>
-                        End Location:&nbsp;&nbsp;   
+                        End Location:&nbsp;&nbsp;&nbsp; 
                         <input type="text" ref={endLocationRef} value={endLocation} onChange={handleEndLocationChange}/>
                     </label> </div>
                     </div>

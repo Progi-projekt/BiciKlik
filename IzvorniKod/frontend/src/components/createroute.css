@@ -71,5 +71,15 @@
     .route-form-container button {
         margin: 0.2rem;
     }
+    .naslov{
+        font-size: 2rem;
+        margin-top: 0.5rem;
+    }
+    .route-form-container{
+        margin-top: 1rem;
+    }
+    .createRoute {
+        width: 80%;
+    }
 }
 

@@ -65,3 +65,10 @@
 .add-participant-container input[type="submit"]:hover {
     background-color: #637C24;
 }
+
+@media (max-width: 845px){
+    .leaderboard {
+        padding-bottom: 1rem;
+        width: 100%;
+    }
+}

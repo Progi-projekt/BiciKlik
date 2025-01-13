@@ -17,6 +17,7 @@ const Heading = () => {
       });
       if (response.ok) {
         checkAuthStatus();
+        setOpenProfile((prev) => !prev);
         navigate('/login');
       } else {
         console.error('Logout failed');
