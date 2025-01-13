@@ -15,7 +15,31 @@ const CreateEvent = () => {
         console.log("Event Time:", eventTime);
         console.log("Description:", description);
         console.log("Route ID:", routeId);
+
+        try {
+            const response = await fetch('/api/event/createEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ eventName, shortDescription, eventTime, description, routeId }),
+            });
+            if (response.ok) {
+                alert('Event created successfully!');
+                setEventName('');
+                setShortDescription('');
+                setEventTime('');
+                setDescription('');
+                setRouteId('');
+            } else {
+                alert('Failed to create event');
+            }
+        } catch (error) {
+            console.error('Error creating event:', error);
+        }
     };
+
+
 
     return (
         <div className="eventyay">
