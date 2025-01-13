@@ -18,6 +18,7 @@ const Heading = () => {
       if (response.ok) {
         checkAuthStatus();
         setOpenProfile((prev) => !prev);
+        console.log(userRole);
         navigate('/login');
       } else {
         console.error('Logout failed');
@@ -41,7 +42,7 @@ const Heading = () => {
           {openProfile &&
             <div className='dropDown-container'>
               <ul className='dropDown'>
-                <li><Link to={"/createEvent"} className="clickable">Create Event</Link></li>
+              {(userRole === "organizer" || userRole === "admin") && <li><Link to={"/createEvent"} className="clickable">Create Event</Link></li>}
                 <li className='logoutItem' onClick={handleLogout}>LogOut</li>
               </ul>
             </div>
