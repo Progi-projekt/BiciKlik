@@ -23,7 +23,7 @@ const Newsfeed = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/event/getEvents'); //fetcha responce od backenda
+        const response = await fetch('/api/event/getEvents'); //fetcha responce od backenda
         const data = await response.json();       
         setEvents(data);         //sprema data za State          
       } catch (error) {

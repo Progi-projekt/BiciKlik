@@ -36,7 +36,7 @@ const Loginsignup = () => {
 
     const handleOAuthSuccess = async (credentialResponse: any) => {
         try {
-            const response = await fetch('/auth/google/callback', { //maknuo sam https:biciklik..., da bude consistent s ostalim stvarima. Trebalo bi radit u teoriji
+            const response = await fetch('/api/auth/google/callback', { //maknuo sam https:biciklik..., da bude consistent s ostalim stvarima. Trebalo bi radit u teoriji
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

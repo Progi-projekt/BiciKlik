@@ -148,7 +148,7 @@ function CreateRoute() {
         try {
             // Step 2: Generate and Save Image
             const polyline = route.routes[0].overview_polyline;
-            const saveImageResponse = await fetch('/map/save-route-image', {
+            const saveImageResponse = await fetch('/api/map/save-route-image', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ polyline }),
@@ -157,7 +157,7 @@ function CreateRoute() {
             const imageData = await saveImageResponse.json();
             console.log('Image saved at:', imageData.filePath);
             
-            const saveGpxResponse = await fetch('/map/save-gpx',{
+            const saveGpxResponse = await fetch('/api/map/save-gpx',{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ polyline }),

@@ -22,7 +22,7 @@ function ClickedEvent() { //funkcija za getanje eventa
     useEffect(() => {
         const fetchEvent = async () => {
             try {
-                const response = await fetch(`/event/${event_id}`); //fetcha event od backenda
+                const response = await fetch(`/api/event/${event_id}`); //fetcha event od backenda
                 const data = await response.json();
                 setEvent(data);
             } catch (error) {
