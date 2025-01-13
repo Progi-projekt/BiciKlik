@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import '../components/createevent.css';
 
 const CreateEvent = () => {
@@ -8,13 +10,10 @@ const CreateEvent = () => {
     const [description, setDescription] = useState('');
     const [routeId, setRouteId] = useState('');
 
+    const navigate = useNavigate();
+
     const handleEventSubmit = async (e: React.FormEvent) => {
         e.preventDefault(); //zaustavja reload stranice
-        console.log("Event Name:", eventName);
-        console.log("Short Description:", shortDescription);
-        console.log("Event Time:", eventTime);
-        console.log("Description:", description);
-        console.log("Route ID:", routeId);
 
         try {
             const response = await fetch('/api/event/createEvent', {
@@ -24,13 +23,18 @@ const CreateEvent = () => {
                 },
                 body: JSON.stringify({ eventName, shortDescription, eventTime, description, routeId }),
             });
+
             if (response.ok) {
-                alert('Event created successfully!');
+                alert('Event created successfully! Redirecting to newsfeed...');
                 setEventName('');
                 setShortDescription('');
                 setEventTime('');
                 setDescription('');
                 setRouteId('');
+
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
             } else {
                 alert('Failed to create event');
             }
