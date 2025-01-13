@@ -135,7 +135,7 @@ export class EventService {
     return participations.map(participation => ({
     email: participation.regular.email,
     name: participation.regular.appUser.name,
-    achieved_result: participation.achieved_result,
+    achieved_result: this.secondsToHHMMSS(participation.achieved_result),
     }));
   }
 
@@ -160,5 +160,17 @@ export class EventService {
       event_time: participation.event.event_time,
     }));
   }
+
+  private secondsToHHMMSS = (totalSeconds: number): string => { // converting seconds back to HH:MM:SS
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return [
+        hours.toString().padStart(2, '0'),
+        minutes.toString().padStart(2, '0'),
+        seconds.toString().padStart(2, '0')
+    ].join(':');
+};
 
 }

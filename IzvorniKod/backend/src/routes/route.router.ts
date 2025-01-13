@@ -3,15 +3,15 @@ import { RouteController } from '../controllers/route.controller';
 
 export class RouteRouter {
   public router: Router;
-  private eventController: RouteController;
+  private routeController: RouteController;
 
   constructor() {
 	this.router = Router();
-	this.eventController = new RouteController();
+	this.routeController = new RouteController();
 	this.initializeRoutes();
   }
 
   private initializeRoutes() {
-	this.router.post('/review/:routeId', this.eventController.addReview); //reviews are route-specific
+	this.router.post('/review/:routeId', this.routeController.addReview); //reviews are route-specific
   }
 }
