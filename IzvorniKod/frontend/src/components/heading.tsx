@@ -17,7 +17,6 @@ const Heading = () => {
       });
       if (response.ok) {
         checkAuthStatus();
-        setOpenProfile((prev) => !prev);
         navigate('/login');
       } else {
         console.error('Logout failed');
@@ -32,8 +31,16 @@ const Heading = () => {
       <img src={logo} alt='logo' className='logo'></img>
       <ul>
         <li><Link to={"/"} className="clickable">News Feed</Link></li>
-        {loggedIn && <li><Link to={"/chat"} className="createButton">Chat</Link></li>}
-        {loggedIn && <li><Link to={"/createRoute"} className="createButton">Create Route</Link></li>}
+        {loggedIn && <li>
+                <Link 
+                    to="/chat" 
+                    state={{}}
+                    className="clickable"
+                >
+                    Chat
+                </Link>
+            </li>} 
+        {loggedIn && <li><Link to={"/createRoute"} className="createButton">Create Route</Link></li>} 
       </ul>
       {loggedIn ? (
         <>
