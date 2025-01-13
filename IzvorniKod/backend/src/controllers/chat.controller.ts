@@ -29,7 +29,12 @@ export class ChatController {
         const email_another = req.params.email_another;
         try {
             const chats = await this.chatService.getAllChatsWithAnotherUser(email, email_another);
-            res.json(chats);
+            if (chats !== null) {
+                res.status(200).json(chats);
+            }
+            else {
+                res.status(400).json("Invalid receiver or sender email");
+            }
         } catch (error) {
             if (error instanceof Error) {
                 res.status(500).json({ error: error.message });
@@ -44,8 +49,13 @@ export class ChatController {
         const email_another = req.params.email_another;
         const content = req.body.content;
         try {
-            await this.chatService.sendMessage(email, email_another, content);
-            res.status(200).json("Successfully sent");
+            const result = await this.chatService.sendMessage(email, email_another, content);
+            if(result){
+                res.status(200).json("Successfully sent");
+            }
+            else{
+                res.status(400).json("Invalid receiver or sender email");
+            }
         } catch (error) {
             if (error instanceof Error) {
                 res.status(500).json({ error: error.message });
