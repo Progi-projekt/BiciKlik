@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import { AuthRouter } from "./routes/oauth.router";
 import { EventRouter } from "./routes/event.router";
 import { MapRouter } from "./routes/map.router";
+import { RouteRouter } from "./routes/route.router";
 import { insertAppUsers } from "./config/database.insert";
 
 dotenv.config();
@@ -44,6 +45,7 @@ class App {
 		this.app.get("/api/health", (req, res) => res.json({ status: "OK" }));
 		this.app.get("/db/health", (req, res) => res.json({ status: this.dbConnected ? "OK" : "ERROR" }));
 		this.app.get("/api/env", (req, res) => res.json({ mapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }));
+		this.app.use("/api/route", new RouteRouter().router);
 
 		this.app.get("*", (req, res) => {
 			res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
