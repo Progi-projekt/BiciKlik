@@ -63,6 +63,7 @@ const Newsfeed = () => {
               <img src={`/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
 
             </div>
+            </div>
           </Link>
         ))}
       </div>
