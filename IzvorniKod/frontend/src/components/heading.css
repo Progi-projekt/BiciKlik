@@ -20,7 +20,7 @@
 .Heading ul{
     list-style: none;
     text-align: center;
-    padding-right: 50%;
+    padding-right: 50%; /*TREBALO BI SE DODAT DA JE 66% KAD NIJE ULOGIRAN*/
 }
 .Heading li {
     display: inline-block;

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import icon from '../assets/icon.png';
 import { useAuth } from '../AuthContext';
+import { response } from 'express';
 
 const Heading = () => {
   const { loggedIn, userRole, checkAuthStatus } = useAuth();
@@ -28,6 +29,36 @@ const Heading = () => {
     }
   };
 
+const upgrade = async () => {
+  try{
+    const response = await fetch('/api/auth/upgrade', {
+      method: "POST"
+    });
+    if (response.ok) {
+      console.log("Upgrade successful");
+    } else {
+      console.error("Upgrade failed");
+    }
+  } catch(error){
+    console.error('Error', error);
+  }
+}
+
+const downgrade = async () => {
+  try{
+    const response = await fetch('api/auth/downgrade', {
+      method: "POST"
+    });
+    if (response.ok) {
+      console.log("Downgrade successful");
+    } else {
+      console.error("Downgrade failed");
+    }
+  } catch(error) {
+    console.error('Error', error);
+  }
+}
+
   return (
     <div className="Heading">
       <Link to={"/"}><img src={logo} alt='logo' className='logo'></img></Link>
@@ -42,7 +73,9 @@ const Heading = () => {
           {openProfile &&
             <div className='dropDown-container'>
               <ul className='dropDown'>
-              {(userRole === "organizer" || userRole === "admin") && <li><Link to={"/createEvent"} className="clickable">Create Event</Link></li>}
+                {userRole === "user" && <li onClick={upgrade}>Upgrade</li>}
+                {userRole === "organizer" && <li onClick={downgrade}>Downgrade</li>}
+                {(userRole === "organizer" || userRole === "admin") && <li><Link to={"/createEvent"} className="clickable">Create Event</Link></li>}
                 <li className='logoutItem' onClick={handleLogout}>LogOut</li>
               </ul>
             </div>
