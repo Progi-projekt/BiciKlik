@@ -1,0 +1,94 @@
+.eventyay {
+    width: 70%;
+    margin: 1%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eventcreation-container {
+    background-color: #D8D8D8;
+    border-radius: 5px;
+    padding: 3% 8% 8% 8%;
+    text-align: left;
+    width: 60%;
+}
+
+.eventcreation-container .naslov {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center; 
+}
+
+.eventcreation-container form {
+    background-color: #b3afaf;
+    border-radius: 5px;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.eventcreation-container form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.eventcreation-container form label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.eventcreation-container form input,
+.eventcreation-container form textarea {
+    width: 100%; 
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.eventcreation-container .shortDescription textarea {
+    min-height: 5%; 
+    resize: none;
+}
+
+.eventcreation-container .description textarea {
+    min-height: 10%; 
+    resize: none;
+}
+
+.eventcreation-container .submitform {
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    background-color: #718E2A;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.eventcreation-container .submitform:hover {
+    background-color: #637C24;
+}
+@media (max-width: 1100px){
+    .eventyay {
+        width: 90%;
+    }
+
+    .eventcreation-container .naslov {
+        font-size: 1.5rem;
+    }
+
+    .eventcreation-container {
+        width: 90%;
+    }
+
+}

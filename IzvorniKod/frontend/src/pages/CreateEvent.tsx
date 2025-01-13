@@ -18,6 +18,7 @@ const CreateEvent = () => {
     };
 
     return (
+        <div className="eventyay">
         <div className='eventcreation-container'>
             <h2 className="naslov">Create Event</h2>
             <form onSubmit={handleEventSubmit}>
@@ -71,6 +72,7 @@ const CreateEvent = () => {
                 </div>
                 <button type="submit" className="submitform">Create Event</button>
             </form>
+        </div>
         </div>
     );
 };
