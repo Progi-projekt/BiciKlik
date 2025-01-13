@@ -18,7 +18,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch("/auth/getAuthorization", { method: "GET", credentials: "include" });
+      const response = await fetch("/api/auth/getAuthorization", { method: "GET", credentials: "include" });
       if (!response.ok) {
         throw new Error("Failed fetch");
       }
