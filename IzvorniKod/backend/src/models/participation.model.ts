@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Regular } from './regular.model';
 import { Event } from './event.model';
 
@@ -19,4 +19,11 @@ export class Participation extends Model {
 
   @Column
   achieved_result!: number;
+
+  @BelongsTo(() => Regular)
+  regular!: Regular;
+
+  @BelongsTo(() => Event)
+  event!: Event;
+
 }

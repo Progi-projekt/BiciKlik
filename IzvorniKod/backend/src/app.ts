@@ -44,22 +44,32 @@ class App {
 		this.app.get("/api/health", (req, res) => res.json({ status: "OK" }));
 		this.app.get("/db/health", (req, res) => res.json({ status: this.dbConnected ? "OK" : "ERROR" }));
 		this.app.get("/api/env", (req, res) => res.json({ mapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }));
+    
+		this.app.get("*", (req, res) => {
+			res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+		});
+
 	}
 
 	private async initializeDatabase() {
 		try {
 			await sequelize.authenticate();
-			await sequelize.sync({ force: false });
 			console.log("Connected to the database");
-			this.dbConnected = true;
-			//await this.insertInitialData();
-			//console.log("Initial data inserted successfully");
+
+			if(!this.dbConnected){ //sync only once
+				await sequelize.sync({ force: false });
+				console.log("All models were synchronized successfully.");
+				this.dbConnected = true;
+				/* await this.insertInitialData();
+				console.log("Initial data inserted successfully"); */
+			}
+			
 		} catch (error) {
 			console.error("Unable to connect to the database:", error);
 		}
 	}
 
-	private async insertInitialData() {
+	private async insertInitialData() { //func 4 inserting initial data
 		const { insertRoutes, insertEvents, insertOrganizers, insertAppUsers } = require("./config/database.insert");
 		await insertAppUsers(sequelize.getQueryInterface());
 		await insertOrganizers(sequelize.getQueryInterface());

@@ -14,7 +14,4 @@ export class Organizer extends Model {
 
   @BelongsTo(() => AppUser)
   appUser!: AppUser;
-
-  @HasMany(() => Route)
-  routes!: Route
 }
