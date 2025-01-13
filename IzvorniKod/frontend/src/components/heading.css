@@ -70,6 +70,12 @@
     background-color: #D8D8D8;
 }
 
+.dropDown-container ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 .LogIn:hover{
     background-color: #637C24;
 }
@@ -79,6 +85,7 @@
 
 a {
     display: contents;
+    color: inherit;
 }
 
 @media (max-width: 1100px){

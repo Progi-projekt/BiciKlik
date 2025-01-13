@@ -75,7 +75,7 @@ const downgrade = async () => {
               <ul className='dropDown'>
                 {userRole === "user" && <li onClick={upgrade}>Upgrade</li>}
                 {userRole === "organizer" && <li onClick={downgrade}>Downgrade</li>}
-                {(userRole === "organizer" || userRole === "admin") && <li><Link to={"/createEvent"} className="clickable">Create Event</Link></li>}
+                {(userRole === "organizer" || userRole === "admin") && <li><Link to={"/createEvent"}>Create Event</Link></li>}
                 <li className='logoutItem' onClick={handleLogout}>LogOut</li>
               </ul>
             </div>
