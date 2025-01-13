@@ -42,7 +42,7 @@
 .add-participant-container input[type="submit"] {
     padding: 10px;
     margin: 5px 0;
-    width: calc(23% - 10px); /* Adjust width for three inputs and one button in a row */
+    width: 33%; /* Adjust width for three inputs and one button in a row */
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
