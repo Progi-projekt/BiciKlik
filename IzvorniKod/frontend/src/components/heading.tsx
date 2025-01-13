@@ -41,6 +41,7 @@ const Heading = () => {
           {openProfile &&
             <div className='dropDown-container'>
               <ul className='dropDown'>
+                <li><Link to={"/createEvent"} className="clickable">Create Event</Link></li>
                 <li className='logoutItem' onClick={handleLogout}>LogOut</li>
               </ul>
             </div>
