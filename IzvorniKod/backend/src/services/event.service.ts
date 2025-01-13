@@ -116,11 +116,7 @@ export class EventService {
       attributes: ['achieved_result', 'email'],
       include: [{
         model: AppUser,
-        attributes: ['email'],
-        include: [{
-          model: AppUser,
-          attributes: ['name'],
-        }]
+        attributes: ['email', 'name'],
       }],
     });
 
