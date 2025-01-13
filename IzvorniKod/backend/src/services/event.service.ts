@@ -4,6 +4,7 @@ import { Organizer } from '../models/organizer.model';
 import { AppUser } from '../models/appuser.model';
 import { Regular } from '../models/regular.model';
 import { Participation } from '../models/participation.model';
+import { or } from 'sequelize';
 
 export class EventService {
 
@@ -40,6 +41,25 @@ export class EventService {
       event_time: event.event_time,
     }));
   }
+
+  public async createEvent(eventData: any) {
+    const eventId = Date.now();
+    try {
+      const newEvent = await Event.create({
+        organizer_email: eventData.organizerEmail,
+        event_id: eventId,
+        event_name: eventData.eventName,
+        event_time: eventData.eventTime,
+        short_description: eventData.shortDescription,
+        route_id: eventData.routeId,
+        description: eventData.description,
+      });
+
+      return newEvent;
+    } catch (error) {
+      console.error('Error creating an event:', error);
+      throw error;}
+    }
 
   // for getting event by id
   public async getEventById(eventId: string): Promise<any> {

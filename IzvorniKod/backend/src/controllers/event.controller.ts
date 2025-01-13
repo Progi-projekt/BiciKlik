@@ -9,7 +9,18 @@ export class EventController {
   }
 
   public createEvent = async (req: Request, res: Response) => {
-    // TODO
+    try {
+      const eventData = req.body;
+      eventData.organizerEmail = req.cookies.loggedInAs;
+      const newEvent = await this.eventService.createEvent(eventData);
+      res.status(201).json(newEvent);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'An unknown error occurred' });
+      }
+    }
   };
 
   public getEvents = async (req: Request, res: Response) => { //getting last 10 events

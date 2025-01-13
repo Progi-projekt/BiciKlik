@@ -17,7 +17,6 @@ function ClickedEvent() { //funkcija za getanje eventa
     const { event_id } = useParams<{ event_id: string }>(); //iz URL vadi event_id
     const [event, setEvent] = useState<EventData>(); 
 
-    
 
     useEffect(() => {
         const fetchEvent = async () => {
