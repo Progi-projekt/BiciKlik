@@ -33,7 +33,7 @@ const Heading = () => {
       <Link to={"/"}><img src={logo} alt='logo' className='logo'></img></Link>
       <ul>
         <li><Link to={"/"} className="clickable">News Feed</Link></li>
-        <li><Link to={"/chat"} className="clickable">Chat</Link></li>
+        {loggedIn && <li><Link to={"/chat"} className="createButton">Chat</Link></li>}
         {loggedIn && <li><Link to={"/createRoute"} className="createButton">Create Route</Link></li>}
       </ul>
       {loggedIn ? (

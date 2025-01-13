@@ -1,0 +1,131 @@
+{
+  "id": "7fc86c84-5d88-4e13-a36d-74bc7ddfacb2",
+  "version": "2.0",
+  "name": "BiciklikTest",
+  "url": "http://localhost:3000",
+  "tests": [{
+    "id": "632ce52f-9fc4-41a3-9552-dc8232d2f6d9",
+    "name": "ClickedEventTest",
+    "commands": [{
+      "id": "aa25b685-f41d-4a85-b88f-01b7ed389988",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4860fe3-c226-453d-b797-d6e69d629960",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "89f8e870-540f-4032-9519-225386ebf7d8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.LogIn",
+      "targets": [
+        ["css=.LogIn", "css:finder"],
+        ["xpath=//div[@id='root']/div/div/a/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Log In')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "85eca343-8c4a-46d8-a6f2-1cd9a36bb82d",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//span[contains(.,'Prijava putem Googlea')]",
+      "targets": [
+        ["css=.nsm7Bb-HzV7m-LgbsSe-BPrWId", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div/div/div/div/div[2]/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Prijava putem Googlea')]", "xpath:innerText"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win9287",
+      "windowTimeout": 2000
+    }, {
+      "id": "5532857e-40cd-4633-be56-7bf814ef3a2a",
+      "comment": "",
+      "command": "storeWindowHandle",
+      "target": "root",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ad73ecc3-59de-4f5e-baf0-cfd71ef0473e",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win9287}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6abf0f43-d8af-4644-849a-3f5a0edbf4c6",
+      "comment": "",
+      "command": "click",
+      "target": "css=.aZvCDf:nth-child(1) .pGzURd",
+      "targets": [
+        ["css=.aZvCDf:nth-child(1) .pGzURd", "css:finder"],
+        ["xpath=//body[@id='yDmH0d']/div/div/div[2]/div/div/div[2]/div/div/div/form/span/section/div/div/div/div/ul/li/div/div/div/div[2]/div", "xpath:idRelative"],
+        ["xpath=//li/div/div/div/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "43c1d75b-bed4-4fe6-9575-61861d4d94ed",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${root}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "32475c0b-5097-47da-b2d9-41db8174cda5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.clickEvent:nth-child(1) .slikarute",
+      "targets": [
+        ["css=.clickEvent:nth-child(1) .slikarute", "css:finder"],
+        ["xpath=//img[@alt='RouteImg']", "xpath:img"],
+        ["xpath=//div[@id='root']/div/div[2]/div/a/div/div/img", "xpath:idRelative"],
+        ["xpath=//a/div/div/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ce250878-8bd1-4004-a1ee-e23c3ad19bdf",
+      "comment": "postojanje naziva elementa",
+      "command": "assertElementPresent",
+      "target": "//*[@id=\"root\"]/div/div[2]/div/p[1]",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "3466d012-c257-4783-a47f-5e4615b89877",
+    "name": "404NotFoundTest",
+    "commands": [{
+      "id": "64865b43-3520-44ba-bf64-8914072f4e73",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/ovoNePostoji",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "951ab935-18a0-4e83-9ae7-d297d34a7522",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "//*[@id=\"root\"]/div/div[2]/p[1]",
+      "targets": [],
+      "value": "404"
+    }]
+  }],
+  "suites": [{
+    "id": "9e4604cc-22e6-4918-a479-4b98e4b64072",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["632ce52f-9fc4-41a3-9552-dc8232d2f6d9"]
+  }],
+  "urls": ["http://localhost:3000/"],
+  "plugins": []
+}

@@ -67,4 +67,19 @@ export class OAuthController {
 			}
 		});
 	};
+	public upgrade = async (req: Request, res: Response): Promise<void> => {
+		let user = AppUser.findOne({ where: req.cookies.loggedInAs });
+		if (user != null) {
+			Organizer.create(req.cookies.loggedInAs);
+			res.status(200);
+		}
+	};
+
+	public downgrade = async (req: Request, res: Response): Promise<void> => {
+		let user = Organizer.findOne({ where: req.cookies.loggedInAs });
+		if (user != null) {
+			Organizer.destroy(req.cookies.loggedInAs);
+			res.status(200);
+		}
+	};
 }

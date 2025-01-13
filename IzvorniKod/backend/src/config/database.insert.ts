@@ -248,36 +248,6 @@ export async function insertOrganizers(queryInterface: QueryInterface) {
 	]);
 }
 
-export async function insertRegulars(queryInterface: QueryInterface) {
-	await queryInterface.bulkInsert("regular", [
-		{
-			email: "andrej.filipciczagreb@gmail.com",
-			createdAt: new Date("2023-01-01 10:00:00"),
-			updatedAt: new Date("2023-01-01 10:00:00"),
-		},
-		{
-			email: "ante.iivancic@gmail.com",
-			createdAt: new Date("2023-01-02 10:00:00"),
-			updatedAt: new Date("2023-01-02 10:00:00"),
-		},
-		{
-			email: "semafor332@gmail.com",
-			createdAt: new Date("2023-01-03 10:00:00"),
-			updatedAt: new Date("2023-01-03 10:00:00"),
-		},
-		{
-			email: "petra.turkovic01@gmail.com",
-			createdAt: new Date("2023-01-04 10:00:00"),
-			updatedAt: new Date("2023-01-04 10:00:00"),
-		},
-		{
-			email: "oliverkreitmeyer@gmail.com",
-			createdAt: new Date("2023-01-05 10:00:00"),
-			updatedAt: new Date("2023-01-05 10:00:00"),
-		},
-	]);
-}
-
 export async function insertAppUsers(queryInterface: QueryInterface) {
 	await queryInterface.bulkInsert("appuser", [
 		{

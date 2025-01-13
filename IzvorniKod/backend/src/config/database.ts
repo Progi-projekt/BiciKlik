@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
 import { AppUser } from "../models/appuser.model";
-import { Regular } from "../models/regular.model";
 import { Organizer } from "../models/organizer.model";
 import { Admin } from "../models/admin.model";
 import { Message } from "../models/message.model";
@@ -20,7 +19,7 @@ const sequelize = new Sequelize({
 	password: process.env.DB_PASS,
 	host: process.env.DB_HOST,
 	schema: "public",
-	models: [AppUser, Regular, Organizer, Admin, Message, Route, Grade, Save, Event, Participation],
+	models: [AppUser, Organizer, Admin, Message, Route, Grade, Save, Event, Participation],
 });
 
 export default sequelize;

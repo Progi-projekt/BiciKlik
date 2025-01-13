@@ -14,7 +14,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ eventId, routeId }) => {
         console.log("routeId: " + routeId, "review: " + review, "rating: " + rating);
         e.preventDefault();
         try {
-            const response = await fetch(`/route/review/${routeId}`, {
+            const response = await fetch(`/api/route/review/${routeId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ eventId, routeId }) => {
 
             />
             <div>
-                <label>Rating: </label>
+                <label id="rating">Rating: </label>
                 <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
                     {[1, 2, 3, 4, 5].map((star) => (
                         <option key={star} value={star}>
