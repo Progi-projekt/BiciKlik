@@ -23,10 +23,10 @@ export class Message extends Model {
   @Column
   content!: string;
 
-  @BelongsTo(() => AppUser, "recipient_email")
+  @BelongsTo(() => AppUser, { foreignKey: "recipient_email", as: "recipient" })
   recipient!: AppUser;
 
-  @BelongsTo(() => AppUser, "sender_email")
+  @BelongsTo(() => AppUser, { foreignKey: "sender_email", as: "sender" })
   sender!: AppUser;
 
 }
