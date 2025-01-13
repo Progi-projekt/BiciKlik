@@ -1,5 +1,5 @@
  .event {
-    width: 74%;
+    width: 90%;
     padding: 1%;
     padding-top: 2%;
     display: flex;
@@ -36,4 +36,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+@media (max-width: 845px){
+    .leaderboard-reviews {
+        flex-direction: column;
+    }
+    .LEADERBORD {
+        margin-bottom: 1rem;
+    }
 }

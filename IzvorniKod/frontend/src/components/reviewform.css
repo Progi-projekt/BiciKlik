@@ -37,3 +37,9 @@
 .container-review button:hover {
     background-color: #637C24;
 }
+
+@media (max-width: 845px){
+    .container-review {
+        width: 100%;
+    }
+}
