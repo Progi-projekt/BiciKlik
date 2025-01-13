@@ -14,4 +14,12 @@ export class ChatService {
 
     }
 
+    public async getAllChatsWithAnotherUser(email: string, email_another:string) {
+
+    }
+
+    public async sendMessage(from: string, to:string, content: string) {
+
+    }
+
 }
