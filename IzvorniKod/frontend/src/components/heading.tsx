@@ -30,7 +30,7 @@ const Heading = () => {
 
   return (
     <div className="Heading">
-      <img src={logo} alt='logo' className='logo'></img>
+      <Link to={"/"}><img src={logo} alt='logo' className='logo'></img></Link>
       <ul>
         <li><Link to={"/"} className="clickable">News Feed</Link></li>
         <li><Link to={"/chat"} className="clickable">Chat</Link></li>

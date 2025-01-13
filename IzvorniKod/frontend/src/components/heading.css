@@ -78,6 +78,10 @@
     background-color: #D8D8D8; /* Dropdown hover style */
 }
 
+a {
+    display: contents;
+}
+
 @media (max-width: 1100px){
     .logo{
         width: 10%;
