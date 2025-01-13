@@ -45,8 +45,9 @@ export class EventController {
   public getParticipants = async (req: Request, res: Response) => { // getting participants from the leaderboard
     const eventId = req.params.eventId;
     try {
-      const participants = await this.eventService.getParticipants(eventId);
-      res.json(participants);
+      const participantsData = await this.eventService.getParticipants(eventId);
+      res.json(participantsData);
+      console.log("participants: " + JSON.stringify(participantsData, null, 2));
     } catch (error) {
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
@@ -67,7 +68,7 @@ export class EventController {
 		} 
 
     const eventId = req.params.eventId; //if ok, get the event id and time from the request 
-    const time = req.body;
+    const { time } = req.body;
 
     try {
       console.log("calling saveResult");
@@ -81,4 +82,6 @@ export class EventController {
       }
     }
   }
+
+
 }

@@ -12,6 +12,7 @@ export class EventService {
     const events = await Event.findAll({
       limit: 10,
       order: [['createdAt', 'DESC']],
+      attributes: ['event_id', 'event_name', 'event_time', 'description', 'route_id'],
       include: [
         {
           model: Route,
@@ -31,6 +32,7 @@ export class EventService {
     });
 
     return events.map(event => ({
+      event_id: event.event_id,
       route_id: event.route_id,
       short_description: event.description,
       organizer: event.organizer.appUser.name,
@@ -66,25 +68,41 @@ export class EventService {
       organizer: event.organizer.appUser.name,
       event_name: event.event_name,
       event_time: event.event_time,
+      route_id: event.route_id,
     };
   }
 
-   //saving result
-  public async saveResult(eventId: string, email: string, result: number) {
-    const participation = await Participation.findOne({
-      where: {
-        event_id: eventId,
-        email: email,
-      },
-    });
+  //saving result
+  public async saveResult(eventId: string, email: string, result: string) {
+    try {
+        let participation = await Participation.findOne({
+            where: {
+                event_id: eventId,
+                email: email,
+            },
+        });
 
-    if (!participation) {
-      throw new Error('Participation not found');
+        if (!participation) {
+            console.log('Participation not found, creating a new one');
+            participation = await Participation.create({
+                event_id: eventId,
+                email: email,
+                achieved_result: 0, // Initialize with a default value
+            });
+        }
+
+        // Convert time string to total seconds
+        const [hours, minutes, seconds] = result.split(':').map(Number);
+        const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+        participation.achieved_result = totalSeconds;
+        await participation.save();
+        return participation;
+    } catch (error) {
+        console.error('Error in saveResult:', error);
+        throw error;
     }
-
-    participation.achieved_result = result;
-    return await participation.save();
-  }
+}
 
   // for getting participants from the leaderboard
   public async getParticipants(eventId: string) {
@@ -96,26 +114,29 @@ export class EventService {
       },
 
       attributes: ['achieved_result', 'email'],
-
       include: [{
         model: Regular,
         attributes: ['email'],
-
         include: [{
           model: AppUser,
           attributes: ['name'],
         }]
-
       }],
     });
 
     // sort by achieved_result (lower is better, so the first one is the winner)
     // result, as of right now, reflects the time it took to complete the event in some time unit
+
+
     participations.sort((a, b) => {
       return a.achieved_result - b.achieved_result;
     });
 
-    return participations;
+    return participations.map(participation => ({
+    email: participation.regular.email,
+    name: participation.regular.appUser.name,
+    achieved_result: participation.achieved_result,
+    }));
   }
 
    // for getting events I'm participating in

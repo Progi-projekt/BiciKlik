@@ -1,11 +1,10 @@
 .leaderboard {
     width: 50%;
     list-style-type: none;
-    padding: 20px;
+    padding: 1rem;
     margin: 0;
     background-color: #f9f9f9; /* Add background color */
     border-radius: 5px; /* Add border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
     align-self: flex-end; /* Move to the right */
 }
 
@@ -56,7 +55,7 @@
 
 .add-participant-container input[type="submit"] {
     width: 100%; /* Full width for submit button */
-    background-color: #4CAF50;
+    background-color: #718E2A;
     color: white;
     border: none;
     cursor: pointer;
@@ -64,5 +63,5 @@
 }
 
 .add-participant-container input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #637C24;
 }

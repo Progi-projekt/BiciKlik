@@ -3,7 +3,8 @@ import './leaderboard.css';
 
 type Participant = {
     name: string;
-    time: string;
+    achieved_result: string;
+    email: string;
 };
 
 type LeaderboardProps = {
@@ -11,7 +12,7 @@ type LeaderboardProps = {
 };
 
 const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
-    const [participants, setParticipants] = useState<Participant[]>([]); //actual code
+    const [participants, setParticipants] = useState<Participant[]>([]);
     const [hours, setHours] = useState('');
     const [minutes, setMinutes] = useState('');
     const [seconds, setSeconds] = useState('');
@@ -24,6 +25,8 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
             try {
                 const response = await fetch(`/event/leaderboard/${eventId}`); //fetcha response od backenda
                 const data = await response.json();
+                const participants = JSON.stringify(data, null, 2)
+                console.log("participants: " + participants);
                 setParticipants(data);
             } catch (error) {
                 console.error('Error fetching leaderboard data:', error);
@@ -60,7 +63,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
             <ul>
                 {participants.map((participant, index) => (
                     <li key={index}>
-                        {participant.name} - {participant.time}
+                        {participant.name} - {participant.achieved_result}
                     </li>
                 ))}
             </ul>
@@ -111,7 +114,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
                     }}
                     required
                 />
-                <input type="submit" value="Add Participant" />
+                <input type="submit" value="Submit your time" />
             </form>
             </div>
         </div>
