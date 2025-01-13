@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../components/newsfeed.css';
 import headerNewsFeed from '../assets/HeaderNewsFeed.png';
 import { Link } from 'react-router-dom';
+import CreateRoute from './CreateRoute';
 import { useAuth } from '../AuthContext';
+
 
 type EventData = {
   route_id: string;
@@ -20,9 +22,9 @@ const Newsfeed = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/event/getEvents');
-        const data = await response.json();
-        setEvents(data);
+        const response = await fetch('/event/getEvents'); //fetcha responce od backenda
+        const data = await response.json();       
+        setEvents(data);         //sprema data za State          
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -46,18 +48,19 @@ const Newsfeed = () => {
           <ul className='filter-drop-ul'>
             <li className='filter-drop-li'>Sort by: ...</li>
           </ul>
-        </div>
-      }
-      <div className='containerRuta'>
-        {events.map(event => (
-          <Link to={`/event/${event.route_id}`} className="clickEvent" key={event.route_id}>
+         </div>
+         }
+         <div className='containerRuta'>
+          
+          {events.map(event => (
+            <Link to={`/event/${event.route_id}`} className="clickEvent" key={event.route_id}>
             <div className='ruta'>
-              <div className='tekst'>
-                <p className='nazivRute'>{event.event_name}</p>
-                <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
-                <p>{event.short_description}</p>
-                <img src={`/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
-              </div>
+            <div className='tekst'>
+              <p className='nazivRute'>{event.event_name}</p>
+              <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
+              <p>{event.short_description}</p>
+              <img src={`/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
+
             </div>
           </Link>
         ))}

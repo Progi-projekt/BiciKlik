@@ -9,7 +9,6 @@ const Heading = () => {
   const { loggedIn, userRole, checkAuthStatus } = useAuth();
   const [openProfile, setOpenProfile] = useState(false);
   const navigate = useNavigate();
-
   const handleLogout = async () => {
     try {
       const response = await fetch('/auth/logout', {
