@@ -1,18 +1,21 @@
 .container-review {
     padding: 1rem;
     border-radius: 5px;
-    background-color: #bbb8b8;
+    background-color: #f9f9f9;
 }
 .container-review h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
+    margin: 0 0 10px 0; /* Margin below the heading */
+    padding: 0;
+    font-size: 1.5rem;
+    color: #333;
 }
 .container-review textarea {
     border: 1px solid #ddd;
-    padding: 0.2rem;
+    padding: 0.5rem;
     margin-top: 0.2rem;
     margin-bottom: 0.3rem;
     border-radius: 5px; 
+    font-size: 1rem;
     resize: none;
     font-family: 'Roboto', 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -27,15 +30,37 @@
 }
 .container-review button {
     background-color: #718E2A;
+    width: 100%;
     color: white;
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 5px;
     border: none;
     margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+
+    font-size: 1rem;
 }
 .container-review button:hover {
     background-color: #637C24;
+}
+
+
+#rating {
+    color: #333;
+}
+
+.container-review select {
+    padding: 0.2rem;
+    outline: none;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #333; /* Added to affect the text inside the select */
+}
+
+.container-review select option {
+    color: #333;
 }
 
 @media (max-width: 845px){

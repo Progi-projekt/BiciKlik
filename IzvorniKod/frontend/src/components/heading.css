@@ -43,11 +43,10 @@
 
 .Heading .createButton {
     text-decoration: none;
-    color: white;
-    background-color: #718E2A;
+    color: inherit;
+    display: block; 
     padding: 0.5rem 1rem;
     border-radius: 9px;
-    border: 1px solid #252321;
 }
 
 .Heading .clickable {
@@ -71,7 +70,7 @@
     background-color: #D8D8D8;
 }
 
-.LogIn:hover, .createButton:hover{
+.LogIn:hover{
     background-color: #637C24;
 }
 .dropDown li:hover {
