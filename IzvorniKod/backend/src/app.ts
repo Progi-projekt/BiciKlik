@@ -50,7 +50,11 @@ class App {
 		this.app.use("/api/route", new RouteRouter().router);
 
 		this.app.get("*", (req, res) => {
-			res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+			if (req.originalUrl.startsWith("/api/")) {
+				res.status(404).json({ error: "API route not found" }); // Avoid serving index.html for API routes
+			} else {
+				res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+			}
 		});
 	}
 

@@ -41,9 +41,9 @@ export class AppUser extends Model {
 	@Column(DataType.DATE)
 	updatedAt!: Date;
 
-	@HasMany(() => Message, { foreignKey: "sender_email", as: "sent_messages" })
-	sent_messages!: Message[];
+	@HasMany(() => Message, { as: "sentMessages", foreignKey: "sender_email" })
+	sentMessages!: Message[];
 
-	@HasMany(() => Message, { foreignKey: "recipient_email", as: "received_messages" })
-	received_messages!: Message[];
+	@HasMany(() => Message, { as: "receivedMessages", foreignKey: "recipient_email" })
+	receivedMessages!: Message[];
 }
