@@ -15,5 +15,7 @@ export class AuthRouter {
 		this.router.post("/google/callback", this.oauthController.googleCallback);
 		this.router.get("/getAuthorization", this.oauthController.getAuthorization);
 		this.router.post("/logout", this.oauthController.logOut);
+		this.router.post("/upgrade",this.oauthController.upgrade);
+		this.router.post("/downgrade",this.oauthController.downgrade);
 	}
 }

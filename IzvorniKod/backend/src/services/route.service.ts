@@ -1,22 +1,19 @@
-import { Event } from '../models/event.model';
-import { Route } from '../models/route.model';
-import { Organizer } from '../models/organizer.model';
-import { AppUser } from '../models/appuser.model';
-import { Regular } from '../models/regular.model';
-import { Participation } from '../models/participation.model';
-import { Save } from '../models/save.model';
-import { Grade } from '../models/grade.model';
+import { Event } from "../models/event.model";
+import { Route } from "../models/route.model";
+import { Organizer } from "../models/organizer.model";
+import { AppUser } from "../models/appuser.model";
+import { Participation } from "../models/participation.model";
+import { Save } from "../models/save.model";
+import { Grade } from "../models/grade.model";
 
 export class RouteService {
-
-
 	// gets all routes owned by a user
 	public async getOwnedRoutes(email: string) {
 		const ownedRoutes = await Route.findAll({
 			where: {
-				email: email,
+				creator_email: email,
 			},
-			attributes: ['route_id', 'route_name'],
+			attributes: ["route_id", "route_name"],
 		});
 		return ownedRoutes;
 	}
@@ -25,15 +22,17 @@ export class RouteService {
 	public async getSavedRoutes(email: string) {
 		const savedRoutes = await Save.findAll({
 			where: {
-				creator_email: email,
+				email: email,
 			},
-			attributes: ['route_id'],
-			include: [{
-				model: Route,
-				attributes: ['route_name'],
-			}]
+			attributes: ["route_id"],
+			include: [
+				{
+					model: Route,
+					attributes: ["route_name"],
+				},
+			],
 		});
-		return savedRoutes.map(route => ({
+		return savedRoutes.map((route) => ({
 			route_id: route.route_id,
 			route_name: route.route.route_name,
 		}));
@@ -43,7 +42,7 @@ export class RouteService {
 	public async getRouteById(routeId: string) {
 		const route = await Route.findByPk(routeId);
 		if (!route) {
-			throw new Error('Route not found');
+			throw new Error("Route not found");
 		}
 		return route;
 	}
@@ -67,18 +66,25 @@ export class RouteService {
 	}
 
 	// user grades a route
-	public async addReview(routeId: string, email: string, review: string, rating: number){
-		const save = new Grade();
-		save.grader_email = email;
-		save.route_id = routeId;
-		save.comment = review;
-		save.grade = rating;
-		console.log(save);
+	public async addReview(routeId: string, email: string, comment: string, rating: number) {
+		const oldReview = await Grade.findOne({
+			where: {
+				grader_email: email,
+				route_id: routeId,
+			},
+		});
 
-		await save.save();
+		if (oldReview) {
+			await oldReview.destroy();
+		}
+
+		const review = new Grade();
+		review.grader_email = email;
+		review.route_id = routeId;
+		review.comment = comment;
+		review.grade = rating;
+		console.log(review);
+
+		await review.save();
 	}
-
-
-
-
 }

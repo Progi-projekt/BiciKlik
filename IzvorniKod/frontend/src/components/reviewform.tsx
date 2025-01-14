@@ -45,7 +45,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ eventId, routeId }) => {
 
             />
             <div>
-                <label>Rating: </label>
+                <label id="rating">Rating: </label>
                 <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
                     {[1, 2, 3, 4, 5].map((star) => (
                         <option key={star} value={star}>

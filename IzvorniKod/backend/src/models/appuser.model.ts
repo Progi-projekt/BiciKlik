@@ -11,6 +11,9 @@ import {
 	HasMany
 } from "sequelize-typescript";
 import {Message} from "./message.model";
+import {Participation} from "./participation.model";
+import {Route} from "./route.model";
+import {Save} from "./save.model";
 
 @Table({
 	tableName: "appuser",
@@ -44,6 +47,17 @@ export class AppUser extends Model {
 	@HasMany(() => Message, { as: "sentMessages", foreignKey: "sender_email" })
 	sentMessages!: Message[];
 
+
 	@HasMany(() => Message, { as: "receivedMessages", foreignKey: "recipient_email" })
 	receivedMessages!: Message[];
+
+	@HasMany(() => Participation)
+	participations!: Participation[];
+
+	@HasMany(() => Route)
+	created_routes!: Route[];
+
+	@HasMany(() => Save)
+	route_saves!: Save[];
+
 }

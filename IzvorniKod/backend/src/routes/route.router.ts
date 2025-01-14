@@ -1,17 +1,20 @@
-import { Router } from 'express';
-import { RouteController } from '../controllers/route.controller';
+import { Router } from "express";
+import { RouteController } from "../controllers/route.controller";
 
 export class RouteRouter {
-  public router: Router;
-  private eventController: RouteController;
+	public router: Router;
+	private routeController: RouteController;
 
-  constructor() {
-	this.router = Router();
-	this.eventController = new RouteController();
-	this.initializeRoutes();
-  }
+	constructor() {
+		this.router = Router();
+		this.routeController = new RouteController();
+		this.initializeRoutes();
+	}
 
-  private initializeRoutes() {
-	this.router.post('/review/:routeId', this.eventController.addReview); //reviews are route-specific
-  }
+	private initializeRoutes() {
+		this.router.post("/review/:routeId", this.routeController.addReview); //reviews are route-specific
+		this.router.get("/myRoutes", this.routeController.myRoutes);
+		this.router.post("/saveRoute/:routeId", this.routeController.saveRoute);
+		this.router.post("/unsaveRoute/:routeId", this.routeController.unsaveRoute);
+	}
 }

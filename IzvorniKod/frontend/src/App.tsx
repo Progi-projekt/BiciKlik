@@ -8,6 +8,7 @@ import Chat from './pages/Chat';
 import ClickedEvent from './pages/ClickedEvent';
 import CreateRoute from './pages/CreateRoute';
 import NotFound from './pages/NotFound';
+import CreateEvent from './pages/CreateEvent';
 
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Newsfeed from './pages/NewsFeed';
@@ -24,6 +25,7 @@ function App() {
       <Route path='/event/:event_id' element={<ClickedEvent/>}/>  
       <Route path='/createRoute' element={<CreateRoute/>}/>
       <Route path='*' element={<NotFound/>}/>  {/*Catch-all route for 404 */}
+      <Route path='/createEvent' element={<CreateEvent/>}/>
       </Routes>
       <div className="footer">
       <Footer></Footer>
