@@ -10,8 +10,7 @@ daljnju vožnju.
 
 # Funkcijski zahtjevi
 >### Korisničke uloge
-> Korisnici će moći odabrati između tri uloge (User, Organizator,
-Admin) prilikom registracije. Ove uloge dozvoljavaju pristup različitim funkcijama
+> Postojat će tri korisničke uloge (User, Organizer i Admin). One dozvoljavaju pristup različitim funkcijama
 aplikacije; organizatorima omogućuju da kreiraju događaje, userima da se na njih
 prijavljuju i traže nove rute za vožnju, dok administratori imaju pristup alatima za
 upravljanje korisnicima i sadržajem.
@@ -30,25 +29,24 @@ točku ili „punktove“ kroz koje želi proći.
 međusobno komuniciraju, razmjenjuju savjete i organiziraju zajedničke vožnje.
 
 >### Ocjenjivanje ruta
-> Korisnici će moći ocjenjivati rute koristeći lajkove i dislajkove te
-ih "pinnati" za buduću upotrebu, čime će se poticati dijeljenje kvalitetnih informacija.
+> Korisnici će moći ostavljati recenzije na rute te ih "pinnati" za buduću upotrebu, čime će se poticati dijeljenje kvalitetnih informacija.
 
 >### Leaderboard
 > Sustav rangiranja korisnika na temelju vremena ostvarenih na
-događanjima, uz mogućnost arhiviranja rezultata ostvarit će, nadamo se, natjecateljski
-duh među korisnicima. Sam unos vremena biti će proizvoljan, User može unijeti
+događanjima ostvarit će, nadamo se, natjecateljski
+duh među korisnicima. Sam unos vremena bit će proizvoljan, User može unijeti
 vrijeme koje je ostvario bez provjere točnosti.
 
 
 # Tehnologije
 >* Sustav će imati vlastitu domenu, hostan na aws hostingu
 >* Sustav će biti implementiran koristeći NodeJS, Express, React u jeziku TypeScript
->* Sustav će koristiti bazu podataka postgreSQL
+>* Sustav će koristiti bazu podataka PostgreSQL
 >* Za implementaciju kreiranja ruta, sustav će koristiti Google Maps API
 >* Korisničke rute će se spremati na serveru u .gpx formatu, te će njihove putanje biti
-spremljene u bazi podataka zajedno sa unikatnim identifikatorom i imenom rute koje
+spremljene u bazi podataka sa unikatnim identifikatorom i imenom rute koje
 zadaje korisnik
->* Aplikacija će biti isključivo web-aplikacija te će biti kompatibilna sa Google Chrome,
+>* Aplikacija će biti isključivo web-aplikacija te će biti kompatibilna s Google Chrome,
 Chromium, Microsoft Edge i Firefox web browserima
 
 # Članovi tima 
@@ -62,7 +60,7 @@ Chromium, Microsoft Edge i Firefox web browserima
 
 
 # 📝 Licenca
-Važeča (1)
+Važeća (1)
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 Ovaj repozitorij sadrži otvoreni obrazovni sadržaji (eng. Open Educational Resources)  i licenciran je prema pravilima Creative Commons licencije koja omogućava da preuzmete djelo, podijelite ga s drugima uz 
@@ -71,7 +69,7 @@ uvjet da navođenja autora, ne upotrebljavate ga u komercijalne svrhe te dijelit
 > ### Napomena:
 >
 > Svi paketi distribuiraju se pod vlastitim licencama.
-> Svi upotrijebleni materijali  (slike, modeli, animacije, ...) distribuiraju se pod vlastitim licencama.
+> Svi upotrijebljeni  materijali  (slike, modeli, animacije, ...) distribuiraju se pod vlastitim licencama.
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
 
@@ -79,7 +77,7 @@ uvjet da navođenja autora, ne upotrebljavate ga u komercijalne svrhe te dijelit
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
-Orginal [![cc0-1.0][cc0-1.0-shield]][cc0-1.0]
+Original [![cc0-1.0][cc0-1.0-shield]][cc0-1.0]
 >
 >COPYING: All the content within this repository is dedicated to the public domain under the CC0 1.0 Universal (CC0 1.0) Public Domain Dedication.
 >
