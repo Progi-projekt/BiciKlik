@@ -34,7 +34,7 @@ export class EventService {
 		return events.map((event) => ({
 			event_id: event.event_id,
 			route_id: event.route_id,
-			short_description: event.description,
+			short_description: event.short_description,
 			organizer: event.organizer.appUser.name,
 			event_name: event.event_name,
 			event_time: event.event_time,
