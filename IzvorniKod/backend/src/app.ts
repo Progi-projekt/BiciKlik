@@ -9,6 +9,7 @@ import { EventRouter } from "./routes/event.router";
 import { MapRouter } from "./routes/map.router";
 import { RouteRouter } from "./routes/route.router";
 import { insertAppUsers } from "./config/database.insert";
+import {ChatRouter} from "./routes/chat.router";
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ class App {
 	private initializeRoutes() {
 		this.app.use("/api/auth", new AuthRouter().router);
 		this.app.use("/api/event", new EventRouter().router);
+		//this.app.use("/api/chat", new ChatRouter().router);
 		this.app.use("/api/map", new MapRouter().router);
 		this.app.get("/api/health", (req, res) => res.json({ status: "OK" }));
 		this.app.get("/db/health", (req, res) => res.json({ status: this.dbConnected ? "OK" : "ERROR" }));
@@ -48,7 +50,11 @@ class App {
 		this.app.use("/api/route", new RouteRouter().router);
 
 		this.app.get("*", (req, res) => {
-			res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+			if (req.originalUrl.startsWith("/api/")) {
+				res.status(404).json({ error: "API route not found" }); // Avoid serving index.html for API routes
+			} else {
+				res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+			}
 		});
 	}
 

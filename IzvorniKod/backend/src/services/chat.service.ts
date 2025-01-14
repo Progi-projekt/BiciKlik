@@ -6,58 +6,72 @@ export class ChatService {
 
     // returns all the users that you've communicated with
     public async getChattersOfUser(email: string) {
-        const chattedUsers = await AppUser.findAll({
+        try {
+          // Step 1: Fetch unique user emails involved in messages
+          const messageParticipants = await Message.findAll({
+            attributes: ["sender_email", "recipient_email"],
             where: {
-                email: {
-                    [Op.ne]: email, // Exclude the user themselves
-                },
+              [Op.or]: [
+                { sender_email: email },
+                { recipient_email: email },
+              ],
             },
-            include: [
-                {
-                    model: Message,
-                    as: "sentMessages",
-                    where: {sender_email: email},
-                    attributes: [], // No need to fetch Message attributes
-                    required: false, // Include users even if no sent messages
-                },
-                {
-                    model: Message,
-                    as: "receivedMessages",
-                    where: {recipient_email: email},
-                    attributes: [], // No need to fetch Message attributes
-                    required: false, // Include users even if no received messages
-                },
-            ],
-        });
-
-        return chattedUsers.map((user: AppUser) => ({
+          });
+      
+          // Step 2: Extract unique participant emails (excluding the logged-in user)
+          const participantEmails = new Set<string>();
+          messageParticipants.forEach((message) => {
+            if (message.sender_email !== email) {
+              participantEmails.add(message.sender_email);
+            }
+            if (message.recipient_email !== email) {
+              participantEmails.add(message.recipient_email);
+            }
+          });
+      
+          // Step 3: Fetch user details for the participant emails
+          const chattedUsers = await AppUser.findAll({
+            where: {
+              email: {
+                [Op.in]: Array.from(participantEmails),
+              },
+            },
+          });
+      
+          // Step 4: Map results to the desired format
+          return chattedUsers.map((user) => ({
             email: user.email,
-            name: user.name
-        }));
-    }
+            name: user.name,
+          }));
+        } catch (error) {
+          console.error("Error fetching chatted users:", error);
+          throw error;
+        }
+      }
+    
 
-    public async getAllChatsWithAnotherUser(email: string, email_another:string) {
-        const user = await AppUser.findByPk(email);
-        const chattedUser = await AppUser.findByPk(email_another);
-        if (chattedUser === null || user === null) return null;
-        const messages = await Message.findAll({
+    public async getAllChatsWithAnotherUser(senderEmail: string, recipientEmail: string) {
+    try {
+        console.log(senderEmail);
+        console.log(recipientEmail);
+        // Fetch chat history between the sender and recipient
+        const chats = await Message.findAll({
             where: {
                 [Op.or]: [
-                    {
-                        sender_email: email,
-                        recipient_email: email_another
-                    },
-                    {
-                        sender_email: email_another,
-                        recipient_email: email,
-                    }
-                ]
+                    { sender_email: senderEmail, recipient_email: recipientEmail },
+                    { sender_email: recipientEmail, recipient_email: senderEmail },
+                ],
             },
+            order: [['createdAt', 'ASC']], // Ensure messages are ordered by creation date
         });
-        //sort by message index
-        messages.sort((msg1, msg2) => msg1.message_index - msg2.message_index);
-        return messages;
+
+        return chats; // Return an empty array if no messages exist
+    } catch (error) {
+        console.error("Error fetching chats:", error);
+        throw new Error("Unable to fetch chats");
     }
+}
+
 
     // sends new message from one appuser to another, returns false on failure and true on success
     public async sendMessage(from: string, to:string, content: string) {
