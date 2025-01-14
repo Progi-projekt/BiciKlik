@@ -60,7 +60,7 @@ const Newsfeed = () => {
               <p className='nazivRute'>{event.event_name}</p>
               <p className="vrijemeDatum">{formatDate(event.event_time)}</p>
               <p>{event.short_description}</p>
-              <img src={`/images/${event.route_id}.PNG`} alt='RouteImg' className='slikarute' />
+              <img src={`/images/route-${event.route_id}.png`} alt='RouteImg' className='slikarute' />
 
             </div>
             </div>
