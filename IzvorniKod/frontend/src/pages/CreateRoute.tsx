@@ -9,6 +9,7 @@ function CreateRoute() {
     const [stops, setStops] = useState<string[]>(['']); // support for stops in between Start and End
     const [endLocation, setEndLocation] = useState<string>('');
     const [route, setRoute] = useState<google.maps.DirectionsResult | null>(null);
+    const [routeName, setRouteName] = useState<string>(''); // New state for route name
     const startLocationRef = useRef<HTMLInputElement>(null); // for autocomplete
     const endLocationRef = useRef<HTMLInputElement>(null);
     const stopRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -81,6 +82,10 @@ function CreateRoute() {
 
     const handleEndLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEndLocation(event.target.value);
+    };
+
+    const handleRouteNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRouteName(event.target.value);
     };
 
     const handleAddStop = () => {
@@ -160,7 +165,7 @@ function CreateRoute() {
             const saveGpxResponse = await fetch('/api/map/save-gpx',{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ polyline }),
+                body: JSON.stringify({ polyline, routeName }), // sending route name to the backend
             });
             if (!saveGpxResponse.ok) {
                 throw new Error('Failed to save the route image.');
@@ -183,6 +188,10 @@ function CreateRoute() {
                 <p className="naslov">Create Route</p>
                 <div className="route-form-container">
                     <div className='route-inputs'>
+                    <div> <label>
+                         Route Name:&nbsp;&nbsp;
+                        <input type="text" value={routeName} onChange={handleRouteNameChange} placeholder={"Enter a name"}/>
+                    </label> </div>
                     <div> <label>
                          Start Location:&nbsp;&nbsp;
                         <input type="text" ref={startLocationRef} value={startLocation} onChange={handleStartLocationChange} />
