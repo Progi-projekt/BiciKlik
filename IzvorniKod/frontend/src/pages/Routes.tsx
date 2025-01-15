@@ -7,9 +7,9 @@ const Routess = () => {
   return (
     <div className='routes-container'>
         <div className='routes-container2'>
-        <div>
+        <div className='routes-container3'>
         <h1>My Routes</h1>
-        <button><Link to={'/createRoute'}>Create Route</Link></button>
+        <Link to={'/createRoute'}><button>+</button></Link>
         </div>
         <div className='grid-route-container'>
             <div className='userRoute'>

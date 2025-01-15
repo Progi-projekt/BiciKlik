@@ -14,6 +14,24 @@
     text-align: left;
 }
 
+.routes-container3   {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.routes-container3  button {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+    background-color: #718E2A;
+}
+
 .routes-container2 h1 {
     font-size: 3rem;
     font-weight: 600;
