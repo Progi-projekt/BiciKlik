@@ -42,8 +42,7 @@ export class RouteController {
 		try {
 			const savedRoutes = await this.routeService.getSavedRoutes(email);
 			const ownedRoutes = await this.routeService.getOwnedRoutes(email);
-			const combinedRoutes = [...savedRoutes, ...ownedRoutes];
-			res.json(combinedRoutes);
+			res.json({ savedRoutes, ownedRoutes });
 		} catch (error) {
 			if (error instanceof Error) {
 				res.status(500).json({ error: error.message });
