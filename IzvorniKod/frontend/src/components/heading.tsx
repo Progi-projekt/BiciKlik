@@ -65,7 +65,7 @@ const downgrade = async () => {
       <ul>
         <li><Link to={"/"} className="clickable">News Feed</Link></li>
         {loggedIn && <li><Link to={"/chat"} className="clickable">Chat</Link></li>}
-        {loggedIn && <li><Link to={"/createRoute"} className="createButton">Create Route</Link></li>}
+        {loggedIn && <li><Link to={"/myroutes"} className='clickable'>Routes</Link></li>}
       </ul>
       {loggedIn ? (
         <>
