@@ -17,7 +17,7 @@ export class MapController {
 	public saveRoute = async (req: Request, res: Response) => {
 		try {
 			this.new_route_id = Date.now();
-			const { polyline } = req.body;
+			const { polyline, routeName } = req.body;
 
 			if (!polyline) {
 				return res.status(400).json({ error: "Polyline is required" });
@@ -96,7 +96,7 @@ export class MapController {
 
 		const newRoute = await this.mapService.saveRoute({
 			route_id: this.new_route_id.toString(),
-			route_name: "test",
+			route_name: req.body.routeName,
 			route_data_path_gpx: `/IzvorniKod/static/gpx/route-${this.new_route_id}`,
 			creator_email: req.cookies.loggedInAs,
 		});
