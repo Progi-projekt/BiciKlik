@@ -95,3 +95,9 @@
 .chat-input button:hover {
   background-color: #0056b3;
 }
+
+.placeholder {
+  padding-top: 1rem;
+  color: #393d2f;
+  font-size: 1.2rem;
+}
