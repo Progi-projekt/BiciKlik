@@ -38,12 +38,54 @@ function ClickedEvent() { //funkcija za getanje eventa
     };
     console.log(event);
 
+    const saveRoute = async (route_id: string) => {
+        try {
+            const response = await fetch(`/api/route/saveRoute/${route_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                alert('Route saved successfully!');
+            } else {
+                alert('Error saving route!');
+            }
+        } catch (error) {
+            console.error('Error saving route:', error);
+        }
+    }
+
+    const signUp = async (event_id: string) => {
+        try {
+            const response = await fetch(`/api/event/signup/${event_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                alert('Signed up successfully!');
+            } else {
+                alert('Error signing up!');
+            }
+        } catch (error) {
+            console.error('Error signing up:', error);
+        }
+    }
+
     return ( //rendera event
         <div className="event">
             <div className="container-event">
-                <p className='nazivEvent'>{event?.event_name}</p>
-                <p className='vrijemeDatumEvent'>{event?.event_time ? formatDate(event.event_time) : 'Date not available'}</p>
-                <p className='shortDescriptionEvent'>{event?.short_description}</p>
+                <div className="event-header">
+                    <p className='nazivEvent'>{event?.event_name}</p>
+                    <button className='buttonEvent' onClick={() => signUp(event?.event_id!)}>Sign up</button>
+                    <button className='buttonEvent' onClick={() => saveRoute(event?.route_id!)}>Save route</button>
+                    <p className='vrijemeDatumEvent'>{event?.event_time ? formatDate(event.event_time) : 'Date not available'}</p>
+                    <p className='shortDescriptionEvent'>{event?.short_description}</p>
+                </div>
                 <img src={`/images/route-${event?.route_id}.png`} alt='Route Image' className='image-event'/>
                 <div className='leaderboard-reviews'>
                 <div className='LEADERBORD'><Leaderboard eventId={event_id!}/></div>
