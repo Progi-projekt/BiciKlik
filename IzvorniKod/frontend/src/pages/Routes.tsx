@@ -32,6 +32,25 @@ const Routess = () => {
         fetchRoutes();
     }, []);
 
+    const unsaveRoute = async (route_id: string) => {
+        try {
+            const response = await fetch(`/api/route/unsaveRoute/${route_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                alert('Route unsaved successfully!');
+                fetchRoutes();
+            } else {
+                alert('Error unsaving route!');
+            }
+        } catch (error) {
+            console.error('Error unsaving route:', error);
+        }
+    };
 
 return (
     <div className='routes-container'>
@@ -57,6 +76,7 @@ return (
               <div key={route.route_id}>
                 <p>{route.route_name}</p>
                 <img src={`/images/route-${route.route_id}.png`} alt='RouteImg' className='slikarute' />
+                <button onClick= {() => unsaveRoute(route?.route_id!)}>Unsave</button>
               </div>
             ))}
           </div>
