@@ -1,6 +1,6 @@
 .sidebar {
     width: 25%;
-    background-color: #fff;
+    background-color: #c4c1be;
     border-right: 1px solid #ddd;
     padding: 20px;
     box-sizing: border-box;
@@ -8,11 +8,31 @@
   
   .sidebar h2 {
     margin-top: 0;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     font-size: 1.5em;
     color: #252321;
   }
-  
+
+  .sidebar input {
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0.2rem;
+  }
+
+  .sidebar button {
+    padding: 0.6rem;
+    margin: 0.2rem;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    background-color: #718E2A;
+  }
+
+  .sidebar button:hover {
+    background-color: #637C24;
+  }
   .contact {
     padding: 10px;
     border-bottom: 1px solid #ddd;

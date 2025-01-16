@@ -15,7 +15,7 @@
   
   .chat-input button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #718E2A;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -23,5 +23,5 @@
   }
   
   .chat-input button:hover {
-    background-color: #0056b3;
+    background-color: #637C24;
   }
