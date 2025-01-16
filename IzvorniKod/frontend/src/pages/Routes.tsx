@@ -2,18 +2,27 @@ import { Link } from 'react-router-dom';
 import '../components/routes.css';
 import React, { useState, useEffect } from 'react';
 
+interface Route {
+    route_id: string;
+    route_name: string;
+}
+
 const Routess = () => {
-    const [savedRoutes, setSavedRoutes] = useState<string[]>([]);
-    const [ownedRoutes, setOwnedRoutes] = useState<string[]>([]);
+    const [savedRoutes, setSavedRoutes] = useState<Route[]>([]);
+    const [ownedRoutes, setOwnedRoutes] = useState<Route[]>([]);
 
     const fetchRoutes = async () => {
         try {
             const response = await fetch('/api/route/myRoutes');
             const data = await response.json();
 
+            console.log('Fetched data:', data); // Debugging line
+
             setSavedRoutes(data.savedRoutes);
             setOwnedRoutes(data.ownedRoutes);
-            console.log(data);
+
+            console.log('Saved Routes:', data.savedRoutes); // Debugging line
+            console.log('Owned Routes:', data.ownedRoutes); // Debugging line
         } catch (error) {
             console.error('Error fetching routes:', error);
         }
@@ -23,43 +32,37 @@ const Routess = () => {
         fetchRoutes();
     }, []);
 
-  return (
+
+return (
     <div className='routes-container'>
-        <div className='routes-container2'>
+      <div className='routes-container2'>
         <div className='routes-container3'>
-        <h1>My Routes</h1>
-        <Link to={'/createRoute'}><button>+</button></Link>
+          <h1>My Routes</h1>
+          <Link to={'/createRoute'}><button>+</button></Link>
         </div>
         <div className='grid-route-container'>
-            <div className='userRoute'>
-                <p>RouteName</p>
-                <p>routeid</p>
-                <img></img>
-            </div>
-            <div className='userRoute'>
-                <p>RouteName</p>
-                <p>routeid</p>
-                <img></img>
-            </div>
-            <div className='userRoute'>
-                <p>RouteName</p>
-                <p>routeid</p>
-                <img></img>
-            </div>
-            <div className='userRoute'>
-                <p>RouteName</p>
-                <p>routeid</p>
-                <img></img>
-            </div>
-            <div className='userRoute'>
-                <p>RouteName</p>
-                <p>routeid</p>
-                <img></img>
-            </div>
+          <div>
+            <h2>Owned Routes</h2>
+            {ownedRoutes.map((route) => (
+              <div key={route.route_id}>
+                <p>{route.route_name}</p>
+                <img src={`/images/route-${route.route_id}.png`} alt='RouteImg' className='slikarute' />
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <h2>Saved Routes</h2>
+            {savedRoutes.map((route) => (
+              <div key={route.route_id}>
+                <p>{route.route_name}</p>
+                <img src={`/images/route-${route.route_id}.png`} alt='RouteImg' className='slikarute' />
+              </div>
+            ))}
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-    
   );
 };
 
