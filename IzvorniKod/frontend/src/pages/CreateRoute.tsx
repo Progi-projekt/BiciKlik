@@ -12,7 +12,8 @@ function CreateRoute() {
     const [routeName, setRouteName] = useState<string>(''); // New state for route name
     const startLocationRef = useRef<HTMLInputElement>(null); // for autocomplete
     const endLocationRef = useRef<HTMLInputElement>(null);
-    const stopRefs = useRef<(HTMLInputElement | null)[]>([]);
+    const stopRefs = useRef<(HTMLInputElement | null)[]>([]);    
+      
 
     useEffect(() => {
         const fetchGoogleMapsKey = async () => {
@@ -55,20 +56,6 @@ function CreateRoute() {
                         const renderer = new google.maps.DirectionsRenderer();
                         renderer.setMap(map);
                         setDirectionsRenderer(renderer);
-                        
-                        // Initialize autocomplete for start and end locations
-                        if (startLocationRef.current) {
-                            new google.maps.places.Autocomplete(startLocationRef.current);
-                        }
-                        if (endLocationRef.current) {
-                            new google.maps.places.Autocomplete(endLocationRef.current);
-                        }
-                        // Initialize autocomplete for stops
-                        stopRefs.current.forEach((ref) => {
-                            if (ref) {
-                                new google.maps.places.Autocomplete(ref);
-                            }
-                        });
                     }
                 });
             }
@@ -89,6 +76,11 @@ function CreateRoute() {
     };
 
     const handleAddStop = () => {
+        const totalStops = stops.length + 3;
+        if(totalStops > 10) {
+            window.alert('Maximum number of stops is 8.');
+            return;
+        }
         setStops([...stops, '']);
     };
 
