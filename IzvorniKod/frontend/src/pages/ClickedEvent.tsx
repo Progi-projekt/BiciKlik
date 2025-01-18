@@ -81,9 +81,9 @@ function ClickedEvent() { //funkcija za getanje eventa
             <div className="container-event">
                 <div className="event-header">
                     <p className='nazivEvent'>{event?.event_name}</p>
+                    <p className='vrijemeDatumEvent'>{event?.event_time ? formatDate(event.event_time) : 'Date not available'}</p>
                     <button className='buttonEvent' onClick={() => signUp(event?.event_id!)}>Sign up</button>
                     <button className='buttonEvent' onClick={() => saveRoute(event?.route_id!)}>Save route</button>
-                    <p className='vrijemeDatumEvent'>{event?.event_time ? formatDate(event.event_time) : 'Date not available'}</p>
                     <p className='shortDescriptionEvent'>{event?.short_description}</p>
                 </div>
                 <img src={`/images/route-${event?.route_id}.png`} alt='Route Image' className='image-event'/>

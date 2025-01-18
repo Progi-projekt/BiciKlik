@@ -1,5 +1,5 @@
 .sidebar {
-    width: 25%;
+    width: 30%;
     background-color: #c4c1be;
     border-right: 1px solid #ddd;
     padding: 20px;
@@ -45,4 +45,22 @@
 
   .sidebar li {
     list-style-type: none;
+  }
+
+  @media (max-width: 845px){
+    .sidebar {
+      width: 40%;
+    }
+    .sidebar button {
+      padding: 0.3rem;
+     margin: 0.1rem;
+    }
+    .sidebar input {
+      width: 90%;
+      padding: 0.3rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 0.1rem;
+      margin-bottom: 0.6rem;
+    }
   }

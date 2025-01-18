@@ -26,8 +26,19 @@
     padding-bottom: 1.5rem;
 }
 
+.event .buttonEvent {
+    background-color: #718E2A;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.event .buttonEvent:hover {
+    background-color: #637C24;
+}
+
 .event .image-event {
-    width: 100%;
+    width: 50%;
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-right: 1rem;
@@ -44,5 +55,8 @@
     }
     .LEADERBORD {
         margin-bottom: 1rem;
+    }
+    .event .image-event {
+        width: 100%;
     }
 }

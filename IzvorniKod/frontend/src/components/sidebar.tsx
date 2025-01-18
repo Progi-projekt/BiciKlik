@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onUserSelect }) => {
       <form onSubmit={handleSearch}>
         <input
           type="text"
-          placeholder="Search by email..."
+          placeholder="Search email."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
