@@ -1,11 +1,10 @@
 .leaderboard {
-    width: 50%;
+    width: 80%;
     list-style-type: none;
     padding: 1rem;
-    margin: 0;
+    margin-left: 4rem;
     background-color: #f9f9f9; /* Add background color */
     border-radius: 5px; /* Add border radius */
-    align-self: flex-end; /* Move to the right */
 }
 
 .leaderboard h2 {
@@ -70,5 +69,6 @@
     .leaderboard {
         padding-bottom: 1rem;
         width: 100%;
+        margin-left: 0rem;
     }
 }
