@@ -92,6 +92,7 @@ export class EventService {
 		};
 	}
 
+
 	//saving result
 	public async saveResult(eventId: string, email: string, result: string) {
 		try {
@@ -120,6 +121,26 @@ export class EventService {
 			return participation;
 		} catch (error) {
 			console.error("Error in saveResult:", error);
+			throw error;
+		}
+	}
+
+	public async removeResult(eventId: string, email: string) {
+		try {
+			const participation = await Participation.findOne({
+				where: {
+					event_id: eventId,
+					email: email,
+				},
+			});
+
+			if (!participation) {
+				return false;
+			}
+			await participation.destroy();
+			return true;
+		} catch (error) {
+			console.error("Error in removeResult:", error);
 			throw error;
 		}
 	}
@@ -175,6 +196,25 @@ export class EventService {
 			event_time: participation.event.event_time,
 		}));
 	}
+
+	public async eraseEvent(eventId: string){
+		const event = await Event.findByPk(eventId);
+		if (!event) {
+			return false
+		}
+		const participations = await Participation.findAll({
+			where: {
+				event_id: eventId,
+			},
+		});
+		await Promise.all(participations.map(async (participation) => {
+			await participation.destroy();
+		}));
+		await event.destroy();
+		return true;
+	}
+
+
 
 	private secondsToHHMMSS = (totalSeconds: number): string => {
 		// converting seconds back to HH:MM:SS

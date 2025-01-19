@@ -5,8 +5,9 @@ import { AppUser } from '../models/appuser.model';
 import { Participation } from '../models/participation.model';
 import { Save } from '../models/save.model';
 import { Admin } from '../models/admin.model';
+import { arch } from 'os';
 
-export class UserService {
+export class AdminService {
 
 	// gets all info of a user
 	public async getUserInfo(email: string) {
@@ -37,7 +38,24 @@ export class UserService {
 			throw new Error('User not found');
 		}
 
-		return user;
+		return {
+			email: user.email,
+			first_name: user.name,
+			is_organizer: is_organizer,
+			is_admin: is_admin,
+			archived_reason: user.archived_reason,
+		};
+	}
+
+	public async changeUserArchiveStatus(email: string, reason: string|null) {
+		
+		const user = await AppUser.findByPk(email);
+		if (!user) {
+			return false;
+		}
+		user.archived_reason = reason;
+		await user.save();
+		return true;
 	}
 	
 
