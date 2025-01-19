@@ -62,8 +62,10 @@ export class ChatService {
                     { sender_email: recipientEmail, recipient_email: senderEmail },
                 ],
             },
-            order: [['createdAt', 'ASC']], // Ensure messages are ordered by creation date
+            order: [['message_index', 'ASC']], // Ensure messages are ordered by creation date
         });
+
+        console.log(chats);
 
         return chats; // Return an empty array if no messages exist
     } catch (error) {

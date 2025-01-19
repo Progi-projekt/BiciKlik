@@ -42,7 +42,7 @@ class App {
 	private initializeRoutes() {
 		this.app.use("/api/auth", new AuthRouter().router);
 		this.app.use("/api/event", new EventRouter().router);
-		//this.app.use("/api/chat", new ChatRouter().router);
+		this.app.use("/api/chat", new ChatRouter().router);
 		this.app.use("/api/map", new MapRouter().router);
 		this.app.get("/api/health", (req, res) => res.json({ status: "OK" }));
 		this.app.get("/db/health", (req, res) => res.json({ status: this.dbConnected ? "OK" : "ERROR" }));
