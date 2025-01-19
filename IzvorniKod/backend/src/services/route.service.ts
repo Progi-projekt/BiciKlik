@@ -87,4 +87,16 @@ export class RouteService {
 
 		await review.save();
 	}
+
+	public async deleteRoute(routeId: string) {
+		
+		var route = await Route.findByPk(routeId);
+		if (route == null) {
+			return false;
+		}
+		await route.destroy();
+		//TODO remove route gpx
+		// what to do about events?
+		return true;
+	}
 }
