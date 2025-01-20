@@ -58,7 +58,6 @@ export class EventController {
     try {
       const participantsData = await this.eventService.getParticipants(eventId);
       res.json(participantsData);
-      console.log("participants: " + JSON.stringify(participantsData, null, 2));
     } catch (error) {
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
@@ -72,7 +71,6 @@ export class EventController {
 
     const email = req.cookies.loggedInAs;
 
-    console.log("email: " + email);
 		if (!email) {
 			res.status(400).json({ message: "No email found in cookies." });  // check if user is logged in, if there is no cookie, return an error
 			return;
@@ -82,7 +80,6 @@ export class EventController {
     const { time } = req.body;
 
     try {
-      console.log("calling saveResult");
       const newParticipant = await this.eventService.saveResult(eventId, email, time);
       res.json(newParticipant);
     } catch (error) {
