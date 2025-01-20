@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Leaderboard from '../components/leaderboard';
 import ReviewForm from '../components/reviewform';
+import  fivestar from '../assets/5star.png';
 
 type EventData = {
     event_id: string;
@@ -96,7 +97,23 @@ function ClickedEvent() { //funkcija za getanje eventa
                 <img src={`/images/route-${event?.route_id}.png`} alt='Route Image' className='image-event'/>
                 <div className='LEADERBORD'><Leaderboard eventId={event_id!}/></div>
                 </div>
+                <div className='reviews-container'>
+                 <div className='reviews'>
+                        <div className='review'>
+                        <p className='review-text'>Ovo je review text</p>
+                        <img className='starImg' src="fivestar"></img>
+                        </div>
+                        <div className='review'>
+                        <p className='review-text'>Ovo je review text</p>
+                        <img className='starImg' src="fivestar"></img>
+                        </div>
+                        <div className='review'>
+                        <p className='review-text'>Ovo je review text</p>
+                        <img className='starImg' src="fivestar"></img>
+                        </div>
+                </div>
                 <div>{event && <ReviewForm eventId={event_id!} routeId={event.route_id} />}</div>
+                </div>
             </div>
         </div>
     );
