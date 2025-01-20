@@ -87,4 +87,24 @@ export class RouteController {
 			}
 		}
 	};
+	public saved = async (req: Request, res: Response) => {
+		const email = req.cookies.loggedInAs;
+		const routeId = req.params.routeId;
+
+		if (!email) {
+			res.status(400).json({ message: "No email found in cookies." });
+			return;
+		}
+
+		try {
+			const isSaved = await this.routeService.isRouteSaved(email, routeId);
+			res.status(200).json({ saved: isSaved });
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ error: error.message });
+			} else {
+				res.status(500).json({ error: "An unknown error occurred" });
+			}
+		}
+	};
 }

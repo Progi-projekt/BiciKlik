@@ -89,14 +89,23 @@ export class RouteService {
 	}
 
 	public async deleteRoute(routeId: string) {
-		
 		var route = await Route.findByPk(routeId);
 		if (route == null) {
 			return false;
 		}
 		await route.destroy();
 		//TODO remove route gpx
-		// what to do about events?
+		// what to do about events? -- honestly, that's a good question
 		return true;
+	}
+	public async isRouteSaved(email: string, routeId: string): Promise<boolean> {
+		const savedRoute = await Save.findOne({
+			where: {
+				email: email,
+				route_id: routeId,
+			},
+		});
+
+		return savedRoute !== null;
 	}
 }

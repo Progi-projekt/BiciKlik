@@ -16,5 +16,6 @@ export class RouteRouter {
 		this.router.get("/myRoutes", this.routeController.myRoutes);
 		this.router.post("/saveRoute/:routeId", this.routeController.saveRoute);
 		this.router.post("/unsaveRoute/:routeId", this.routeController.unsaveRoute);
+		this.router.get("/saved/:routeId", this.routeController.saved);
 	}
 }

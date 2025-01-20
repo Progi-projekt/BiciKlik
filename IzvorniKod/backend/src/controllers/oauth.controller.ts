@@ -3,12 +3,15 @@ import { OAuthService } from "../services/oauth.service";
 import { AppUser } from "../models/appuser.model";
 import { Admin } from "../models/admin.model";
 import { Organizer } from "../models/organizer.model";
+import { AdminService } from "../services/admin.service";
 
 export class OAuthController {
 	private oauthService: OAuthService;
+	private adminService: AdminService;
 
 	constructor() {
 		this.oauthService = new OAuthService();
+		this.adminService = new AdminService();
 	}
 
 	public googleCallback = async (req: Request, res: Response): Promise<void> => {
@@ -30,30 +33,20 @@ export class OAuthController {
 		}
 	};
 
-	public getAuthorization = async (req: Request, res: Response): Promise<void> => {
-		const email = req.cookies.loggedInAs;
-
+	public getAuthorization = async (req: Request, res: Response) => {
+		const email = req.cookies.loggedInAs; 
 		if (!email) {
-			res.status(400).json({ message: "No loggedInAs cookie found" });
-			return;
+			return res.status(401).json({ error: "User not authenticated" });
 		}
 		try {
-			const user = await AppUser.findOne({ where: { email } });
-			if (!user) {
-				res.status(404).json({ message: "User not found" });
-				return;
+			const info = await this.adminService.getUserInfo(email);
+			if (!info) {
+				return res.status(404);
 			}
-			if (Admin.findOne({ where: { email } }) != null) {
-				res.json({ loggedInAs: user.email, role: "admin" });
-			} else if (Organizer.findOne({ where: { email } }) != null) {
-				res.json({ loggedInAs: user.email, role: "organizer" });
-			} else {
-				res.json({ loggedInAs: user.email, role: "user" });
-			}
+			res.status(200).json(info);
 		} catch (error) {
-			console.error("Error fetching user role:", error);
-			const errorMessage = error instanceof Error ? error.message : "Unknown error";
-			res.status(500).json({ message: "Failed to fetch user role", error: errorMessage });
+			console.error("Error fetching user:", error);
+			res.status(500).json({ error: "Internal Server Error" });
 		}
 	};
 	public logOut = async (req: Request, res: Response): Promise<void> => {
@@ -68,18 +61,32 @@ export class OAuthController {
 		});
 	};
 	public upgrade = async (req: Request, res: Response): Promise<void> => {
-		let user = AppUser.findOne({ where: req.cookies.loggedInAs });
-		if (user != null) {
-			Organizer.create(req.cookies.loggedInAs);
-			res.status(200);
+		try {
+			const user = await AppUser.findOne({ where: { email: req.cookies.loggedInAs } });
+			if (user) {
+				await Organizer.create({ email: req.cookies.loggedInAs });
+				res.status(200).json({ message: "Upgrade successful" });
+			} else {
+				res.status(404).json({ message: "User not found" });
+			}
+		} catch (error) {
+			console.error("Error upgrading user:", error);
+			res.status(500).json({ error: "Internal Server Error" });
 		}
 	};
 
 	public downgrade = async (req: Request, res: Response): Promise<void> => {
-		let user = Organizer.findOne({ where: req.cookies.loggedInAs });
-		if (user != null) {
-			Organizer.destroy(req.cookies.loggedInAs);
-			res.status(200);
+		try {
+			const user = await Organizer.findOne({ where: { email: req.cookies.loggedInAs } });
+			if (user) {
+				await Organizer.destroy({ where: { email: req.cookies.loggedInAs } });
+				res.status(200).json({ message: "Downgrade successful" });
+			} else {
+				res.status(404).json({ message: "User not found" });
+			}
+		} catch (error) {
+			console.error("Error downgrading user:", error);
+			res.status(500).json({ error: "Internal Server Error" });
 		}
 	};
 }
