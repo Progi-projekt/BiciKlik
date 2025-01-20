@@ -60,25 +60,29 @@ return (
           <Link to={'/createRoute'}><button>+</button></Link>
         </div>
         <div className='grid-route-container'>
-          <div>
+          <div className='owned-routes-container'>
             <h2>Owned Routes</h2>
+            <div className='owned-routes'>
             {ownedRoutes.map((route) => (
-              <div key={route.route_id}>
+              <div key={route.route_id} className='owned-route' >
                 <p>{route.route_name}</p>
-                <img src={`/images/route-${route.route_id}.png`} alt='RouteImg' className='slikarute' />
+                <img src={`/images/route-${route.route_id}.png`} alt='RouteImg' className='slikarute2' />
               </div>
             ))}
+            </div>
           </div>
 
-          <div>
+          <div className='saved-routes-container'>
             <h2>Saved Routes</h2>
+            <div className='saved-routes'>
             {savedRoutes.map((route) => (
-              <div key={route.route_id}>
+              <div key={route.route_id} className='saved-route'>
                 <p>{route.route_name}</p>
-                <img src={`/images/route-${route.route_id}.png`} alt='RouteImg' className='slikarute' />
+                <img src={`/images/route-${route.route_id}.png`} alt='RouteImg' className='slikarute2' />
                 <button onClick= {() => unsaveRoute(route?.route_id!)}>Unsave</button>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </div>
