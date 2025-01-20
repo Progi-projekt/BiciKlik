@@ -62,6 +62,22 @@
 
 .reviews-container {
     display: flex;
+    justify-content: space-between;
+}
+
+.reviews{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+}
+
+.review {
+    background-color: #F9F9F9;
+    border-radius: 5px;
+    padding: 1rem;
+}
+.starImg{
+    width: 100%;
 }
 
 @media (max-width: 845px){
