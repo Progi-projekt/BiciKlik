@@ -23,9 +23,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         throw new Error("Failed fetch");
       }
       const data = await response.json();
-      if (data.loggedInAs) {
+      if (data.email) {
         setLoggedIn(true);
-        setUserRole(data.role);
+        setUserRole("user")
+        if(data.is_organizer){
+          setUserRole("organizer");
+        }if(data.is_admin){
+          setUserRole("admin")
+        }
+        console.log(userRole)
       } else {
         setLoggedIn(false);
         setUserRole(null);

@@ -36,6 +36,7 @@ const upgrade = async () => {
     });
     if (response.ok) {
       console.log("Upgrade successful");
+      checkAuthStatus();
     } else {
       console.error("Upgrade failed");
     }
@@ -51,6 +52,7 @@ const downgrade = async () => {
     });
     if (response.ok) {
       console.log("Downgrade successful");
+      checkAuthStatus();
     } else {
       console.error("Downgrade failed");
     }
