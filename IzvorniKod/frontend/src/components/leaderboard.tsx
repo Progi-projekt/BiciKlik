@@ -20,19 +20,17 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
     const minutesRef = useRef<HTMLInputElement>(null);
     const secondsRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => { // GET request za leaderboard (participants)
-        const fetchParticipants = async () => {
-            try {
-                const response = await fetch(`/api/event/leaderboard/${eventId}`); //fetcha response od backenda
-                const data = await response.json();
-                const participants = JSON.stringify(data, null, 2)
-                console.log("participants: " + participants);
-                setParticipants(data);
-            } catch (error) {
-                console.error('Error fetching leaderboard data:', error);
-            }
-        };
+    const fetchParticipants = async () => {
+        try {
+            const response = await fetch(`/api/event/leaderboard/${eventId}`); //fetcha response od backenda
+            const data = await response.json();
+            setParticipants(data);
+        } catch (error) {
+            console.error('Error fetching leaderboard data:', error);
+        }
+    };
 
+    useEffect(() => { // GET request za leaderboard (participants)
         fetchParticipants();
     }, [eventId]);
 
@@ -48,10 +46,19 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
                 body: JSON.stringify({ time }),
             });
             const newParticipant = await response.json();
-            setParticipants([...participants, newParticipant]);
+            
+            // Format the time and include the name before updating the state
+            const formattedParticipant = {
+                ...newParticipant,
+                achieved_result: time, // Assuming the backend returns the time in seconds
+            };
+
+            setParticipants([...participants, formattedParticipant]);
             setHours('');
             setMinutes('');
             setSeconds('');
+
+            fetchParticipants(); // call after adding to display the updated leaderboard
         } catch (error) {
             console.error('Error adding participant:', error);
         }
