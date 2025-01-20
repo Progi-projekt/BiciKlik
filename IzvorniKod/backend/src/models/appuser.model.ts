@@ -8,12 +8,15 @@ import {
 	UpdatedAt,
 	Index,
 	Unique,
-	HasMany
+	HasMany,
+	HasOne
 } from "sequelize-typescript";
 import {Message} from "./message.model";
 import {Participation} from "./participation.model";
 import {Route} from "./route.model";
 import {Save} from "./save.model";
+import { Organizer } from "./organizer.model";
+import { Admin } from "./admin.model";
 
 @Table({
 	tableName: "appuser",
@@ -59,5 +62,12 @@ export class AppUser extends Model {
 
 	@HasMany(() => Save)
 	route_saves!: Save[];
+
+	@HasOne(() => Organizer)
+	organizer!: Organizer;
+
+	@HasOne(() => Admin)
+	admin!: Admin;
+
 
 }
