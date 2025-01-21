@@ -107,4 +107,18 @@ export class RouteController {
 			}
 		}
 	};
+
+	public getReviews = async (req: Request, res: Response) => {
+		const routeId = req.params.routeId;
+		try {
+			const reviews = await this.routeService.getReviews(routeId);
+			res.json(reviews);
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ error: error.message });
+			} else {
+				res.status(500).json({ error: "An unknown error occurred" });
+			}
+		}
+	};
 }

@@ -108,4 +108,22 @@ export class RouteService {
 
 		return savedRoute !== null;
 	}
+
+	public async getReviews(routeId: string) {
+		try{
+			const reviews = await Grade.findAll({
+				where: {
+					route_id: routeId,
+				},
+				attributes: ["grader_email", "comment", "grade"],
+			});
+			const plainReviews =  reviews.map((review) => review.toJSON());
+			return plainReviews;
+
+		}
+		catch (error) {
+			console.error("Error getting reviews:", error);
+			throw error;
+		}
+	}
 }
