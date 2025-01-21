@@ -19,7 +19,6 @@ const Heading = () => {
       if (response.ok) {
         checkAuthStatus();
         setOpenProfile((prev) => !prev);
-        console.log(userRole);
         navigate('/login');
       } else {
         console.error('Logout failed');

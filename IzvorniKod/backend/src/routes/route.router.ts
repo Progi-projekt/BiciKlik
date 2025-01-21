@@ -13,6 +13,7 @@ export class RouteRouter {
 
 	private initializeRoutes() {
 		this.router.post("/review/:routeId", this.routeController.addReview); //reviews are route-specific
+		this.router.get("/reviews/:routeId", this.routeController.getReviews);
 		this.router.get("/myRoutes", this.routeController.myRoutes);
 		this.router.post("/saveRoute/:routeId", this.routeController.saveRoute);
 		this.router.post("/unsaveRoute/:routeId", this.routeController.unsaveRoute);

@@ -18,6 +18,7 @@ function ClickedEvent() {
     const { event_id } = useParams<{ event_id: string }>(); //iz URL vadi event_id
     const [event, setEvent] = useState<EventData>();
     const [isRouteSaved, setIsRouteSaved] = useState<boolean>(false);
+    const [reviews, setReviews] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -25,6 +26,10 @@ function ClickedEvent() {
                 const response = await fetch(`/api/event/${event_id}`); //fetcha event od backenda
                 const data = await response.json();
                 setEvent(data);
+
+                const reviewsResponse = await fetch(`/api/route/reviews/${data.route_id}`);
+                const reviewsData = await reviewsResponse.json();
+                setReviews(reviewsData);
             } catch (error) {
                 console.error('Error fetching event data:', error);
             }
@@ -136,14 +141,12 @@ function ClickedEvent() {
                 </div>
                 <div className='reviews-container'>
                     <div className='reviews'>
-                        <div className='review'>
-                            <p className='review-text'>Ovo je review text</p>
-                            <img className='starImg' src="fivestar"></img>
-                        </div>
-                        <div className='review'>
-                            <p className='review-text'>Ovo je review text</p>
-                            <img className='starImg' src="fivestar"></img>
-                        </div>
+                    {reviews.map((review) => (
+                            <div className='review' key={review.id}>
+                                <p className='review-text'>{review.comment}</p>
+                                <p className='review-grader'>{review.grader_email}</p>
+                            </div>
+                        ))}
                     </div>
                     <div>{event && <ReviewForm eventId={event_id!} routeId={event.route_id} />}</div>
                 </div>
