@@ -34,7 +34,7 @@ const Routess = () => {
 
     const unsaveRoute = async (route_id: string) => {
         try {
-            const response = await fetch(`/api/route/unsaveRoute/${route_id}`, {
+            const response = await fetch(`/api/route/${route_id}/unsave`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -12,10 +12,12 @@ export class RouteRouter {
 	}
 
 	private initializeRoutes() {
-		this.router.post("/review/:routeId", this.routeController.addReview); //reviews are route-specific
+		this.router.post("/:routeId/review", this.routeController.addReview); //reviews are route-specific
 		this.router.get("/myRoutes", this.routeController.myRoutes);
-		this.router.post("/saveRoute/:routeId", this.routeController.saveRoute);
-		this.router.post("/unsaveRoute/:routeId", this.routeController.unsaveRoute);
-		this.router.get("/saved/:routeId", this.routeController.saved);
+		this.router.post("/:routeId/save", this.routeController.saveRoute);
+		this.router.post("/:routeId/unsave", this.routeController.unsaveRoute);
+		this.router.get("/:routeId/saved", this.routeController.saved);
+		this.router.get("/:routeId/reviews", this.routeController.getRecentReviews);
+		this.router.get("/:routeId/average", this.routeController.getAverageGrade);
 	}
 }

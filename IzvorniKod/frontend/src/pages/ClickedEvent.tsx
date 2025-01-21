@@ -32,7 +32,7 @@ function ClickedEvent() {
 
         const checkIfRouteSaved = async (routeId: string) => {
             try {
-                const response = await fetch(`/api/route/saved/${routeId}`);
+                const response = await fetch(`/api/route/${routeId}/saved`);
                 const data = await response.json();
                 setIsRouteSaved(data.saved);
             } catch (error) {
@@ -53,7 +53,7 @@ function ClickedEvent() {
 
     const saveRoute = async (route_id: string) => {
         try {
-            const response = await fetch(`/api/route/saveRoute/${route_id}`, {
+            const response = await fetch(`/api/route/${route_id}/save`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ function ClickedEvent() {
 
     const unsaveRoute = async (route_id: string) => {
         try {
-            const response = await fetch(`/api/route/unsaveRoute/${route_id}`, {
+            const response = await fetch(`/api/route/${route_id}/unsave`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

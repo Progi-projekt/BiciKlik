@@ -14,7 +14,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ eventId, routeId }) => {
         console.log("routeId: " + routeId, "review: " + review, "rating: " + rating);
         e.preventDefault();
         try {
-            const response = await fetch(`/api/route/review/${routeId}`, {
+            const response = await fetch(`/api/route/${routeId}/review`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
