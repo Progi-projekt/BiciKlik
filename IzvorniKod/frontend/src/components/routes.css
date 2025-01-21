@@ -101,3 +101,15 @@
     border-radius: 5px;
 }
 
+@media (max-width: 845px){
+    .owned-routes, .saved-routes {
+        grid-template-columns: auto;
+    }
+    .routes-container2 h1 {
+        font-size: 2rem;
+    }
+    .routes-container {
+        width: 80%;
+    }
+}
+
