@@ -110,20 +110,24 @@ export class RouteService {
 	}
 
 	public async getReviews(routeId: string) {
-		try{
+		try {
 			const reviews = await Grade.findAll({
 				where: {
 					route_id: routeId,
 				},
 				attributes: ["grader_email", "comment", "grade"],
 			});
-			const plainReviews =  reviews.map((review) => review.toJSON());
+			const plainReviews = reviews.map((review) => review.toJSON());
 			return plainReviews;
-
-		}
-		catch (error) {
+		} catch (error) {
 			console.error("Error getting reviews:", error);
 			throw error;
 		}
+	}
+	public async getAllRoutes() {
+		const routes = await Route.findAll({
+			attributes: ["route_id", "route_name"],
+		});
+		return routes;
 	}
 }

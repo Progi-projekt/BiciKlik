@@ -92,7 +92,6 @@ export class EventService {
 		};
 	}
 
-
 	//saving result
 	public async saveResult(eventId: string, email: string, result: string) {
 		try {
@@ -197,24 +196,24 @@ export class EventService {
 		}));
 	}
 
-	public async eraseEvent(eventId: string){
+	public async eraseEvent(eventId: string) {
 		const event = await Event.findByPk(eventId);
 		if (!event) {
-			return false
+			return false;
 		}
 		const participations = await Participation.findAll({
 			where: {
 				event_id: eventId,
 			},
 		});
-		await Promise.all(participations.map(async (participation) => {
-			await participation.destroy();
-		}));
+		await Promise.all(
+			participations.map(async (participation) => {
+				await participation.destroy();
+			})
+		);
 		await event.destroy();
 		return true;
 	}
-
-
 
 	private secondsToHHMMSS = (totalSeconds: number): string => {
 		// converting seconds back to HH:MM:SS
@@ -228,4 +227,10 @@ export class EventService {
 			seconds.toString().padStart(2, "0"),
 		].join(":");
 	};
+	public async getAllEvents() {
+		const events = await Event.findAll({
+			attributes: ["event_id", "event_name"],
+		});
+		return events;
+	}
 }
