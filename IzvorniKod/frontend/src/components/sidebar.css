@@ -30,6 +30,9 @@
     background-color: #718E2A;
   }
 
+  .sidebar form {
+    margin-bottom: 0.7rem;
+  }
   .sidebar button:hover {
     background-color: #637C24;
   }
@@ -37,10 +40,11 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
+    color: #c4c1be;
   }
   
   .contact:hover {
-    background-color: #f7f7f7;
+    background-color: #d3d1ce;
   }
 
   .sidebar li {

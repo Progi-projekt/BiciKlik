@@ -9,28 +9,30 @@
 }
 
 .eventcreation-container {
-    background-color: #D8D8D8;
+    background-color: #5D5A5A;
     border-radius: 5px;
     padding: 3% 8% 6% 8%;
     text-align: left;
     width: 60%;
+    color: #FFFFFF;
 }
 
 .eventcreation-container .naslov {
     font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-weight: 400;
+    margin-top: 1rem;
     text-align: center; 
 }
 
 .eventcreation-container form {
-    background-color: #b3afaf;
+    background-color: #5D5A5A;
     border-radius: 5px;
     margin-top: 2rem;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    color: #D4D4D4;
 }
 
 .eventcreation-container form div {
@@ -65,8 +67,8 @@
 }
 
 .eventcreation-container .submitform {
-    padding: 1rem 2rem;
     margin-top: 1rem;
+    padding: 1rem 2rem;
     cursor: pointer;
     color: #ffffff;
     border: none;
