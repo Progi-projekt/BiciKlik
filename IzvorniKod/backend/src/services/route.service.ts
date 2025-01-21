@@ -88,6 +88,27 @@ export class RouteService {
 		await review.save();
 	}
 
+	public async getLastTenReviews(routeId: string) {
+		const reviews = await Grade.findAll({
+			where: {
+				route_id: routeId,
+			},
+			order: [["createdAt", "DESC"]],
+			limit: 10,
+			include: [
+				{
+					model: AppUser,
+					attributes: ["name"],
+				},
+			],
+		});
+		return reviews.map((review) => ({
+			grader_name: review.appUser.name,
+			comment: review.comment,
+			grade: review.grade,
+		}));
+	}
+
 	public async deleteRoute(routeId: string) {
 		var route = await Route.findByPk(routeId);
 		if (route == null) {
