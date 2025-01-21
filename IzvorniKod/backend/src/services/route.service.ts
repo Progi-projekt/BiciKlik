@@ -109,6 +109,32 @@ export class RouteService {
 		}));
 	}
 
+	public async getGradeAverage(routeId: string) {
+		try{
+			// check if route exists
+			const route = await Route.findByPk(routeId);
+			if (route == null) {
+				return null;
+			}
+
+			// get all reviews for the route, return null if has no reviews
+			const reviews = await Grade.findAll({
+				where: {
+					route_id: routeId,
+				},
+			});
+			if (reviews.length === 0) {
+				return null;
+			}
+
+			const sum = reviews.reduce((acc, review) => acc + review.grade, 0);
+			return sum / reviews.length;
+		} catch (error) {
+			console.error("Error getting grade average:", error);
+			throw error;
+		}
+	}
+
 	public async deleteRoute(routeId: string) {
 		var route = await Route.findByPk(routeId);
 		if (route == null) {
