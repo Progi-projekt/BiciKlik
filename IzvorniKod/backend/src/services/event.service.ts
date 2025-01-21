@@ -177,12 +177,7 @@ export class EventService {
 			});
 
 			if (!participation) {
-				console.log("Participation not found, creating a new one");
-				participation = await Participation.create({
-					event_id: eventId,
-					email: email,
-					achieved_result: 0, // Initialize with a default value
-				});
+				return false;
 			}
 
 			// Convert time string to total seconds

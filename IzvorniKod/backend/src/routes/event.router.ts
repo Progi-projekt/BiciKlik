@@ -16,6 +16,6 @@ export class EventRouter {
     this.router.get('/getEvents', this.eventController.getEvents);
     this.router.get('/:eventId', this.eventController.getEventById);
     this.router.get('/leaderboard/:eventId', this.eventController.getParticipants);
-    this.router.post('/leaderboard/:eventId', this.eventController.addParticipant);
+    this.router.post('/leaderboard/:eventId', this.eventController.saveResult);
   }
 }
