@@ -121,4 +121,16 @@ export class RouteController {
 			}
 		}
 	};
+	public getAllRoutes = async (req: Request, res: Response) => {
+		try {
+			const routes = await this.routeService.getAllRoutes();
+			res.status(200).json(routes);
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ error: error.message });
+			} else {
+				res.status(500).json({ error: "An unknown error occurred" });
+			}
+		}
+	};
 }
