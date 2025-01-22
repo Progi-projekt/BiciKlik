@@ -106,4 +106,48 @@ export class EventController {
 			}
 		}
 	};
+
+	public signUp = async (req: Request, res: Response) => {
+		const email = req.cookies.loggedInAs;
+
+		if (!email) {
+			res.status(400).json({ message: "No email found in cookies." });
+			return;
+		}
+
+		const eventId = req.params.eventId;
+
+		try {
+			const newParticipant = await this.eventService.signUp(eventId, email);
+			res.json(newParticipant);
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ error: error.message });
+			} else {
+				res.status(500).json({ error: "An unknown error occurred" });
+			}
+		}
+	}
+
+	public checkSignUp = async (req: Request, res: Response) => {
+		const email = req.cookies.loggedInAs;
+
+		if (!email) {
+			res.status(400).json({ message: "No email found in cookies." });
+			return;
+		}
+
+		const eventId = req.params.eventId;
+
+		try {
+			const isSignedUp = await this.eventService.checkSignUp(eventId, email);
+			res.status(200).json({ signedUp: isSignedUp });
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ error: error.message });
+			} else {
+				res.status(500).json({ error: "An unknown error occurred" });
+			}
+		}
+	}
 }

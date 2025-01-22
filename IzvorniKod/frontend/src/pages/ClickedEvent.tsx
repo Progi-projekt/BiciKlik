@@ -19,6 +19,7 @@ function ClickedEvent() {
     const [event, setEvent] = useState<EventData>();
     const [isRouteSaved, setIsRouteSaved] = useState<boolean>(false);
     const [reviews, setReviews] = useState<any[]>([]);
+    const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -45,9 +46,20 @@ function ClickedEvent() {
             }
         };
 
+        const checkIfSignedUp = async (eventId: string) => {
+            try {
+                const response = await fetch(`/api/event/signedUp/${eventId}`);
+                const data = await response.json();
+                setIsSignedUp(data.signedUp);
+            } catch (error) {
+                console.error('Error checking if signed up:', error);
+            }
+        };
+
         fetchEvent();
         if (event?.route_id) {
             checkIfRouteSaved(event.route_id);
+            checkIfSignedUp(event.event_id);
         }
     }, [event_id, event?.route_id]);
 
@@ -107,6 +119,7 @@ function ClickedEvent() {
 
             if (response.ok) {
                 alert('Signed up successfully!');
+                setIsSignedUp(true);
             } else {
                 alert('Error signing up!');
             }
@@ -125,7 +138,12 @@ function ClickedEvent() {
                             <p className='vrijemeDatumEvent'>{event?.event_time ? formatDate(event.event_time) : 'Date not available'}</p>
                         </div>
                         <div>
-                            <button className='buttonEvent' onClick={() => signUp(event?.event_id!)}>Sign up</button>
+                            {!isSignedUp ? (
+                                <button className='buttonEvent' onClick={() => signUp(event?.event_id!)}>Sign up</button>
+                            ) : (
+                                <p>You have signed up for this event.</p>
+                            )}
+
                             {isRouteSaved ? (
                                 <button className='buttonEvent' onClick={() => unsaveRoute(event?.route_id!)}>Unsave route</button>
                             ) : (
