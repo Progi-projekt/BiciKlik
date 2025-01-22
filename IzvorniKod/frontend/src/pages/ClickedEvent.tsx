@@ -4,6 +4,10 @@ import React, { useEffect, useState } from 'react';
 import Leaderboard from '../components/leaderboard';
 import ReviewForm from '../components/reviewform';
 import fivestar from '../assets/5star.png';
+import fourstar from '../assets/4star.png';
+import threestar from '../assets/3star.png';
+import twostar from '../assets/2star.png';
+import onestar from '../assets/1star.png';
 
 type EventData = {
     event_id: string;
@@ -20,6 +24,14 @@ function ClickedEvent() {
     const [isRouteSaved, setIsRouteSaved] = useState<boolean>(false);
     const [reviews, setReviews] = useState<any[]>([]);
 
+    const gradeToImage = {
+        '5': fivestar,
+        '4': fourstar,
+        '3': threestar,
+        '2': twostar,
+        '1': onestar,
+      };
+
     useEffect(() => {
         const fetchEvent = async () => {
             try {
@@ -30,6 +42,7 @@ function ClickedEvent() {
                 const reviewsResponse = await fetch(`/api/route/reviews/${data.route_id}`);
                 const reviewsData = await reviewsResponse.json();
                 setReviews(reviewsData);
+
             } catch (error) {
                 console.error('Error fetching event data:', error);
             }
@@ -143,8 +156,9 @@ function ClickedEvent() {
                     <div className='reviews'>
                     {reviews.map((review) => (
                             <div className='review' key={review.id}>
-                                <p className='review-text'>{review.comment}</p>
                                 <p className='review-grader'>{review.grader_email}</p>
+                                <p className='review-text'>{review.comment}</p>
+                                <img src={gradeToImage[review.grade] || onestar} alt={`${review.grade} star`} className='starImg'></img>
                             </div>
                         ))}
                     </div>

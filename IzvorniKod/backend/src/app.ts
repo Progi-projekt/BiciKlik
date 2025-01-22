@@ -38,6 +38,7 @@ class App {
 		);
 		this.app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 		this.app.use("/images", express.static(path.join(__dirname, "../../static/images")));
+		this.app.use("/assets", express.static(path.join(__dirname, "../../static/assets")));
 	}
 
 	private initializeRoutes() {
