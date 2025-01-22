@@ -233,4 +233,29 @@ export class EventService {
 		});
 		return events;
 	}
+
+	public async signUp(eventId: string, email: string) {
+		try {
+			const participation = await Participation.create({
+				event_id: eventId,
+				email: email,
+				achieved_result: null,
+			});
+			return participation;
+		} catch (error) {
+			console.error("Error in signUp:", error);
+			throw error;
+		}
+	}
+
+	public async checkSignUp(eventId: string, email: string): Promise<boolean> {
+		const participation = await Participation.findOne({
+			where: {
+				email: email,
+				event_id: eventId,	
+			},
+		});
+
+		return participation !== null;
+	}
 }
