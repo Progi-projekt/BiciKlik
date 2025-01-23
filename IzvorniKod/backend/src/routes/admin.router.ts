@@ -15,7 +15,7 @@ export class AdminRouter {
 		this.router.get('/user/:email', this.adminController.getUserInfo);
 		this.router.post('/user/:email/archive', this.adminController.archiveUser);
 		this.router.post('/event/:eventId/delete', this.adminController.deleteEvent);
-		this.router.post('/event/:eventId/leaderboard/remove/:user', this.adminController.removeEntry);
+		this.router.post('/event/:eventId/leaderboard/remove/:email', this.adminController.removeEntry);
 		this.router.post('/route/:routeId/delete', this.adminController.deleteRoute);
 
 	}

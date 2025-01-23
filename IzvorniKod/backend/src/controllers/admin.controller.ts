@@ -21,16 +21,17 @@ export class AdminController {
 
 
     public getUserInfo = async (req: Request, res: Response) => {
-        const email = req.cookies.loggedInAs; // Ensure this cookie is set
-        if (!email) {
+        const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
+        const user_email = req.params.email;
+        if (!admin_email) {
             return res.status(401).json({ error: 'User not authenticated' });
         }
-		if(!await this.isAdmin(email)){
+		if(!await this.isAdmin(admin_email)){
 			return res.status(401).json({ error: 'User not authorized' });
 		}
     
         try {
-            const info = await this.adminService.getUserInfo(email);
+            const info = await this.adminService.getUserInfo(user_email);
             if (!info) {
                 return res.status(404);
             }
@@ -42,17 +43,19 @@ export class AdminController {
     };
 
 	public archiveUser = async (req: Request, res: Response) => {
-        const email = req.cookies.loggedInAs; // Ensure this cookie is set
+        const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
+        const user_email = req.params.email;
+        
 		const reason = req.body.reason;
-        if (!email) {
+        if (!admin_email) {
             return res.status(401).json({ error: 'User not authenticated' });
         }
-		if(!await this.isAdmin(email)){
+		if(!await this.isAdmin(admin_email)){
 			return res.status(401).json({ error: 'User not authorized' });
 		}
     
         try {
-            const success = await this.adminService.changeUserArchiveStatus(email, reason);
+            const success = await this.adminService.changeUserArchiveStatus(user_email, reason);
             if (!success) {
                 return res.status(404);
             }
@@ -64,18 +67,18 @@ export class AdminController {
     };
 
 	public removeEntry = async (req: Request, res: Response) => {
-        const email = req.cookies.loggedInAs; // Ensure this cookie is set
+        const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
 		const eventId = req.params.eventId;
-		const user = req.params.user;
-        if (!email) {
+		const user_email = req.params.email;
+        if (!admin_email) {
             return res.status(401).json({ error: 'User not authenticated' });
         }
-		if(!await this.isAdmin(email)){
+		if(!await this.isAdmin(admin_email)){
 			return res.status(401).json({ error: 'User not authorized' });
 		}
     
         try {
-            const success = await this.eventService.removeResult(eventId, user);
+            const success = await this.eventService.removeResult(eventId, user_email);
             if (!success) {
                 return res.status(404);
             }
