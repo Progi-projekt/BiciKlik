@@ -5,6 +5,7 @@
     margin-left: 4rem;
     background-color: #f9f9f9; /* Add background color */
     border-radius: 5px; /* Add border radius */
+    box-shadow: rgba(87, 87, 87, 0.25) 0px 8px 24px;
 }
 
 .leaderboard h2 {

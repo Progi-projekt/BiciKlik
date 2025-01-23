@@ -8,10 +8,12 @@
 }
 
 .createRoute-container {
-    background-color: #D8D8D8;
+    background-color: #5D5A5A;
     border-radius: 5px;
     padding: 3% 8% 8% 8%;
     text-align: left;
+    color: white;
+    box-shadow: rgba(15, 15, 15, 0.25) 0px 8px 24px;
 }
 
 .naslov {
@@ -31,10 +33,12 @@
 }
 
 .route-form-container {
-    background-color: #b3afaf;
+    background-color: #807b7b;
     border-radius: 5px;
     margin-top: 2rem;
     padding: 1.5rem;
+    box-shadow: rgba(68, 63, 63, 0.25) 0px 8px 24px;
+    margin-bottom: 1rem;
 }
 
 .stops input, .route-inputs input {
@@ -43,6 +47,9 @@
     border-radius: 5px;
     margin: 0.2rem;
 
+}
+
+.stop-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
@@ -88,5 +95,11 @@
 
     .createRoute {
         width: 80%;
+    }
+
+    .stop-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
     }
 }

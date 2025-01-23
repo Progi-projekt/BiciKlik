@@ -195,6 +195,7 @@ function CreateRoute() {
                     </div>
                     <div>
                     <button onClick={handleAddStop}>Add Stop</button>
+                    <div className='stop-container'>
                     {stops.map((stop, index) => ( //new stops
                         <div key={index} className='stops'>
                             <label>
@@ -203,6 +204,7 @@ function CreateRoute() {
                             </label>
                         </div>
                     ))}
+                    </div>
                     </div>
                     <button onClick={handleCreateRoute}>Calculate Route</button>
                     <button onClick={handleSaveRoute}>Save Route</button>
