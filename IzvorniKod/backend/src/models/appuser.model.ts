@@ -17,6 +17,7 @@ import {Route} from "./route.model";
 import {Save} from "./save.model";
 import { Organizer } from "./organizer.model";
 import { Admin } from "./admin.model";
+import { Grade } from "./grade.model";
 
 @Table({
 	tableName: "appuser",
@@ -68,6 +69,9 @@ export class AppUser extends Model {
 
 	@HasOne(() => Admin)
 	admin!: Admin;
+
+	@HasMany(() => Grade)
+	reviews!: Grade[];
 
 
 }
