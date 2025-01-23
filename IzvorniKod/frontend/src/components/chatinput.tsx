@@ -37,14 +37,20 @@ const ChatInput: React.FC<ChatInputProps> = ({onSendMessage,recipientEmail }) =>
 
   return (
     <div className="chat-input">
-      <input
-        type="text"
-        placeholder="Type a message..."
-        value={content}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <button onClick={handleSendMessage}>Send</button>
-    </div>
+  <form onSubmit={(e) => {
+      e.preventDefault();
+      handleSendMessage();
+    }}>
+    <input
+      type="text"
+      placeholder="Type a message..."
+      value={content}
+      onChange={(e) => setMessage(e.target.value)}
+    />
+    <button type="submit">Send</button>
+  </form>
+</div>
+
   );
 };
 
