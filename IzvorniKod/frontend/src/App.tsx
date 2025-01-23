@@ -15,7 +15,7 @@ import NotAllowed from './pages/NotAllowed';
 import UserRoutes from './components/UserRoutes';
 import AdminRoutes from './components/AdminRoutes';
 import AdminPanel from './pages/AdminPanel';
-import bgImg from './assets/always-grey-1920x1080.png';
+import bgImg from './assets/black-twill-1920x1080.png';
 
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Newsfeed from './pages/NewsFeed';
@@ -23,7 +23,12 @@ import Newsfeed from './pages/NewsFeed';
 function App() { 
   return (
     <BrowserRouter>
-    <div className="App">
+    <div className="App"  style={{
+    backgroundImage: `url(${bgImg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }}>
       <Heading/>
       <Routes>
         <Route element={<AdminRoutes/>}> {/* Routes for admins */}

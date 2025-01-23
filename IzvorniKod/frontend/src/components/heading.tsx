@@ -89,7 +89,7 @@ const Heading = () => {
                 {userRole === "user" && <li onClick={upgrade}>Upgrade</li>}
                 {userRole === "organizer" && <li onClick={downgrade}>Downgrade</li>}
                 {(userRole === "organizer" || userRole === "admin") && <li><Link to={"/createEvent"}>Create Event</Link></li>}
-                {userRole ==="admin" && <li><Link to={"/adminpanel"}>Admin Panel</Link></li>}
+                {userRole ==="admin" && <li><Link to={"/adminPanel"}>Admin Panel</Link></li>}
                 <li className='logoutItem' onClick={handleLogout}>LogOut</li>
               </ul>
             </div>
