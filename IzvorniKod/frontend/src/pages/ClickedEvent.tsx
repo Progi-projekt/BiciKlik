@@ -4,6 +4,10 @@ import React, { useEffect, useState } from 'react';
 import Leaderboard from '../components/leaderboard';
 import ReviewForm from '../components/reviewform';
 import fivestar from '../assets/5star.png';
+import fourstar from '../assets/4star.png';
+import threestar from '../assets/3star.png';
+import twostar from '../assets/2star.png';
+import onestar from '../assets/1star.png';
 
 type EventData = {
     event_id: string;
@@ -18,6 +22,16 @@ function ClickedEvent() {
     const { event_id } = useParams<{ event_id: string }>(); //iz URL vadi event_id
     const [event, setEvent] = useState<EventData>();
     const [isRouteSaved, setIsRouteSaved] = useState<boolean>(false);
+    const [reviews, setReviews] = useState<any[]>([]);
+    const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
+
+    const gradeToImage = {
+        '5': fivestar,
+        '4': fourstar,
+        '3': threestar,
+        '2': twostar,
+        '1': onestar,
+      };
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -25,6 +39,11 @@ function ClickedEvent() {
                 const response = await fetch(`/api/event/${event_id}`); //fetcha event od backenda
                 const data = await response.json();
                 setEvent(data);
+
+                const reviewsResponse = await fetch(`/api/route/${data.route_id}/reviews`);
+                const reviewsData = await reviewsResponse.json();
+                setReviews(reviewsData);
+
             } catch (error) {
                 console.error('Error fetching event data:', error);
             }
@@ -40,9 +59,20 @@ function ClickedEvent() {
             }
         };
 
+        const checkIfSignedUp = async (eventId: string) => {
+            try {
+                const response = await fetch(`/api/event/${eventId}/signedUp`);
+                const data = await response.json();
+                setIsSignedUp(data.signedUp);
+            } catch (error) {
+                console.error('Error checking if signed up:', error);
+            }
+        };
+
         fetchEvent();
         if (event?.route_id) {
             checkIfRouteSaved(event.route_id);
+            checkIfSignedUp(event.event_id);
         }
     }, [event_id, event?.route_id]);
 
@@ -93,7 +123,7 @@ function ClickedEvent() {
 
     const signUp = async (event_id: string) => {
         try {
-            const response = await fetch(`/api/event/signup/${event_id}`, {
+            const response = await fetch(`/api/event/${event_id}/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,6 +132,7 @@ function ClickedEvent() {
 
             if (response.ok) {
                 alert('Signed up successfully!');
+                setIsSignedUp(true);
             } else {
                 alert('Error signing up!');
             }
@@ -120,7 +151,12 @@ function ClickedEvent() {
                             <p className='vrijemeDatumEvent'>{event?.event_time ? formatDate(event.event_time) : 'Date not available'}</p>
                         </div>
                         <div>
-                            <button className='buttonEvent' onClick={() => signUp(event?.event_id!)}>Sign up</button>
+                            {!isSignedUp ? (
+                                <button className='buttonEvent' onClick={() => signUp(event?.event_id!)}>Sign up</button>
+                            ) : (
+                                <p>You have signed up for this event.</p>
+                            )}
+
                             {isRouteSaved ? (
                                 <button className='buttonEvent' onClick={() => unsaveRoute(event?.route_id!)}>Unsave route</button>
                             ) : (
@@ -136,14 +172,13 @@ function ClickedEvent() {
                 </div>
                 <div className='reviews-container'>
                     <div className='reviews'>
-                        <div className='review'>
-                            <p className='review-text'>Ovo je review text</p>
-                            <img className='starImg' src="fivestar"></img>
-                        </div>
-                        <div className='review'>
-                            <p className='review-text'>Ovo je review text</p>
-                            <img className='starImg' src="fivestar"></img>
-                        </div>
+                    {reviews.map((review) => (
+                            <div className='review' key={review.id}>
+                                <p className='review-grader'>{review.grader_email}</p>
+                                <p className='review-text'>{review.comment}</p>
+                                <img src={gradeToImage[review.grade] || onestar} alt={`${review.grade} star`} className='starImg'></img>
+                            </div>
+                        ))}
                     </div>
                     <div>{event && <ReviewForm eventId={event_id!} routeId={event.route_id} />}</div>
                 </div>

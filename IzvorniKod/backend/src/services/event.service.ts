@@ -105,7 +105,7 @@ export class EventService {
 			if(event.event_time < currentDate){
 				return false;
 			}
-
+			
 			// Check if user is already signed
 			const old_participation = await Participation.findOne({
 				where: {
@@ -116,20 +116,21 @@ export class EventService {
 			if (old_participation) {
 				return false;
 			}
-
+			
 			const participation = await Participation.create({
 				event_id: eventId,
 				email: email,
 			});
 			await participation.save();
-			return true;
+			return participation;
+			
 		}
 		catch (error) {
 			console.error("Error in signUp:", error);
 			throw error;
 		}
 	}
-
+	
 	//signout
 	public async signOut(eventId: string, email: string) {
 		try {
@@ -156,7 +157,7 @@ export class EventService {
 			if (!participation) {
 				return false;
 			}
-
+			
 			await participation.destroy();
 			return true;
 		} catch (error) {
@@ -164,7 +165,6 @@ export class EventService {
 			throw error;
 		}
 	}
-
 
 	//saving result
 	public async saveResult(eventId: string, email: string, result: string) {
@@ -265,24 +265,24 @@ export class EventService {
 		}));
 	}
 
-	public async eraseEvent(eventId: string){
+	public async eraseEvent(eventId: string) {
 		const event = await Event.findByPk(eventId);
 		if (!event) {
-			return false
+			return false;
 		}
 		const participations = await Participation.findAll({
 			where: {
 				event_id: eventId,
 			},
 		});
-		await Promise.all(participations.map(async (participation) => {
-			await participation.destroy();
-		}));
+		await Promise.all(
+			participations.map(async (participation) => {
+				await participation.destroy();
+			})
+		);
 		await event.destroy();
 		return true;
 	}
-
-
 
 	private secondsToHHMMSS = (totalSeconds: number): string => {
 		// converting seconds back to HH:MM:SS
@@ -296,4 +296,22 @@ export class EventService {
 			seconds.toString().padStart(2, "0"),
 		].join(":");
 	};
+	public async getAllEvents() {
+		const events = await Event.findAll({
+			attributes: ["event_id", "event_name"],
+		});
+		return events;
+	}
+
+
+	public async checkSignUp(eventId: string, email: string): Promise<boolean> {
+		const participation = await Participation.findOne({
+			where: {
+				email: email,
+				event_id: eventId,	
+			},
+		});
+
+		return participation !== null;
+	}
 }

@@ -31,7 +31,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }if(data.is_admin){
           setUserRole("admin")
         }
-        console.log(userRole)
       } else {
         setLoggedIn(false);
         setUserRole(null);

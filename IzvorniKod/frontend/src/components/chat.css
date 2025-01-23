@@ -41,7 +41,7 @@
 
 .message.sent {
   align-self: flex-end;
-  background-color: #d1f7c4; /* Light green for sent messages */
+  background-color: #bed1b7; /* Light green for sent messages */
   color: #000;
 }
 
@@ -84,8 +84,9 @@
 
 .chat-input button {
   padding: 8px 16px;
+  border: 2px ;
   border: none;
-  background-color: #007bff;
+  background-color: #4473a5;
   color: white;
   border-radius: 4px;
   font-size: 14px;
@@ -93,7 +94,7 @@
 }
 
 .chat-input button:hover {
-  background-color: #0056b3;
+  background-color: #2a5786;
 }
 
 .placeholder {

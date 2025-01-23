@@ -16,6 +16,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
     const [hours, setHours] = useState('');
     const [minutes, setMinutes] = useState('');
     const [seconds, setSeconds] = useState('');
+    const [eventStarted, setEventStarted] = useState(false);
 
     const minutesRef = useRef<HTMLInputElement>(null);
     const secondsRef = useRef<HTMLInputElement>(null);
@@ -30,14 +31,38 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
         }
     };
 
+    const checkEventStatus = async () => {
+        try{
+            const response = await fetch(`/api/event/${eventId}`);
+            const data = await response.json();
+            const eventTime = new Date(data.event_time);
+            const currentTime = new Date();
+
+            if(eventTime < currentTime){
+                setEventStarted(true);
+            }else{
+                setEventStarted(false);
+            }
+        } catch (error) {
+            console.error('Error fetching event data:', error);
+        }
+    }
+    
+
     useEffect(() => { // GET request za leaderboard (participants)
         fetchParticipants();
+        checkEventStatus();
     }, [eventId]);
 
     const handleSubmit = async (e: React.FormEvent) => { // POST request za leaderboard (participants)
         e.preventDefault();
         const time = `${hours}:${minutes}:${seconds}`;
         try {
+            if(!eventStarted){ 
+                alert("Event has not started yet!");
+                throw new Error("Event has not started yet!"); 
+            }
+
             const response = await fetch(`/api/event/${eventId}/leaderboard`, {    //salje podatke na backend
                 method: 'POST',
                 headers: {
@@ -90,7 +115,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
                             }
                         }
                     }}
-                    required
+                    required disabled={!eventStarted}
                 />
                 <input
                     type="text"
@@ -106,7 +131,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
                             }
                         }
                     }}
-                    required
+                    required disabled={!eventStarted}
                 />
                 <input
                     type="text"
@@ -119,9 +144,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
                             setSeconds(value);
                         }
                     }}
-                    required
+                    required disabled={!eventStarted}
                 />
-                <input type="submit" value="Submit your time" />
+                <input type="submit" value="Submit your time" disabled={!eventStarted}/>
             </form>
             </div>
         </div>

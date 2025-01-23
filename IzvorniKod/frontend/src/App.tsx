@@ -15,6 +15,7 @@ import NotAllowed from './pages/NotAllowed';
 import UserRoutes from './components/UserRoutes';
 import AdminRoutes from './components/AdminRoutes';
 import AdminPanel from './pages/AdminPanel';
+import bgImg from './assets/always-grey-1920x1080.png';
 
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Newsfeed from './pages/NewsFeed';

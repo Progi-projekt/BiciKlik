@@ -5,6 +5,7 @@
     margin-left: 4rem;
     background-color: #f9f9f9; /* Add background color */
     border-radius: 5px; /* Add border radius */
+    box-shadow: rgba(87, 87, 87, 0.25) 0px 8px 24px;
 }
 
 .leaderboard h2 {
@@ -63,6 +64,14 @@
 
 .add-participant-container input[type="submit"]:hover {
     background-color: #637C24;
+}
+
+.add-participant-container input[type="text"]:disabled,
+.add-participant-container input[type="submit"]:disabled {
+    background-color: #e0e0e0; /* Light grey background for disabled inputs */
+    color: #a0a0a0; /* Grey text color for disabled inputs */
+    cursor: not-allowed; /* Change cursor to not-allowed */
+    border: 1px solid #ccc; /* Keep the border consistent */
 }
 
 @media (max-width: 845px){
