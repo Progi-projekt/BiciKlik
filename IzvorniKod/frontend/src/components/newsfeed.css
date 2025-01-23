@@ -1,86 +1,116 @@
 .newsfeed {
-    width: 85%;
-    padding: 1%;
-    padding-top: 2%;
-    display: flex;
-   flex-direction: column; 
+	width: 85%;
+	padding: 1%;
+	padding-top: 2%;
+	display: flex;
+	flex-direction: column;
 }
-.slikanews{
-    width: 100%;
-    box-shadow: rgba(5, 5, 5, 0.1) 0px 8px 24px;
+.slikanews {
+	width: 100%;
+	box-shadow: rgba(5, 5, 5, 0.1) 0px 8px 24px;
 }
 .ruta {
-    background-color: #c4c1be;
-    border-radius: 5px;
-    padding: 2% 8% 8% 8%;
-    cursor: pointer;
-    box-shadow: rgba(5, 5, 5, 0.25) 0px 8px 24px;
+	background-color: #c4c1be;
+	border-radius: 5px;
+	padding: 2% 8% 8% 8%;
+	cursor: pointer;
+	box-shadow: rgba(5, 5, 5, 0.25) 0px 8px 24px;
 }
 
-.filter{
-    color: #D8D8D8;
-    align-self: flex-start;
-    padding: 1rem ;
-    cursor: pointer;
-    position: relative;
+.filter {
+	color: #d8d8d8;
+	align-self: flex-start;
+	padding: 1rem;
+	cursor: pointer;
+	position: relative;
 }
 
 .slikarute {
-    width: 100%;
-    padding-top: 3%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 2px;
+	width: 100%;
+	padding-top: 3%;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	border-radius: 2px;
 }
 
 .slikarute:hover {
-    object-fit: contain;
+	object-fit: contain;
 }
 
-.containerRuta{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 4rem;
-    padding-bottom: 1rem;
+.containerRuta {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 4rem;
+	padding-bottom: 1rem;
 }
 
-.tekst{
-    text-align: left;
+.tekst {
+	text-align: left;
 }
-.nazivRute{
-    font-size: 2rem;
-    font-weight: 600;
-    padding-top: 1rem;
+.nazivRute {
+	font-size: 2rem;
+	font-weight: 600;
+	padding-top: 1rem;
 }
-.vrijemeDatum{
-    color: #5D5A5A;
-    font-size: 0.9rem;
-    padding-bottom: 1rem;
+.vrijemeDatum {
+	color: #5d5a5a;
+	font-size: 0.9rem;
+	padding-bottom: 1rem;
 }
-.clickEvent{
-    text-decoration: none;
-    color: inherit;
+.clickEvent {
+	text-decoration: none;
+	color: inherit;
 }
-.filter-drop-down{
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    width: 10%; 
+.filter-drop-down {
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	width: 10%;
 }
-.filter-drop-ul{
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.filter-drop-ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
 .filter-drop-li {
-    padding: 10px;
-    cursor: pointer;
-  }
-
-@media (max-width: 845px){
-    .containerRuta{
-        grid-template-columns: repeat(1, 1fr); 
-    }
+	padding: 10px;
+	cursor: pointer;
 }
 
+@media (max-width: 845px) {
+	.containerRuta {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+.search-bar {
+	position: relative;
+	margin: 20px 0;
+}
+
+.search-input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.search-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	z-index: 1000;
+}
+
+.search-result-item {
+	padding: 10px;
+	cursor: pointer;
+}
+
+.search-result-item:hover {
+	background-color: #f0f0f0;
+}
