@@ -61,7 +61,7 @@ function ClickedEvent() {
 
         const checkIfSignedUp = async (eventId: string) => {
             try {
-                const response = await fetch(`/api/event/${eventId}/signedUp`);
+                const response = await fetch(`/api/event/${eventId}/signedup`);
                 const data = await response.json();
                 setIsSignedUp(data.signedUp);
             } catch (error) {

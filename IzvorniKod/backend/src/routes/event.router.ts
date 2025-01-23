@@ -14,13 +14,13 @@ export class EventRouter {
 	private initializeRoutes() {
 		this.router.post('/createEvent', this.eventController.createEvent);
 		this.router.get('/getEvents', this.eventController.getEvents);
-		this.router.get("/getAllEvents", this.eventController.getAllEvents);
-		this.router.get('/:eventId/signup', this.eventController.signUp);
-		this.router.get('/:eventId/signout', this.eventController.signOut);
+		this.router.get('/getAllEvents', this.eventController.getAllEvents);
 		this.router.get('/:eventId', this.eventController.getEventById);
 		this.router.get('/:eventId/leaderboard', this.eventController.getParticipants);
+		this.router.get('/:eventId/signedup', this.eventController.checkSignUp);
+		this.router.post('/:eventId/signup', this.eventController.signUp);
+		this.router.post('/:eventId/signout', this.eventController.signOut);
 		this.router.post('/:eventId/leaderboard', this.eventController.saveResult);
-		this.router.get("/:eventid/signedup", this.eventController.checkSignUp);
 	}
 }
 

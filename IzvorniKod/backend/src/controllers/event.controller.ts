@@ -152,6 +152,8 @@ export class EventController {
 	public checkSignUp = async (req: Request, res: Response) => {
 		const email = req.cookies.loggedInAs;
 
+		console.log(email);
+
 		if (!email) {
 			res.status(400).json({ message: "No email found in cookies." });
 			return;
