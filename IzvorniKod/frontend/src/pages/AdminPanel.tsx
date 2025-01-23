@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../components/adminpanel.css';
 
 const AdminPanel = () => {
     const [email, setEmail] = useState('');
