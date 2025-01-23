@@ -108,11 +108,16 @@ export class RouteController {
 		}
 	};
 
-	public getReviews = async (req: Request, res: Response) => {
+	public getRecentReviews = async (req: Request, res: Response) => {
 		const routeId = req.params.routeId;
 		try {
-			const reviews = await this.routeService.getReviews(routeId);
-			res.json(reviews);
+			const reviews = await this.routeService.getLastTenReviews(routeId);
+			if (!reviews) {
+				res.status(404).json({ error: "No reviews found" });
+				return
+			}
+			res.status(200).json(reviews);
+
 		} catch (error) {
 			if (error instanceof Error) {
 				res.status(500).json({ error: error.message });
@@ -120,7 +125,27 @@ export class RouteController {
 				res.status(500).json({ error: "An unknown error occurred" });
 			}
 		}
-	};
+	}
+	
+	public getAverageGrade = async (req: Request, res: Response) => {
+		const routeId = req.params.routeId;
+		try {
+			const grade = await this.routeService.getGradeAverage(routeId);
+			if (!grade) {
+				res.status(404).json({ error: "No reviews found" });
+				return
+			}
+			res.status(200).json(grade);
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ error: error.message });
+			} else {
+				res.status(500).json({ error: "An unknown error occurred" });
+			}
+		}
+	}
+
+
 	public getAllRoutes = async (req: Request, res: Response) => {
 		try {
 			const routes = await this.routeService.getAllRoutes();
@@ -132,5 +157,6 @@ export class RouteController {
 				res.status(500).json({ error: "An unknown error occurred" });
 			}
 		}
+
 	};
 }

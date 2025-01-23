@@ -40,7 +40,7 @@ function ClickedEvent() {
                 const data = await response.json();
                 setEvent(data);
 
-                const reviewsResponse = await fetch(`/api/route/reviews/${data.route_id}`);
+                const reviewsResponse = await fetch(`/api/route/${data.route_id}/reviews`);
                 const reviewsData = await reviewsResponse.json();
                 setReviews(reviewsData);
 
@@ -51,7 +51,7 @@ function ClickedEvent() {
 
         const checkIfRouteSaved = async (routeId: string) => {
             try {
-                const response = await fetch(`/api/route/saved/${routeId}`);
+                const response = await fetch(`/api/route/${routeId}/saved`);
                 const data = await response.json();
                 setIsRouteSaved(data.saved);
             } catch (error) {
@@ -61,7 +61,7 @@ function ClickedEvent() {
 
         const checkIfSignedUp = async (eventId: string) => {
             try {
-                const response = await fetch(`/api/event/signedUp/${eventId}`);
+                const response = await fetch(`/api/event/${eventId}/signedup`);
                 const data = await response.json();
                 setIsSignedUp(data.signedUp);
             } catch (error) {
@@ -83,7 +83,7 @@ function ClickedEvent() {
 
     const saveRoute = async (route_id: string) => {
         try {
-            const response = await fetch(`/api/route/saveRoute/${route_id}`, {
+            const response = await fetch(`/api/route/${route_id}/save`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ function ClickedEvent() {
 
     const unsaveRoute = async (route_id: string) => {
         try {
-            const response = await fetch(`/api/route/unsaveRoute/${route_id}`, {
+            const response = await fetch(`/api/route/${route_id}/unsave`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ function ClickedEvent() {
 
     const signUp = async (event_id: string) => {
         try {
-            const response = await fetch(`/api/event/signup/${event_id}`, {
+            const response = await fetch(`/api/event/${event_id}/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

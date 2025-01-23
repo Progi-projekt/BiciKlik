@@ -70,8 +70,7 @@ export class EventController {
 		}
 	};
 
-	public addParticipant = async (req: Request, res: Response) => {
-		// adding a participant to the leaderboard
+  public saveResult = async (req: Request, res: Response) => { // adding a participant to the leaderboard
 
 		const email = req.cookies.loggedInAs;
 
@@ -84,16 +83,58 @@ export class EventController {
 		const { time } = req.body;
 
 		try {
-			const newParticipant = await this.eventService.saveResult(eventId, email, time);
-			res.json(newParticipant);
+			const participation = await this.eventService.saveResult(eventId, email, time);
+			if(!participation){
+				res.status(400).json({ message: "Action now allowed." });
+			}
+			res.status(200).json(participation);
 		} catch (error) {
 			if (error instanceof Error) {
 				res.status(500).json({ error: error.message });
 			} else {
-				res.status(500).json({ error: "An unknown error occurred" });
+				res.status(500).json({ error: 'An unknown error occurred' });
 			}
 		}
-	};
+	}
+	
+  public signUp = async (req: Request, res: Response) => { // signing up for an event
+    const email = req.cookies.loggedInAs;
+    const eventId = req.params.eventId;
+    try {
+      const result = await this.eventService.signUp(eventId, email);
+      if (result == false) {
+        return res.status(400).json({ error: 'Could not sign up for event' });
+      }
+      res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: 'An unknown error occurred' });
+      }
+    }
+  }
+
+
+  	
+	public signOut = async (req: Request, res: Response) => { // signing out from an event
+   		const email = req.cookies.loggedInAs;
+		const eventId = req.params.eventId;
+		try {
+		const success = await this.eventService.signOut(eventId, email);
+		if (!success) {
+			return res.status(400).json({ error: 'Could not sign out of event' });
+		}
+		res.status(200).json("done");
+		} catch (error) {
+		if (error instanceof Error) {
+			res.status(500).json({ error: error.message });
+		} else {
+			res.status(500).json({ error: 'An unknown error occurred' });
+		}
+		}
+	}
+
 	public getAllEvents = async (req: Request, res: Response) => {
 		try {
 			const events = await this.eventService.getAllEvents();
@@ -107,30 +148,11 @@ export class EventController {
 		}
 	};
 
-	public signUp = async (req: Request, res: Response) => {
-		const email = req.cookies.loggedInAs;
-
-		if (!email) {
-			res.status(400).json({ message: "No email found in cookies." });
-			return;
-		}
-
-		const eventId = req.params.eventId;
-
-		try {
-			const newParticipant = await this.eventService.signUp(eventId, email);
-			res.json(newParticipant);
-		} catch (error) {
-			if (error instanceof Error) {
-				res.status(500).json({ error: error.message });
-			} else {
-				res.status(500).json({ error: "An unknown error occurred" });
-			}
-		}
-	}
 
 	public checkSignUp = async (req: Request, res: Response) => {
 		const email = req.cookies.loggedInAs;
+
+		console.log(email);
 
 		if (!email) {
 			res.status(400).json({ message: "No email found in cookies." });
