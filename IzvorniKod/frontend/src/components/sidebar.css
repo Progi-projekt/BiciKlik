@@ -40,7 +40,9 @@
     padding: 10px;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
-    color: #c4c1be;
+    border-radius: 2px;
+    background-color: #cfccc9;
+    color: black;
   }
   
   .contact:hover {

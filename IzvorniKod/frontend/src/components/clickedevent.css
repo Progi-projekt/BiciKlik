@@ -16,6 +16,7 @@
     border-radius: 5px;
     padding: 3% 8% 3% 8%;
     text-align: left;
+    box-shadow: rgba(5, 5, 5, 0.25) 0px 8px 24px;
 }
 
 .buttons-left-container {
@@ -67,7 +68,10 @@
 .reviews{
     display: grid;
     grid-template-columns: auto auto;
-    gap: 1rem;
+    row-gap: 1rem;
+    column-gap: 2rem;
+    width: 50%;
+    margin-right: 1rem;
 }
 
 .review {
@@ -87,8 +91,17 @@
     margin-bottom: 0.5rem;
 }
 
+@media (max-width: 1010px){
+    .reviews{
+        width: 80%;
+        grid-template-columns: auto;
+        margin-bottom: 1rem;
+    }
+}
+
 
 @media (max-width: 845px){
+
     .buttons-left-container {
         flex-direction: column;
     }
@@ -111,5 +124,8 @@
     }
     .event .vrijemeDatumEvent {
         margin-bottom: 0.6rem;
+    }
+    .reviews-container {
+        flex-direction: column;
     }
 }
