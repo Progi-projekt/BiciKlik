@@ -45,6 +45,7 @@
     border: none;
     cursor: pointer;
     font-size: 1.2rem;
+    box-shadow: rgba(94, 93, 93, 0.1) 0px 8px 24px;
 }
 
 .event .buttonEvent:hover {
@@ -53,6 +54,8 @@
 
 .event .image-event {
     width: 50%;
+    box-shadow: rgba(94, 93, 93, 0.1) 0px 8px 24px;
+    border-radius: 2px;
 }
 .image-leaderbord {
     display: flex;
@@ -80,6 +83,7 @@
     padding: 1rem;
     max-width: 100%;
     max-height: fit-content;
+    box-shadow: rgba(94, 93, 93, 0.1) 0px 8px 24px;
 }
 .starImg{
     padding-top: 1rem;

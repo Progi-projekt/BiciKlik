@@ -7,6 +7,7 @@
 }
 .slikanews{
     width: 100%;
+    box-shadow: rgba(5, 5, 5, 0.1) 0px 8px 24px;
 }
 .ruta {
     background-color: #c4c1be;
@@ -29,6 +30,7 @@
     padding-top: 3%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    border-radius: 2px;
 }
 
 .slikarute:hover {
