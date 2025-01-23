@@ -23,7 +23,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
 
     const fetchParticipants = async () => {
         try {
-            const response = await fetch(`/api/event/leaderboard/${eventId}`); //fetcha response od backenda
+            const response = await fetch(`/api/event/${eventId}/leaderboard`); //fetcha response od backenda
             const data = await response.json();
             setParticipants(data);
         } catch (error) {
@@ -62,8 +62,8 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ eventId }) => {
                 alert("Event has not started yet!");
                 throw new Error("Event has not started yet!"); 
             }
-            
-            const response = await fetch(`/api/event/leaderboard/${eventId}`, {    //salje podatke na backend
+
+            const response = await fetch(`/api/event/${eventId}/leaderboard`, {    //salje podatke na backend
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

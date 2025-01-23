@@ -1,6 +1,8 @@
 .sidebar {
     width: 30%;
     background-color: #c4c1be;
+    width: 30%;
+    background-color: #c4c1be;
     border-right: 1px solid #ddd;
     padding: 20px;
     box-sizing: border-box;
@@ -9,8 +11,33 @@
   .sidebar h2 {
     margin-top: 0;
     padding-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
     font-size: 1.5em;
     color: #252321;
+  }
+
+  .sidebar input {
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0.2rem;
+  }
+
+  .sidebar button {
+    padding: 0.6rem;
+    margin: 0.2rem;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    background-color: #718E2A;
+  }
+
+  .sidebar form {
+    margin-bottom: 0.7rem;
+  }
+  .sidebar button:hover {
+    background-color: #637C24;
   }
 
   .sidebar input {
@@ -42,15 +69,37 @@
     cursor: pointer;
     border-radius: 2px;
     background-color: #cfccc9;
+    color:  #252321;
+    border-radius: 2px;
+    background-color: #cfccc9;
     color: black;
   }
   
   .contact:hover {
     background-color: #d3d1ce;
+    background-color: #d3d1ce;
   }
 
   .sidebar li {
     list-style-type: none;
+  }
+
+  @media (max-width: 845px){
+    .sidebar {
+      width: 40%;
+    }
+    .sidebar button {
+      padding: 0.3rem;
+     margin: 0.1rem;
+    }
+    .sidebar input {
+      width: 90%;
+      padding: 0.3rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 0.1rem;
+      margin-bottom: 0.6rem;
+    }
   }
 
   @media (max-width: 845px){

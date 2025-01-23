@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Route } from './route.model';
 import {AppUser} from "./appuser.model";
 
@@ -22,4 +22,10 @@ export class Grade extends Model {
 
   @Column
   comment!: string;
+
+  @BelongsTo(() => AppUser, 'grader_email')
+  appUser!: AppUser;
+
+  @BelongsTo(() => Route, 'route_id')
+  route!: Route;
 }

@@ -101,9 +101,12 @@
     right: 1rem;
     border: none;
     padding: 0.5rem;
-    background-color: #718E2A;
+    background-color: #8a3030;
     color: #ffffff;
     border-radius: 5px;
+}
+.saved-routes button:hover {
+    background-color: #6d2626;
 }
 
 @media (max-width: 845px){

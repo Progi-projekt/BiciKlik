@@ -1,6 +1,7 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo, NotNull, AllowNull, HasMany } from 'sequelize-typescript';
 import { Event } from './event.model';
 import {AppUser} from "./appuser.model";
+import { Grade } from './grade.model';
 
 @Table({
   tableName: 'route',
@@ -26,5 +27,8 @@ export class Route extends Model {
 
   @HasMany(() => Event)
   events_on!: Event[];
+
+  @HasMany(() => Grade)
+  reviews!: Grade[];
 
 }

@@ -88,6 +88,53 @@ export class RouteService {
 		await review.save();
 	}
 
+	public async getLastTenReviews(routeId: string) {
+		const reviews = await Grade.findAll({
+			where: {
+				route_id: routeId,
+			},
+			order: [["createdAt", "DESC"]],
+			limit: 10,
+			include: [
+				{
+					model: AppUser,
+					attributes: ["name"],
+				},
+			],
+		});
+		return reviews.map((review) => ({
+			grader_name: review.appUser.name,
+			comment: review.comment,
+			grade: review.grade,
+		}));
+	}
+
+	public async getGradeAverage(routeId: string) {
+		try{
+			// check if route exists
+			const route = await Route.findByPk(routeId);
+			if (route == null) {
+				return null;
+			}
+
+			// get all reviews for the route, return null if has no reviews
+			const reviews = await Grade.findAll({
+				where: {
+					route_id: routeId,
+				},
+			});
+			if (reviews.length === 0) {
+				return null;
+			}
+
+			const sum = reviews.reduce((acc, review) => acc + review.grade, 0);
+			return sum / reviews.length;
+		} catch (error) {
+			console.error("Error getting grade average:", error);
+			throw error;
+		}
+	}
+
 	public async deleteRoute(routeId: string) {
 		var route = await Route.findByPk(routeId);
 		if (route == null) {

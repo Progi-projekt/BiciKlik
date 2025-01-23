@@ -8,6 +8,7 @@
   min-height: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
+  color:  #252321;
 }
 .content {
   flex: 1; 

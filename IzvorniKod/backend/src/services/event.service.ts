@@ -92,6 +92,80 @@ export class EventService {
 		};
 	}
 
+	//signup
+	public async signUp(eventId: string, email: string) {
+		try{
+			// Check if event exists
+			const event = await Event.findByPk(eventId);
+			if (!event) {
+				return false;
+			}
+			// Check if event has already passed
+			const currentDate = new Date();
+			if(event.event_time < currentDate){
+				return false;
+			}
+			
+			// Check if user is already signed
+			const old_participation = await Participation.findOne({
+				where: {
+					event_id: eventId,
+					email: email,
+				},
+			});
+			if (old_participation) {
+				return false;
+			}
+			
+			const participation = await Participation.create({
+				event_id: eventId,
+				email: email,
+			});
+			await participation.save();
+			return participation;
+			
+		}
+		catch (error) {
+			console.error("Error in signUp:", error);
+			throw error;
+		}
+	}
+	
+	//signout
+	public async signOut(eventId: string, email: string) {
+		try {
+			const event = await Event.findByPk(eventId);
+			 
+			// Check if event exists
+			if (!event) {
+				return false;
+			}
+
+			// Check if event has already passed
+			const currentDate = new Date();
+			if(event.event_time < currentDate){
+				return false;
+			}
+
+			// Check if user is signed up
+			const participation = await Participation.findOne({
+				where: {
+					event_id: eventId,
+					email: email,
+				},
+			});
+			if (!participation) {
+				return false;
+			}
+			
+			await participation.destroy();
+			return true;
+		} catch (error) {
+			console.error("Error in signDown:", error);
+			throw error;
+		}
+	}
+
 	//saving result
 	public async saveResult(eventId: string, email: string, result: string) {
 		try {
@@ -103,12 +177,7 @@ export class EventService {
 			});
 
 			if (!participation) {
-				console.log("Participation not found, creating a new one");
-				participation = await Participation.create({
-					event_id: eventId,
-					email: email,
-					achieved_result: 0, // Initialize with a default value
-				});
+				return false;
 			}
 
 			// Convert time string to total seconds
@@ -234,19 +303,6 @@ export class EventService {
 		return events;
 	}
 
-	public async signUp(eventId: string, email: string) {
-		try {
-			const participation = await Participation.create({
-				event_id: eventId,
-				email: email,
-				achieved_result: null,
-			});
-			return participation;
-		} catch (error) {
-			console.error("Error in signUp:", error);
-			throw error;
-		}
-	}
 
 	public async checkSignUp(eventId: string, email: string): Promise<boolean> {
 		const participation = await Participation.findOne({
