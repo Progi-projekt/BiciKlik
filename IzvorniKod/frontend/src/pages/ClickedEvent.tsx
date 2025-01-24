@@ -1,5 +1,5 @@
 import '../components/clickedevent.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Leaderboard from '../components/leaderboard';
 import ReviewForm from '../components/reviewform';
@@ -24,6 +24,9 @@ function ClickedEvent() {
     const [isRouteSaved, setIsRouteSaved] = useState<boolean>(false);
     const [reviews, setReviews] = useState<any[]>([]);
     const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
+    const [auth, setAuth] = useState(false);
+
+    const navigate = useNavigate();
 
     const gradeToImage = {
         '5': fivestar,
@@ -68,6 +71,21 @@ function ClickedEvent() {
                 console.error('Error checking if signed up:', error);
             }
         };
+
+        const fetchAuthStatus = async () => {
+            try {
+                const response = await fetch('/api/auth/getAuthorization');
+                const data = await response.json();
+                setAuth(data.is_admin);
+                setAuth(true); // EVERYONE IS ADMIN FOR TESTING PURPOSES, REMOVE LATER!!!
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setAuth(false);
+            } finally {
+                console.log('Auth status:', auth);
+            }
+        };
+        fetchAuthStatus();
 
         fetchEvent();
         if (event?.route_id) {
@@ -141,6 +159,31 @@ function ClickedEvent() {
         }
     };
 
+    const deleteEvent = async (event_id: string) => {
+        try {
+            if (!auth) {
+                alert('You are not authorized to delete events!');
+                throw new Error("Not authorized to delete events");
+            }
+            console.log('Deleting event:', event_id);
+            const response = await fetch(`/api/admin/event/${event_id}/delete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                alert('Event deleted successfully!');
+                navigate('/');
+            } else {
+                alert('Error deleting event!');
+            }
+        } catch (error) {
+            console.error('Error deleting event:', error);
+        }
+    };
+
     return (
         <div className="event">
             <div className="container-event">
@@ -161,6 +204,10 @@ function ClickedEvent() {
                                 <button className='buttonEvent' onClick={() => unsaveRoute(event?.route_id!)}>Unsave route</button>
                             ) : (
                                 <button className='buttonEvent' onClick={() => saveRoute(event?.route_id!)}>Save route</button>
+                            )}
+
+                            {auth && (
+                                <button className='buttonEvent' onClick={() => deleteEvent(event?.event_id!)}>Delete Event</button>
                             )}
                         </div>
                     </div>
