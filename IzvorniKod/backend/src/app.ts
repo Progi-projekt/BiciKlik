@@ -74,8 +74,8 @@ class App {
 				await sequelize.sync({ force: false });
 				console.log("All models were synchronized successfully.");
 				this.dbConnected = true;
-				/* await this.insertInitialData();
-				console.log("Initial data inserted successfully"); */
+				await this.insertInitialData();
+				console.log("Initial data inserted successfully");
 			}
 		} catch (error) {
 			console.error("Unable to connect to the database:", error);
