@@ -19,6 +19,11 @@ export class AdminController {
 		return user.is_admin;
 	};
 
+    public isOrganizerOfEvent = async (email: string, eventId: string ) => {
+		const organizer_of_event = await this.eventService.getOrganizer(eventId);
+		return organizer_of_event?.email == email;
+	};
+
 
     public getUserInfo = async (req: Request, res: Response) => {
         const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
@@ -95,7 +100,7 @@ export class AdminController {
         if (!email) {
             return res.status(401).json({ error: 'User not authenticated' });
         }
-		if(!await this.isAdmin(email)){
+		if(!(await this.isAdmin(email) || await this.isOrganizerOfEvent(email, eventId))){
 			return res.status(401).json({ error: 'User not authorized' });
 		}
     
