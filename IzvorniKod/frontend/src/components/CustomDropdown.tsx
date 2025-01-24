@@ -10,6 +10,7 @@ const CustomDropdown = ({ options, value, onChange, onMouseEnter, onMouseLeave }
     const handleOptionClick = (optionValue) => {
         onChange(optionValue);
         setIsOpen(false);
+        onMouseLeave();
     };
 
     return (
