@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Favicon from 'react-favicon';
 import './App.css';
 import Heading from './components/heading';
 import Footer from './components/footer';
@@ -21,6 +22,7 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Newsfeed from './pages/NewsFeed';
 
 function App() { 
+  const [faviconurl, setFaviconurl] = useState('https://i.postimg.cc/Mp4vKXNw/favicon.png');
   return (
     <BrowserRouter>
     <div className="App"  style={{
@@ -29,6 +31,7 @@ function App() {
     backgroundPosition: 'center',
     backgroundRepeat: 'repeat',
   }}>
+      <Favicon url={faviconurl}/>
       <Heading/>
       <Routes>
         <Route element={<AdminRoutes/>}> {/* Routes for admins */}
