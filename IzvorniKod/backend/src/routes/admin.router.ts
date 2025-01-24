@@ -13,6 +13,8 @@ export class AdminRouter {
 
 	private initializeRoutes() {
 		this.router.get('/user/:email', this.adminController.getUserInfo);
+		this.router.post('/user/:email/promote', this.adminController.promoteToOrganizer);
+		this.router.post('/user/:email/demote', this.adminController.demoteOrganizer);
 		this.router.post('/user/:email/archive', this.adminController.archiveUser);
 		this.router.post('/event/:eventId/delete', this.adminController.deleteEvent);
 		this.router.post('/event/:eventId/leaderboard/remove/:email', this.adminController.removeEntry);

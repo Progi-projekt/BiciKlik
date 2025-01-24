@@ -112,12 +112,12 @@ export class AdminController {
     };
 
 	public deleteRoute = async (req: Request, res: Response) => {
-        const email = req.cookies.loggedInAs; // Ensure this cookie is set
+        const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
 		const routeId = req.params.routeId;
-        if (!email) {
+        if (!admin_email) {
             return res.status(401).json({ error: 'User not authenticated' });
         }
-		if(!await this.isAdmin(email)){
+		if(!await this.isAdmin(admin_email)){
 			return res.status(401).json({ error: 'User not authorized' });
 		}
     
@@ -132,6 +132,53 @@ export class AdminController {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     };
+
+    public promoteToOrganizer = async (req: Request, res: Response) => {
+        const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
+        const user_email = req.params.email;
+        
+        if (!admin_email) {
+            return res.status(401).json({ error: 'User not authenticated' });
+        }
+		if(!await this.isAdmin(admin_email)){
+			return res.status(401).json({ error: 'User not authorized' });
+		}
+            
+        try {
+            const success = await this.adminService.promoteToOrganizer(user_email);
+            if (!success) {
+                return res.status(404);
+            }
+            res.status(200).json("done");
+        } catch (error) {
+            console.error('Error promoting user:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    };
+
+    public demoteOrganizer = async (req: Request, res: Response) => {
+        const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
+        const user_email = req.params.email;
+        
+        if (!admin_email) {
+            return res.status(401).json({ error: 'User not authenticated' });
+        }
+		if(!await this.isAdmin(admin_email)){
+			return res.status(401).json({ error: 'User not authorized' });
+		}
+
+        try {
+            const success = await this.adminService.demoteOrganizer(user_email);
+            if (!success) {
+                return res.status(404);
+            }
+            res.status(200).json("done");
+        } catch (error) {
+            console.error('Error demoting user:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+
 
     
 }

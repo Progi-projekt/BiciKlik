@@ -57,6 +57,30 @@ export class AdminService {
 		await user.save();
 		return true;
 	}
+
+	public async promoteToOrganizer(email: string) {
+		
+		const organizer_user = await Organizer.findByPk(email);
+		if (organizer_user) {
+			return false;
+		}
+
+		const new_organizer = await Organizer.create();
+		new_organizer.email = email;
+		await new_organizer.save();
+		return true;
+	}
+
+	public async demoteOrganizer(email: string) {
+		
+		const organizer_user = await Organizer.findByPk(email);
+		if (!organizer_user) {
+			return false;
+		}
+
+		await organizer_user.destroy();
+		return true;
+	}
 	
 
 }
