@@ -53,7 +53,12 @@ export class AdminService {
 		if (!user) {
 			return false;
 		}
-		user.archived_reason = reason;
+		if(user.archived_reason == reason){
+			user.archived_reason = null;
+		}
+		else{
+			user.archived_reason = reason;
+		}
 		await user.save();
 		return true;
 	}
