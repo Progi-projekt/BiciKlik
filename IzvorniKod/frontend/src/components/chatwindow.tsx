@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
+import './chatwindow.css'
 
 const socket = io(); // Adjust with your WebSocket server URL if needed
 
