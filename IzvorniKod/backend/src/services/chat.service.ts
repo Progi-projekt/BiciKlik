@@ -5,7 +5,7 @@ import {Op} from 'sequelize';
 export class ChatService {
 
     // returns all the users that you've communicated with
-    public async getChattersOfUser(email: string) {
+    public async getChattersOfUser(email: string) { 
         try {
           // Step 1: Fetch unique user emails involved in messages
           const messageParticipants = await Message.findAll({
@@ -103,7 +103,7 @@ export class ChatService {
         newMessage.content = content;
 
         await newMessage.save();
-        return true;
+        return newMessage;
     }
 
 }

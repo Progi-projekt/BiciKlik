@@ -12,7 +12,7 @@ import { insertAppUsers } from "./config/database.insert";
 import {ChatRouter} from "./routes/chat.router";
 import { AdminRouter } from "./routes/admin.router";
 
-dotenv.config();
+dotenv.config(); 
 
 class App {
 	public app: Application;
