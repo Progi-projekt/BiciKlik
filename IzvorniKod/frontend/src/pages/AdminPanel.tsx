@@ -30,12 +30,12 @@ const AdminPanel = () => {
 
     const banThisGuyNOW = async () => {
         try {
-            const response = await fetch(`/api/admin/user/:email/archive`, {
+            const response = await fetch(`/api/admin/user/${email}/archive`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: userInfo?.email }),
+                body: JSON.stringify({ reason: 'Banned by admin' }),
             });
             if (response.ok) {
                 alert('User banned successfully!');

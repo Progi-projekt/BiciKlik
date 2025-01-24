@@ -77,7 +77,6 @@ function ClickedEvent() {
                 const response = await fetch('/api/auth/getAuthorization');
                 const data = await response.json();
                 setAuth(data.is_admin);
-                setAuth(true); // EVERYONE IS ADMIN FOR TESTING PURPOSES, REMOVE LATER!!!
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setAuth(false);
