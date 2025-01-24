@@ -12,6 +12,7 @@ export class ChatRouter {
     }
 
     private initializeRoutes() {
+        this.router.post('/mojmail/ajde', this.chatController.mojmail);
         this.router.get('/', this.chatController.getChattersOfUser);
         this.router.get('/:anotherUser', this.chatController.getAllChatsWithAnotherUser);
         this.router.post('/:anotherUser/send', this.chatController.sendMessage);

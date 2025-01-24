@@ -13,7 +13,7 @@ import {ChatRouter} from "./routes/chat.router";
 import {UserRouter} from "./routes/user.router";
 import { AdminRouter } from "./routes/admin.router";
 
-dotenv.config();
+dotenv.config(); 
 
 class App {
 	public app: Application;

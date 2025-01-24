@@ -10,6 +10,25 @@ export class ChatController {
     }
 
 
+    public mojmail = async (req: Request, res: Response) => {
+        try {
+            const email = req.cookies.loggedInAs;
+    
+            if (!email) {
+                return res.status(401).json({ error: "User not authenticated" });
+            }
+    
+            console.log("EMAIL:");
+            console.log(email);
+    
+            // Send the email back to the frontend
+            return res.status(200).json({ email: email });
+        } catch (error) {
+            console.error("Error retrieving email:", error);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+    };
+    
     public getChattersOfUser = async (req: Request, res: Response) => {
         const email = req.cookies.loggedInAs; // Ensure this cookie is set
         if (!email) {
@@ -57,12 +76,11 @@ export class ChatController {
         const email = req.cookies.loggedInAs;
         const email_another = req.params.anotherUser;
         const content = req.body.content;
-        console.log("ŠALJEMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
-        console.log(content);
+
         try {
             const result = await this.chatService.sendMessage(email, email_another, content);
             if(result){
-                res.status(200).json("Successfully sent");
+                res.status(200).json(result);
             }
             else{
                 res.status(400).json("Invalid receiver or sender email");

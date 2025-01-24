@@ -5,7 +5,7 @@ import {Op} from 'sequelize';
 export class ChatService {
 
     // returns all the users that you've communicated with
-    public async getChattersOfUser(email: string) {
+    public async getChattersOfUser(email: string) { 
         try {
           // Step 1: Fetch unique user emails involved in messages
           const messageParticipants = await Message.findAll({
@@ -50,29 +50,43 @@ export class ChatService {
       }
     
 
-    public async getAllChatsWithAnotherUser(senderEmail: string, recipientEmail: string) {
-    try {
-        console.log(senderEmail);
-        console.log(recipientEmail);
-        // Fetch chat history between the sender and recipient
-        const chats = await Message.findAll({
-            where: {
-                [Op.or]: [
-                    { sender_email: senderEmail, recipient_email: recipientEmail },
-                    { sender_email: recipientEmail, recipient_email: senderEmail },
-                ],
-            },
-            order: [['message_index', 'ASC']], // Ensure messages are ordered by creation date
-        });
-
-        console.log(chats);
-
-        return chats; // Return an empty array if no messages exist
-    } catch (error) {
-        console.error("Error fetching chats:", error);
-        throw new Error("Unable to fetch chats");
+      public async getAllChatsWithAnotherUser(senderEmail: string, recipientEmail: string) {
+        try {
+            console.log(senderEmail);
+            console.log(recipientEmail);
+    
+            // Check if the recipient exists in the database
+            const recipientExists = await AppUser.findOne({
+                where: { email: recipientEmail },
+            });
+    
+            if (!recipientExists) {
+                console.log("No user found");
+                return "no user found";
+            }
+    
+            // Fetch chat history between the sender and recipient
+            const chats = await Message.findAll({
+                where: {
+                    [Op.or]: [
+                        { sender_email: senderEmail, recipient_email: recipientEmail },
+                        { sender_email: recipientEmail, recipient_email: senderEmail },
+                    ],
+                },
+                order: [['message_index', 'ASC']], // Ensure messages are ordered by creation date
+            });
+    
+            console.log(chats);
+    
+            return chats; // Return an empty array if no messages exist
+        } catch (error) {
+            console.error("Error fetching chats:", error);
+            throw new Error("Unable to fetch chats");
+        }
     }
-}
+    
+
+
 
 
     // sends new message from one appuser to another, returns false on failure and true on success
@@ -89,7 +103,7 @@ export class ChatService {
         newMessage.content = content;
 
         await newMessage.save();
-        return true;
+        return newMessage;
     }
 
 }

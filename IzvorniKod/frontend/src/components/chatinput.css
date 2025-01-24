@@ -1,27 +1,41 @@
 .chat-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    background-color: #ffffff;
-  }
-  
-  .chat-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-  
-  .chat-input button {
-    padding: 10px 20px;
-    background-color: #718E2A;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .chat-input button:hover {
-    background-color: #637C24;
-  }
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #ffffff;
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding doesn't add extra width */
+}
+
+.chat-input form {
+  display: flex;
+  flex-grow: 1;  /* Ensure the form expands to fill the parent */
+  align-items: center; /* Align input and button vertically */
+  margin: 0;  /* Remove default margins */
+  padding: 0; /* Remove any extra padding */
+  width: 100%;  /* Ensure full width */
+}
+
+.chat-input input {
+  flex-grow: 1;  /* Allow input to expand within the form */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 100%;  /* Ensure full width inside flex */
+  box-sizing: border-box;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent button from shrinking */
+}
+
+.chat-input button:hover {
+  background-color: #0056b3;
+}

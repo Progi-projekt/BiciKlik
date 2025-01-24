@@ -44,14 +44,17 @@ const Sidebar: React.FC<SidebarProps> = ({ onUserSelect }) => {
         const response = await fetch(`/api/chat/${searchTerm.trim()}`);
         if (response.ok) {
           const user = searchTerm.trim();
-
+          setSearchTerm('');
           // Add the email to contacts if it doesn't already exist
+          if(await response.json()!=="no user found"){
           if (!contacts.includes(user)) {
             setContacts((prevContacts) => [...prevContacts, user]);
-          }
-
-          setSearchTerm(''); // Clear search input
+          }          
           onUserSelect(user); // Notify parent of user selection
+        }
+        else{
+          alert("Ne postoji navedeni korisnik! Molimo pokušajte ponovno.")
+        }
         } else {
           console.error('Failed to find user:', response.statusText);
         }

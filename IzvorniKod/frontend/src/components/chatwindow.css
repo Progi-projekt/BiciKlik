@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #D8D8D8;
+    scroll-behavior: smooth;
   }
   
   .message-history {
