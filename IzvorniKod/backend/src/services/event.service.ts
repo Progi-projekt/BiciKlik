@@ -61,6 +61,20 @@ export class EventService {
 		}
 	}
 
+	// for getting the organizer of an event
+	public async getOrganizer(eventId: string) {
+		const event = await Event.findByPk(eventId);
+
+		if (!event) {
+			return null;
+		}
+
+		return {
+			email: event.organizer.email,
+			name: event.organizer.appUser.name,
+		};
+	}
+
 	// for getting event by id
 	public async getEventById(eventId: string): Promise<any> {
 		const event = await Event.findByPk(eventId, {

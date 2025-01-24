@@ -16,6 +16,7 @@ export class EventRouter {
 		this.router.get('/getEvents', this.eventController.getEvents);
 		this.router.get('/getAllEvents', this.eventController.getAllEvents);
 		this.router.get('/:eventId', this.eventController.getEventById);
+		this.router.get('/:eventId/organizer', this.eventController.getOrganizer);
 		this.router.get('/:eventId/leaderboard', this.eventController.getParticipants);
 		this.router.get('/:eventId/signedup', this.eventController.checkSignUp);
 		this.router.post('/:eventId/signup', this.eventController.signUp);

@@ -23,6 +23,23 @@ export class EventController {
 		}
 	};
 
+	public getOrganizer = async (req: Request, res: Response) => {
+		const eventId = req.params.eventId;
+		try {
+			const organizer = await this.eventService.getOrganizer(eventId);
+			if (!organizer) {
+				return res.status(404).json({ error: "Event not found" });
+			}
+			res.status(200).json(organizer);
+		} catch (error) {
+			if (error instanceof Error) {
+				res.status(500).json({ error: error.message });
+			} else {
+				res.status(500).json({ error: "An unknown error occurred" });
+			}
+		}
+	};
+
 	public getEvents = async (req: Request, res: Response) => {
 		//getting last 10 events
 		try {
