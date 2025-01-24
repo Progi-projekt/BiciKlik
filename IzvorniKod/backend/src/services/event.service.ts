@@ -5,6 +5,7 @@ import { AppUser } from "../models/appuser.model";
 import { Participation } from "../models/participation.model";
 import { or } from "sequelize";
 import App from "../app";
+import app from "../app";
 
 export class EventService {
 	// for getting last 10 events
@@ -69,9 +70,24 @@ export class EventService {
 			return null;
 		}
 
+		const org_email = event.organizer_email;
+
+		const organizer = await Organizer.findByPk(org_email);
+
+		if(!organizer){
+			return null;
+		}
+
+		const app_user = await AppUser.findByPk(org_email);
+
+		if(!app_user){
+			return null;
+		}
+
+
 		return {
-			email: event.organizer.email,
-			name: event.organizer.appUser.name,
+			email: org_email,
+			name: app_user.name,
 		};
 	}
 
