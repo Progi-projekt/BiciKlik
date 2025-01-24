@@ -10,6 +10,7 @@ import { MapRouter } from "./routes/map.router";
 import { RouteRouter } from "./routes/route.router";
 import { insertAppUsers } from "./config/database.insert";
 import {ChatRouter} from "./routes/chat.router";
+import {UserRouter} from "./routes/user.router";
 import { AdminRouter } from "./routes/admin.router";
 
 dotenv.config();
@@ -43,6 +44,7 @@ class App {
 
 	private initializeRoutes() {
 		this.app.use("/api/auth", new AuthRouter().router);
+		this.app.use("/api/user", new UserRouter().router);
 		this.app.use("/api/event", new EventRouter().router);
 		this.app.use("/api/chat", new ChatRouter().router);
 		this.app.use("/api/admin", new AdminRouter().router);
