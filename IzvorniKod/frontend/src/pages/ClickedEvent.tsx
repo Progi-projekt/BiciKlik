@@ -72,11 +72,28 @@ function ClickedEvent() {
             }
         };
 
-        const fetchAuthStatus = async () => {
+        fetchEvent();
+        if (event?.route_id) {
+            checkIfRouteSaved(event.route_id);
+            checkIfSignedUp(event.event_id);
+        }
+    }, [event_id, event?.route_id]);
+
+    useEffect(() => {
+        const fetchAuthStatus = async (eventId: string) => {
             try {
                 const response = await fetch('/api/auth/getAuthorization');
                 const data = await response.json();
                 setAuth(data.is_admin);
+
+                const response2 = await fetch(`/api/event/${eventId}/organizer`);
+                const thisEventsOrganizer = await response2.json();
+                const response3 = await fetch(`/api/user/email`);
+                const thisUser = await response3.json();
+
+                if (thisEventsOrganizer.email === thisUser.email) {
+                    setAuth(true);
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setAuth(false);
@@ -84,14 +101,10 @@ function ClickedEvent() {
                 console.log('Auth status:', auth);
             }
         };
-        fetchAuthStatus();
-
-        fetchEvent();
-        if (event?.route_id) {
-            checkIfRouteSaved(event.route_id);
-            checkIfSignedUp(event.event_id);
+        if (event?.event_id) {
+            fetchAuthStatus(event.event_id);
         }
-    }, [event_id, event?.route_id]);
+    }, [event_id, event?.event_id]);
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -182,6 +195,8 @@ function ClickedEvent() {
             console.error('Error deleting event:', error);
         }
     };
+
+    console.log('Auth status:', auth);
 
     return (
         <div className="event">
