@@ -38,6 +38,14 @@ export class OAuthController {
 		if (!email) {
 			return res.status(401).json({ error: "User not authenticated" });
 		}
+
+		const userInfo = await this.adminService.getUserInfo(email);
+		const archived = userInfo?.archived_reason
+		
+		if (archived != null) {
+			return res.status(403).json({ error: "User is archived", reason: archived });
+		}
+
 		try {
 			const info = await this.adminService.getUserInfo(email);
 			if (!info) {
