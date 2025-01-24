@@ -48,10 +48,48 @@ const AdminPanel = () => {
         }
     }
 
+    const promoteUser = async () => {
+        try {
+            const response = await fetch(`/api/admin/user/${email}/promote`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ role: 'organizer' }), // Adjust the body as needed
+            });
+            if (response.ok) {
+                alert('User promoted successfully!');
+                fetchUserInfo();
+            } else {
+                alert('Error promoting user!');
+            }
+        } catch (err) {
+            throw new Error('Error promoting user');
+        }
+    };
+
+    const demoteUser = async () => {
+        try {
+            const response = await fetch(`/api/admin/user/${email}/demote`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ role: 'user' }), // Adjust the body as needed
+            });
+            if (response.ok) {
+                alert('User demoted successfully!');
+                fetchUserInfo();
+            } else {
+                alert('Error demoting user!');
+            }
+        } catch (err) {
+            throw new Error('Error demoting user');
+        }}
+
     return (
         <div className="admin-panel">
             <h1>Admin Panel</h1>
-            <p>Welcome to the admin panel. This is a placeholder for future functionality.</p>
             <div className="input-container">
                 <input
                     type="email"
@@ -69,7 +107,8 @@ const AdminPanel = () => {
                     <p><strong>Is Organizer:</strong> {userInfo.is_organizer ? 'Yes' : 'No'}</p>
                     <p><strong>Is Admin:</strong> {userInfo.is_admin ? 'Yes' : 'No'}</p>
                     <p><strong>Archived Reason:</strong> {userInfo.archived_reason || 'N/A'}</p>
-                    <button onClick={banThisGuyNOW}>Ban Hammer</button>
+                    <button onClick={banThisGuyNOW}>Ban</button>
+                    {userInfo.is_organizer ? <button onClick={demoteUser}>Demote user</button> : <button onClick={promoteUser}>Promote user to Organizer</button>}  
                 </div>
             )}
         </div>

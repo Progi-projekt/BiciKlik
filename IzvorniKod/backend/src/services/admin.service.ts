@@ -59,14 +59,12 @@ export class AdminService {
 	}
 
 	public async promoteToOrganizer(email: string) {
-		
 		const organizer_user = await Organizer.findByPk(email);
 		if (organizer_user) {
 			return false;
 		}
 
-		const new_organizer = await Organizer.create();
-		new_organizer.email = email;
+		const new_organizer = await Organizer.create({email});
 		await new_organizer.save();
 		return true;
 	}

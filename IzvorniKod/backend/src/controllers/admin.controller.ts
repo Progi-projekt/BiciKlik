@@ -136,7 +136,7 @@ export class AdminController {
     public promoteToOrganizer = async (req: Request, res: Response) => {
         const admin_email = req.cookies.loggedInAs; // Ensure this cookie is set
         const user_email = req.params.email;
-        
+       
         if (!admin_email) {
             return res.status(401).json({ error: 'User not authenticated' });
         }
