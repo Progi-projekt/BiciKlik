@@ -78,28 +78,27 @@
 	cursor: pointer;
 }
 
-@media (max-width: 845px) {
-	.containerRuta {
-		grid-template-columns: repeat(1, 1fr);
-	}
-}
 .search-bar {
+	display: flex;
+	justify-content: right;
 	position: relative;
 	margin: 20px 0;
+	margin-bottom: 1.5rem;
 }
 
 .search-input {
-	width: 100%;
+	width: 30%;
 	padding: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid #ffffff;
 	border-radius: 4px;
+	background-color: #e9e7e6;
 }
 
 .search-dropdown {
+	width: 30%;
 	position: absolute;
 	top: 100%;
-	left: 0;
-	width: 100%;
+	right: 0;
 	background: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -113,4 +112,17 @@
 
 .search-result-item:hover {
 	background-color: #f0f0f0;
+}
+
+@media (max-width: 845px) {
+	.containerRuta {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.search-input {
+		width: 100%;
+	}
+	.search-input {
+		width: 100%;
+	}
+
 }

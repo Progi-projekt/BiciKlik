@@ -25,9 +25,9 @@ function App() {
     <BrowserRouter>
     <div className="App"  style={{
     backgroundImage: `url(${bgImg})`,
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
+    backgroundRepeat: 'repeat',
   }}>
       <Heading/>
       <Routes>

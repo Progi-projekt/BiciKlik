@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    border-radius: 5px;
 }
 
 .eventcreation-container form label {
