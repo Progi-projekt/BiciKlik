@@ -1,6 +1,7 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey, BelongsTo, NotNull, AllowNull, HasMany } from 'sequelize-typescript';
-import { Organizer } from './organizer.model';
 import { Event } from './event.model';
+import {AppUser} from "./appuser.model";
+import { Grade } from './grade.model';
 
 @Table({
   tableName: 'route',
@@ -17,14 +18,17 @@ export class Route extends Model {
   @Column
   route_data_path_gpx!: string;  
 
-  @ForeignKey(() => Organizer)
+  @ForeignKey(() => AppUser)
   @Column
   creator_email!: string;
 
-  @BelongsTo(() => Organizer)
-  creator!: Organizer;
+  @BelongsTo(() => AppUser)
+  creator!: AppUser;
 
   @HasMany(() => Event)
   events_on!: Event[];
+
+  @HasMany(() => Grade)
+  reviews!: Grade[];
 
 }

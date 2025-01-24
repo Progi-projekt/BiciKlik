@@ -8,6 +8,7 @@
   min-height: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
+  color:  #252321;
 }
 .content {
   flex: 1; 
@@ -21,6 +22,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 .no-link-style {
   text-decoration: none; 

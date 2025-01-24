@@ -13,7 +13,7 @@ const Loginsignup = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch('/api/login', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Loginsignup = () => {
 
     const handleOAuthSuccess = async (credentialResponse: any) => {
         try {
-            const response = await fetch('https://biciklik.duckdns.org/auth/google/callback', {
+            const response = await fetch('/api/auth/google/callback', { //maknuo sam https:biciklik..., da bude consistent s ostalim stvarima. Trebalo bi radit u teoriji
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -49,6 +49,7 @@ const Loginsignup = () => {
             if (response.ok) {
               setMessage(data.message); // Show success message
               navigate('/'); // Redirect to newsfeed
+              window.location.reload();
             } else {
               setMessage(data.message); // Show error message from backend 
             }

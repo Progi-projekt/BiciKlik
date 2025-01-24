@@ -1,0 +1,123 @@
+.routes-container {
+    width: 74%;
+    padding: 1%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    display: flex;
+   flex-direction: column;
+   color: #252321;
+}
+
+.routes-container2{
+    background-color: #D8D8D8;
+    border-radius: 5px;
+    padding: 3% 8% 8% 8%;
+    text-align: left;
+    box-shadow: rgba(22, 22, 22, 0.25) 0px 8px 24px;
+}
+
+.routes-container3   {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.routes-container3  button {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+    background-color: #718E2A;
+}
+
+.routes-container2 h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.grid-route-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.owned-routes, .saved-routes {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 0.8rem;
+}
+.owned-route, .saved-route {
+    background-color: #D9D9D9;
+    box-shadow: rgba(94, 93, 93, 0.1) 0px 8px 24px;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.saved-route{
+    position: relative;
+}
+
+.saved-routes-container h2, .owned-routes-container h2 {
+    margin-bottom: 1rem;
+}
+
+.owned-route p, .saved-route  p{
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+.owned-routes-container, .saved-routes-container {
+    background-color: #B9B9B9;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    box-shadow: rgba(94, 93, 93, 0.1) 0px 8px 24px;
+}
+
+.userRoute {
+    background-color: white;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+}
+
+.slikarute2 {
+    width: 100%;
+    box-shadow: rgba(94, 93, 93, 0.1) 0px 8px 24px;
+    border-radius: 2px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.saved-route button {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    border: none;
+    padding: 0.5rem;
+    background-color: #8a3030;
+    color: #ffffff;
+    border-radius: 5px;
+}
+.saved-routes button:hover {
+    background-color: #6d2626;
+}
+
+@media (max-width: 845px){
+    .owned-routes, .saved-routes {
+        grid-template-columns: auto;
+    }
+    .routes-container2 h1 {
+        font-size: 2rem;
+    }
+    .routes-container {
+        width: 80%;
+    }
+}
+

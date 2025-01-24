@@ -1,6 +1,7 @@
 import { Table, ForeignKey, BelongsTo, Model, Column, PrimaryKey, HasMany, Unique } from 'sequelize-typescript';
 import { AppUser } from './appuser.model';
 import { Route } from './route.model';
+import { Event } from './event.model';
 
 @Table({
   tableName: 'organizer',
@@ -15,6 +16,6 @@ export class Organizer extends Model {
   @BelongsTo(() => AppUser)
   appUser!: AppUser;
 
-  @HasMany(() => Route)
-  routes!: Route
+  @HasMany(() => Event)
+  organized_events!: Event[];
 }

@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, ForeignKey, AutoIncrement } from 'sequelize-typescript';
+import {Table, Column, Model, PrimaryKey, ForeignKey, AutoIncrement, BelongsTo} from 'sequelize-typescript';
 import { AppUser } from './appuser.model';
 
 @Table({
@@ -22,4 +22,11 @@ export class Message extends Model {
 
   @Column
   content!: string;
+
+  @BelongsTo(() => AppUser, { foreignKey: "recipient_email", as: "recipient" })
+  recipient!: AppUser;
+
+  @BelongsTo(() => AppUser, { foreignKey: "sender_email", as: "sender" })
+  sender!: AppUser;
+
 }

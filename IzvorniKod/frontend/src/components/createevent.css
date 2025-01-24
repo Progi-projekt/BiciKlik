@@ -1,0 +1,150 @@
+.eventyay {
+    width: 70%;
+    margin: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eventcreation-container {
+    background-color: #5D5A5A;
+    border-radius: 5px;
+    padding: 3% 8% 6% 8%;
+    text-align: left;
+    width: 60%;
+    color: #FFFFFF;
+    box-shadow: rgba(5, 5, 5, 0.25) 0px 8px 24px;
+}
+
+.eventcreation-container .naslov {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    text-align: center; 
+}
+
+.eventcreation-container form {
+    background-color: #5D5A5A;
+    border-radius: 5px;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #D4D4D4;
+}
+
+.eventcreation-container form div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 5px;
+}
+
+.eventcreation-container form label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.eventcreation-container form input,
+.eventcreation-container form textarea {
+    width: 100%; 
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.eventcreation-container .shortDescription textarea {
+    min-height: 5%; 
+    resize: none;
+}
+
+.eventcreation-container .description textarea {
+    min-height: 10%; 
+    resize: none;
+}
+
+.eventcreation-container .submitform {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    background-color: #718E2A;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.eventcreation-container .submitform:hover {
+    background-color: #637C24;
+}
+@media (max-width: 1100px){
+    .eventyay {
+        width: 90%;
+    }
+
+    .eventcreation-container .naslov {
+        font-size: 1.5rem;
+    }
+
+    .eventcreation-container {
+        width: 90%;
+    }
+
+}
+
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.selected-value {
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+.dropdown-options {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    color: black;
+}
+
+.dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-option:hover {
+    background-color: #f1f1f1;
+    color: black;
+    text-emphasis: bold;
+}
+
+.route-image-popup {
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.route-image-popup img {
+    max-width: 300px;
+    max-height: 300px;
+}

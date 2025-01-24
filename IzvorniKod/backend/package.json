@@ -8,6 +8,8 @@
     "dev": "ts-node-dev src/server.ts"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "@googlemaps/polyline-codec": "^1.0.28",
     "@types/express-session": "^1.18.0",
     "backend": "file:",
     "bcrypt": "^5.1.1",
@@ -16,12 +18,16 @@
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "express-validator": "^7.2.0",
+    "fs": "^0.0.1-security",
     "google-auth-library": "^9.14.2",
+    "googlemaps": "^1.12.0",
+    "gpx-builder": "^5.4.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.5",
-    "sequelize-typescript": "^2.1.6"
+    "sequelize-typescript": "^2.1.6",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

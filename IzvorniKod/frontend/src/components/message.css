@@ -9,11 +9,13 @@
   .message.contact {
     background-color: #ffffff;
     align-self: flex-start; 
+    cursor: default;
   }
   
   .message.user {
-    background-color: #bfce98;
+    background-color: #73814ef6;
     align-self: flex-end; 
+    cursor: default;
   }
   
   .message-sender {

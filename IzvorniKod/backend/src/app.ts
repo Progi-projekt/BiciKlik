@@ -1,97 +1,95 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
-import path from 'path';
-import sequelize from './config/database';
-import dotenv from 'dotenv';
-import mockRouter from './routes/mockRoutes';
-import session from 'express-session';
-import cookieParser from 'cookie-parser';
-import authRouter from './routes/oauth.router';
-import eventRouter from './routes/event.router';
-import { getLastTenEvents } from './services/event.service';
-import { json } from 'sequelize';
+import express, { Application } from "express";
+import path from "path";
+import dotenv from "dotenv";
+import sequelize from "./config/database";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import { AuthRouter } from "./routes/oauth.router";
+import { EventRouter } from "./routes/event.router";
+import { MapRouter } from "./routes/map.router";
+import { RouteRouter } from "./routes/route.router";
+import { insertAppUsers } from "./config/database.insert";
+import {ChatRouter} from "./routes/chat.router";
+import {UserRouter} from "./routes/user.router";
+import { AdminRouter } from "./routes/admin.router";
+import { OrganizerRouter } from "./routes/organizer.router";
 
-dotenv.config();
+dotenv.config(); 
 
-const app: Application = express();
-var db_connected: boolean = false;
+class App {
+	public app: Application;
+	private dbConnected: boolean = false;
 
-sequelize.authenticate()
-    .then(async () => {
-        await sequelize.sync({ force: false });
-        console.log('Connected to the database');
-        db_connected = true;
+	constructor() {
+		this.app = express();
+		this.initializeMiddlewares();
+		this.initializeRoutes();
+		this.initializeDatabase();
+	}
 
-        // Insert initial data into the database
-        try {
-            // Call your bulkInsert functions here
-            await insertInitialData();
-            console.log('Initial data inserted successfully');
-        } catch (error) {
-            console.error('Error inserting initial data:', error);
-        }
-    })
-    .catch((err: any) => {
-        console.error('Unable to connect to the database:', err);
-    });
+	private initializeMiddlewares() {
+		this.app.use(express.json());
+		this.app.use(cookieParser());
+		this.app.use(
+			session({
+				secret: process.env.SESSION_SECRET || "your_secret_key",
+				resave: false,
+				saveUninitialized: true,
+				cookie: { secure: false },
+			})
+		);
+		this.app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+		this.app.use("/images", express.static(path.join(__dirname, "../../static/images")));
+		this.app.use("/assets", express.static(path.join(__dirname, "../../static/assets")));
+	}
 
-    async function insertInitialData() {
-        const { insertRoutes, insertEvents, insertOrganizers } = require('./config/database.insert');
-        await insertOrganizers(sequelize.getQueryInterface());
-        await insertRoutes(sequelize.getQueryInterface());
-        await insertEvents(sequelize.getQueryInterface());
-    }
+	private initializeRoutes() {
+		this.app.use("/api/auth", new AuthRouter().router);
+		this.app.use("/api/user", new UserRouter().router);
+		this.app.use("/api/event", new EventRouter().router);
+		this.app.use("/api/chat", new ChatRouter().router);
+		this.app.use("/api/admin", new AdminRouter().router);
+		this.app.use("/api/map", new MapRouter().router);
+		this.app.get("/api/health", (req, res) => res.json({ status: "OK" }));
+		this.app.get("/db/health", (req, res) => res.json({ status: this.dbConnected ? "OK" : "ERROR" }));
+		this.app.get("/api/env", (req, res) => res.json({ mapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }));
+		this.app.use("/api/route", new RouteRouter().router);
 
-app.use(express.json());
-app.use(cookieParser());
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'your_secret_key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
-}));
+		this.app.get("*", (req, res) => {
+			if (req.originalUrl.startsWith("/api/")) {
+				res.status(404).json({ error: "API route not found" }); // Avoid serving index.html for API routes
+			} else {
+				res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+			}
+		});
+	}
 
-app.use(express.static(path.join(__dirname, '../../frontend/dist')));
-app.use('/images', express.static(path.join(__dirname, '../../static/images')));
+	private async initializeDatabase() {
+		try {
+			await sequelize.authenticate();
+			console.log("Connected to the database");
 
-app.get('/api/health', (req, res) => {
-    res.json({ status: 'OK' });
-});
+			if (!this.dbConnected) {
+				//sync only once
+				await sequelize.sync({ force: false });
+				console.log("All models were synchronized successfully.");
+				this.dbConnected = true;
+				/* await this.insertInitialData();
+				console.log("Initial data inserted successfully"); */
+			}
+		} catch (error) {
+			console.error("Unable to connect to the database:", error);
+		}
+	}
 
-app.use('/auth', authRouter);
-app.use('/mock', mockRouter);
-app.use('/event', eventRouter);
+	private async insertInitialData() {
+		//func 4 inserting initial data
+		const { insertRoutes, insertEvents, insertOrganizers, insertAppUsers } = require("./config/database.insert");
+		await insertAppUsers(sequelize.getQueryInterface());
+		await insertOrganizers(sequelize.getQueryInterface());
+		await insertRoutes(sequelize.getQueryInterface());
+		await insertEvents(sequelize.getQueryInterface());
+	}
+}
 
-app.get('/db/health', (req, res) => {
-    if (db_connected) {
-        res.json({ status: 'OK' });
-    } else {
-        res.json({ status: 'ERROR' });
-    }
-});
-
-app.get('/db/createEvent', (req, res) => {
-    
-
-
-})
-
-app.get('/db/getEvents', (req, res) => {
-    let events = getLastTenEvents()
-    .then((data) => {
-        res.json(data);
-    })
-    .catch((err) => {
-        res.json(err);
-    });
-})
-
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../frontend/dist', 'index.html'));
-});
-
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-
-export default app;
+export default new App().app;
